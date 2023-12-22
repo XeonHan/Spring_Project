@@ -24,7 +24,7 @@
 </head>
 <body>
 
-	<%@include file="../views/include/header.jsp"%>
+	<%@include file="../include/header.jsp"%>
 
 
 	<div class="row">
