@@ -1,26 +1,32 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
-	pageEncoding="UTF-8"%>
-<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
-<%@ taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt"%>
+    pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <html>
 <head>
 <meta charset="UTF-8">
 <title>Insert title here</title>
-<style type="text/css">
-.modal-dialog {
-	overflow-y: initial !important
-}
-
-.modal-body {
-	height: 100%;
-	overflow-y: auto;
-}
-</style>
 </head>
-
 <body>
 	<%@include file="../include/header.jsp"%>
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	<!-- 모달 버튼 -->
 	<button type="button" class="btn btn-primary" data-toggle="modal"
 		data-target="#exampleModal">Launch demo modal</button>
 
@@ -47,6 +53,9 @@
 									name='mallCode'>
 							</div>
 
+							<div class="form-group">
+								<label>상호 이름</label> <input class="form-control" name='mallName'>
+							</div>
 
 							<div class="form-group">
 								<label>거래처</label>
@@ -54,11 +63,9 @@
 									<!-- 쇼핑몰, 통합관리소루션 선택 버튼 -->
 									<label><input type="radio" name="solutionSelect"
 										value="사업자등록번호" onclick="showOptions(this.value)">
-										사업자등록번호</label> 
-										<label><input type="radio"
+										사업자등록번호</label> <label><input type="radio"
 										name="solutionSelect" value="비사업자(내국인)"
-										onclick="showOptions(this.value)"> 비사업자(내국인)</label> 
-										<label><input
+										onclick="showOptions(this.value)"> 비사업자(내국인)</label> <label><input
 										type="radio" name="solutionSelect" value="비사업자(외국인)"
 										onclick="showOptions(this.value)"> 비사업자(외국인)</label>
 								</div>
@@ -66,7 +73,42 @@
 
 
 							</div>
-							
+							<div class="form-group">
+								<label>대표자명</label> <input class="form-control" name='custName'>
+							</div>
+							<div class="form-group">
+								<label>업태</label> <input class="form-control" name='ID'>
+							</div>
+							<div class="form-group">
+								<label>종목</label> <input class="form-control" name='ID'>
+							</div>
+							<div class="form-group">
+								<label>전화</label> <input class="form-control" name='ID'>
+							</div>
+							<div class="form-group">
+								<label>FAX</label> <input class="form-control" name='ID'>
+							</div>
+							<div class="form-group">
+								<label>검색창내용</label> <input class="form-control" name='ID'>
+							</div>
+							<div class="form-group">
+								<label>모바일</label> <input class="form-control" name='ID'>
+							</div>
+							<div class="form-group">
+								<label>주소</label> <input class="form-control" name='ID'>
+							</div>
+							<div class="form-group">
+								<label>홈페이지</label> <input class="form-control" name='ID'>
+							</div>
+							<div class="form-group">
+								<label>담당자</label> <input class="form-control" name='ID'>
+							</div>
+							<div class="form-group">
+								<label>Email</label> <input class="form-control" name='ID'>
+							</div>
+							<div class="form-group">
+								<label>거래처그룹</label> <input class="form-control" name='ID'>
+							</div>
 
 						</div>
 					</div>
@@ -94,3 +136,5 @@
 	</script>
 
 	<%@include file="../include/footer.jsp"%>
+</body>
+</html>
