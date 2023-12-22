@@ -17,4 +17,8 @@ public class BusinessManController {
 	public void salelist() {
 		
 	}
+	@GetMapping("/testFile")
+	public void testFile() {
+		
+	}
 }
