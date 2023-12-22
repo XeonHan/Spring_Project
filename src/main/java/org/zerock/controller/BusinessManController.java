@@ -21,4 +21,9 @@ public class BusinessManController {
 	public void testFile() {
 		
 	}
+	
+	@GetMapping("/list_test")
+	public void list_test() {
+		
+	}
 }
