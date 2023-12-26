@@ -277,4 +277,4 @@ function showOptions(selectedOption) {
 						
 
 
-<%@include file="../includes/footer.jsp"%>
+<%@include file="../include/footer.jsp"%>
