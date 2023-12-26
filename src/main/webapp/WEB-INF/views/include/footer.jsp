@@ -28,7 +28,7 @@
 <script src="/resources/dist/js/sb-admin-2.js"></script>
 
 <!-- Page-Level Demo Scripts - Tables - Use for reference -->
-<script>
+<!-- <script>
   $(document).ready(function() {
     $('#dataTables-example').DataTable({
       responsive: true
@@ -38,7 +38,7 @@
       .attr("aria-expanded",'false')
       .attr("style","height:1px");
   });
-</script>
+</script> -->
 
 </body>
 
