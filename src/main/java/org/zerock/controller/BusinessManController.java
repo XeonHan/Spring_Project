@@ -26,4 +26,8 @@ public class BusinessManController {
 	public void regist1() {
 		
 	}
+	@GetMapping("/read_dataTest")
+	public void read_dataTest() {
+		
+	}
 }
