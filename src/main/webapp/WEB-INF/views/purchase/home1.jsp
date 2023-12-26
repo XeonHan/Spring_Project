@@ -31,7 +31,7 @@
 </head>
 <body>
 
-	<%@include file="../include/header.jsp"%>
+	<%@include file="../include/header2.jsp"%>
 
 	<div class="row">
 		<div class="col-lg-12">
@@ -227,15 +227,17 @@
         });
     }
 	
-	$(document).ready(function() {
+    var jq3 = $.noConflict(true);
+	
+    jq3(document).ready(function() {
 		// Initialize datepicker
-		$('#datepicker1').datepicker({ // 일자
+		jq3('#datepicker1').datepicker({ // 일자
 			format : 'yyyy-mm-dd', 
 			todayHighlight : true,
 			autoclose : true
 		});
 
-		$('#datepicker2').datepicker({ // 납기일자
+	jq3('#datepicker2').datepicker({ // 납기일자
 			format : 'yyyy-mm-dd', 
 			todayHighlight : true,
 			autoclose : true
@@ -243,6 +245,8 @@
 	});
 	
 	</script>
+
+	<%@include file="../include/footer2.jsp"%>
 
 </body>
 </html>

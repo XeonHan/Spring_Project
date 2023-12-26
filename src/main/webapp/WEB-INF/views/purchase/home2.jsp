@@ -6,34 +6,46 @@
 <head>
 <title>발주요청입력</title>
 
-<link href="/resources/css/sidedropdown.css" rel="stylesheet"
-	type="text/css">
+<!-- jQuery -->
+<script src="https://code.jquery.com/jquery-3.3.1.min.js"></script>
 
 <!-- Bootstrap CSS -->
 <link rel="stylesheet"
 	href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
 
-<!-- Bootstrap-datepicker CSS -->
-<link rel="stylesheet"
-	href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.9.0/css/bootstrap-datepicker.min.css">
-
-<!-- jQuery -->
-<script src="https://code.jquery.com/jquery-3.3.1.min.js"></script>
-
 <!-- Bootstrap JS -->
 <script
 	src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
+
+<!-- Bootstrap-datepicker CSS -->
+<link rel="stylesheet"
+	href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.9.0/css/bootstrap-datepicker.min.css">
 
 <!-- Bootstrap-datepicker JS -->
 <script
 	src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.9.0/js/bootstrap-datepicker.min.js"></script>
 
-
 </head>
 <body>
 
-	<%@include file="../include/header.jsp"%>
+	<%@include file="../include/header2.jsp"%>
 
+
+	<ul class="sidenav">
+		<li><a href="#">견적서</a>
+			<ul class="sidesub">
+				<li><a href="#">submenu01</a></li>
+				<li><a href="#">submenu02</a></li>
+				<li><a href="#">submenu03</a></li>
+				<li><a href="#">submenu04</a></li>
+				<li><a href="#">submenu05</a></li>
+			</ul></li>
+
+		<li><a href="#">주문서</a></li>
+
+		<li><a href="#">판매</a></li>
+		<li><a href="#">출하</a></li>
+	</ul>
 
 	<div class="row">
 		<div class="col-lg-12">
@@ -46,21 +58,7 @@
 		<div class="col-lg-12">
 			<div class="panel panel-default">
 				<div class="panel-body">
-					<ul class="sidenav">
-						<li><a href="#">견적서</a>
-							<ul class="sidesub">
-								<li><a href="#">submenu01</a></li>
-								<li><a href="#">submenu02</a></li>
-								<li><a href="#">submenu03</a></li>
-								<li><a href="#">submenu04</a></li>
-								<li><a href="#">submenu05</a></li>
-							</ul></li>
 
-						<li><a href="#">주문서</a></li>
-
-						<li><a href="#">판매</a></li>
-						<li><a href="#">출하</a></li>
-					</ul>
 
 
 					<div class="tab-pane">
@@ -104,7 +102,6 @@
 								</div>
 							</li>
 
-							<li><div class="title">첨부</div></li>
 						</ul>
 					</div>
 
@@ -146,7 +143,12 @@
 						</tbody>
 
 					</table>
-					<button class="btn btn-primary" onclick="addRow()">추가</button>
+
+					<div>
+						<p>
+							<button class="btn btn-primary" onclick="addRow()">추가</button>
+						</p>
+					</div>
 
 					<div class="pull-left">
 						<button onclick="saveData()">저장</button>
@@ -202,20 +204,27 @@
 	</script>
 
 	<script>
-		$(document).ready(function() {
-			// Initialize datepicker
-			$('#datepicker1').datepicker({ // 일자
-				format : 'yyyy-mm-dd', 
-				todayHighlight : true,
-				autoclose : true
-			});
+    // noConflict를 사용하여 이전 jQuery 참조를 jq3에 저장합니다.
+    var jq3 = $.noConflict(true);
 
-			$('#datepicker2').datepicker({ // 납기일자
-				format : 'yyyy-mm-dd', 
-				todayHighlight : true,
-				autoclose : true
-			});
-		});
-	</script>
+    // jq3를 사용하여 문서가 준비되었을 때 및 datepicker를 초기화합니다.
+    jq3(document).ready(function() {
+        // datepicker를 초기화합니다.
+        jq3('#datepicker1').datepicker({
+            format: 'yyyy-mm-dd', 
+            todayHighlight: true,
+            autoclose: true
+        });
+
+        jq3('#datepicker2').datepicker({
+            format: 'yyyy-mm-dd', 
+            todayHighlight: true,
+            autoclose: true
+        });
+    });
+</script>
+
+	<%@include file="../include/footer2.jsp"%>
+
 </body>
 </html>
