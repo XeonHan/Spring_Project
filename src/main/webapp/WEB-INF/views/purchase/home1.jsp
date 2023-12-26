@@ -6,32 +6,29 @@
 <head>
 <title>발주요청조회</title>
 
-<link href="/resources/css/sidedropdown.css" rel="stylesheet"
-	type="text/css">
-
-<!-- Bootstrap CSS -->
+<!-- <!-- Bootstrap CSS
 <link rel="stylesheet"
 	href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
 
-<!-- Bootstrap-datepicker CSS -->
+Bootstrap-datepicker CSS
 <link rel="stylesheet"
 	href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.9.0/css/bootstrap-datepicker.min.css">
 
-<!-- jQuery -->
+jQuery
 <script src="https://code.jquery.com/jquery-3.3.1.min.js"></script>
 
-<!-- Bootstrap JS -->
+Bootstrap JS
 <script
 	src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
 
-<!-- Bootstrap-datepicker JS -->
+Bootstrap-datepicker JS
 <script
 	src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.9.0/js/bootstrap-datepicker.min.js"></script>
-
+ -->
 </head>
 <body>
 
-	<%@include file="../include/header2.jsp"%>
+	<%@include file="../include/header.jsp"%>
 
 	<div class="row">
 		<div class="col-lg-12">
@@ -227,7 +224,7 @@
         });
     }
 	
-    var jq3 = $.noConflict(true);
+   /*  var jq3 = $.noConflict(true);
 	
     jq3(document).ready(function() {
 		// Initialize datepicker
@@ -243,10 +240,10 @@
 			autoclose : true
 		});
 	});
-	
+	 */
 	</script>
 
-	<%@include file="../include/footer2.jsp"%>
+	<%@include file="../include/footer.jsp"%>
 
 </body>
 </html>
