@@ -6,7 +6,7 @@ import lombok.Data;
 
 @Data
 public class QuotationVO {
-	private String  qhodate_no;
+	private String qhodate_no;
 	private String company_name;
 	private String employee_name;
 	private String ware_name;

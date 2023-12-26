@@ -1,6 +1,7 @@
 package org.zerock.controller;
 
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 
@@ -13,21 +14,9 @@ import lombok.extern.log4j.Log4j;
 @AllArgsConstructor
 public class BusinessManController {
 	
-	@GetMapping("/salelist")
-	public void salelist() {
+	@GetMapping("/quoteInquiry")
+	public void quoteInquiry(Model model) {
 		
-	}
-	@GetMapping("/list_test")
-	public void list_test() {
-		
-	}
-	
-	@GetMapping("/regist1")
-	public void regist1() {
-		
-	}
-	@GetMapping("/read_dataTest")
-	public void read_dataTest() {
 		
 	}
 }
