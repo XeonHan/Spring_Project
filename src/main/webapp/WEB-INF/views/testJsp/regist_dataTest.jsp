@@ -224,7 +224,7 @@
     });
 </script>
 
-	<%@include file="../include/footer2.jsp"%>
+	<%@include file="../include/footer.jsp"%>
 
 </body>
 </html>
