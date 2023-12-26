@@ -6,30 +6,10 @@
 <head>
 <title>발주요청입력</title>
 
-<!-- jQuery -->
-<script src="https://code.jquery.com/jquery-3.3.1.min.js"></script>
-
-<!-- Bootstrap CSS -->
-<link rel="stylesheet"
-	href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
-
-<!-- Bootstrap JS -->
-<script
-	src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
-
-<!-- Bootstrap-datepicker CSS -->
-<link rel="stylesheet"
-	href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.9.0/css/bootstrap-datepicker.min.css">
-
-<!-- Bootstrap-datepicker JS -->
-<script
-	src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.9.0/js/bootstrap-datepicker.min.js"></script>
-
 </head>
 <body>
 
 	<%@include file="../include/header.jsp"%>
-
 
 	<ul class="sidenav">
 		<li><a href="#">견적서</a>
@@ -66,8 +46,7 @@
 							<li>
 								<div class="title">일자</div>
 								<div class="form-group">
-									<input type="text" class="form-control" id="datepicker1"
-										name="date" readonly>
+									<input type="date" class="form-control">
 								</div>
 							</li>
 							<li>
@@ -85,15 +64,12 @@
 										type="text" class="form-control">
 								</div>
 							</li>
-
 							<li>
 								<div class="title">납기일자</div>
 								<div class="form-group">
-									<input type="text" class="form-control" id="datepicker2"
-										name="date" readonly>
+									<input type="date" class="form-control">
 								</div>
 							</li>
-
 							<li>
 								<div class="title">새로운 항목 추가</div>
 								<div class="form-group">
@@ -202,27 +178,6 @@
         });
     }
 	</script>
-
-	<script>
-    // noConflict를 사용하여 이전 jQuery 참조를 jq3에 저장합니다.
-    var jq3 = $.noConflict(true);
-
-    // jq3를 사용하여 문서가 준비되었을 때 및 datepicker를 초기화합니다.
-    jq3(document).ready(function() {
-        // datepicker를 초기화합니다.
-        jq3('#datepicker1').datepicker({
-            format: 'yyyy-mm-dd', 
-            todayHighlight: true,
-            autoclose: true
-        });
-
-        jq3('#datepicker2').datepicker({
-            format: 'yyyy-mm-dd', 
-            todayHighlight: true,
-            autoclose: true
-        });
-    });
-</script>
 
 	<%@include file="../include/footer.jsp"%>
 
