@@ -28,7 +28,7 @@
 </head>
 <body>
 
-	<%@include file="../include/header2.jsp"%>
+	<%@include file="../include/header.jsp"%>
 
 
 	<ul class="sidenav">
