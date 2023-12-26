@@ -31,7 +31,7 @@
 			<div class="modal-content">
 				<div class="modal-header" style="background-color: #1f48d4;">
 					<h5 class="modal-title" id="exampleModalLabel"
-						style="color: white;">거래처 등록</h5>
+						style="color: white;">창고 등록</h5>
 					<button type="button" class="close" data-dismiss="modal"
 						aria-label="Close" style="background-color: white;">
 						<span aria-hidden="true">&times;</span>
@@ -43,30 +43,67 @@
 						<div class="panel-body">
 							<!-- form 어디로 보낼지 적기 -->
 							<div class="form-group">
-								<label>거래처 코드</label> <input class="form-control"
-									name='mallCode'>
+								<label>창고 코드</label> <input class="form-control" name='mallCode'>
+							</div>
+
+							<div class="form-group">
+								<label>창고명</label> <input class="form-control" name='mallCode'>
 							</div>
 
 
 							<div class="form-group">
-								<label>거래처</label>
+								<label>구분</label>
 								<div>
 									<!-- 쇼핑몰, 통합관리소루션 선택 버튼 -->
-									<label><input type="radio" name="solutionSelect"
-										value="사업자등록번호" onclick="showOptions(this.value)">
-										사업자등록번호</label> 
-										<label><input type="radio"
-										name="solutionSelect" value="비사업자(내국인)"
-										onclick="showOptions(this.value)"> 비사업자(내국인)</label> 
-										<label><input
-										type="radio" name="solutionSelect" value="비사업자(외국인)"
-										onclick="showOptions(this.value)"> 비사업자(외국인)</label>
+									<label><input type="checkbox" name="solutionSelect"
+										value="사업자등록번호" onclick="showOptions(this.value)"> 창고</label>
+									<label><input type="checkbox" name="solutionSelect"
+										value="비사업자(내국인)" onclick="showOptions(this.value)">
+										공장</label> <label><input type="checkbox" name="solutionSelect"
+										value="비사업자(외국인)" onclick="showOptions(this.value)">
+										공장(외부관리)</label>
 								</div>
+								<br>
 
+
+							</div>
+							<div class="form-group">
+								<label>부가세율(매출)</label>
+								<div>
+									<!-- 쇼핑몰, 통합관리소루션 선택 버튼 -->
+									<label><input type="checkbox" name="solutionSelect"
+										value="사업자등록번호" onclick="showOptions(this.value)"> 창고</label>
+									<label><input type="checkbox" name="solutionSelect"
+										value="비사업자(내국인)" onclick="showOptions(this.value)">
+										공장</label> <label><input type="checkbox" name="solutionSelect"
+										value="비사업자(외국인)" onclick="showOptions(this.value)">
+										공장(외부관리)</label>
+								</div>
+								<br>
+
+
+							</div>
+							<div class="form-group">
+								<label>부가세율(매입)</label>
+								<div>
+									<!-- 쇼핑몰, 통합관리소루션 선택 버튼 -->
+									<label><input type="checkbox" name="solutionSelect"
+										value="사업자등록번호" onclick="showOptions(this.value)"> 창고</label>
+									<label><input type="checkbox" name="solutionSelect"
+										value="비사업자(내국인)" onclick="showOptions(this.value)">
+										공장</label> <label><input type="checkbox" name="solutionSelect"
+										value="비사업자(외국인)" onclick="showOptions(this.value)">
+										공장(외부관리)</label>
+								</div>
+								<br>
 
 
 							</div>
 							
+							<div class="form-group">
+								<label>부서그룹</label> <input class="form-control" name='mallCode'>
+							</div>
+
 
 						</div>
 					</div>
