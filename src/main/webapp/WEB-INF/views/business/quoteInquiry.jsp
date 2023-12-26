@@ -6,90 +6,109 @@
 <%@include file="../include/header.jsp"%>
 
 
+<!-- 사이드 바 메뉴 -->
+<ul class="sidenav">
+	<li><a href="#">견적서</a>
+		<ul class="sidesub">
+			<li><a href="/business/quoteInquiry">견적서 조회</a></li>
+			<li><a href="#">견적서 입력</a></li>
+			<li><a href="#">견적서 현황</a></li>
+			<li><a href="#">미주문 현황</a></li>
+		</ul></li>
+
+	<li><a href="#">주문서</a></li>
+
+	<li><a href="#">판매</a></li>
+	<li><a href="#">출하</a></li>
+</ul>
+</nav>
+<!-- /Navigation -->
+<div id="page-wrapper">
+	<!-- /사이드 바 메뉴 -->
 
 
 
-<div class="row">
-	<div class="col-lg-12">
-		<h1 class="page-header">쇼핑몰 등록</h1>
+	<div class="row">
+		<div class="col-lg-12">
+			<h1 class="page-header">쇼핑몰 등록</h1>
+		</div>
+		<!-- /.col-lg-12 -->
 	</div>
-	<!-- /.col-lg-12 -->
-</div>
-<!-- /.row -->
-<div class="row">
-	<div class="col-lg-12">
-		<div class="panel panel-default">
-			<div class="panel-heading">
-				Board List Page <input type='text' name='keyword'
-					value='<c:out value="${pageMaker.cri.keyword}"/>' /> <input
-					type='hidden' name='pageNum'
-					value='<c:out value="${pageMaker.cri.pageNum}"/>' /> <input
-					type='hidden' name='amount'
-					value='<c:out value="${pageMaker.cri.amount}"/>'
-					class="btn btn-xs pull-right" />
-				<button class='btn btn-default pull-right'>Search</button>
+	<!-- /.row -->
+	<div class="row">
+		<div class="col-lg-12">
+			<div class="panel panel-default">
+				<div class="panel-heading">
+					Board List Page <input type='text' name='keyword'
+						value='<c:out value="${pageMaker.cri.keyword}"/>' /> <input
+						type='hidden' name='pageNum'
+						value='<c:out value="${pageMaker.cri.pageNum}"/>' /> <input
+						type='hidden' name='amount'
+						value='<c:out value="${pageMaker.cri.amount}"/>'
+						class="btn btn-xs pull-right" />
+					<button class='btn btn-default pull-right'>Search</button>
 
+				</div>
 			</div>
 		</div>
-	</div>
-	<!-- /.panel-heading -->
-	<div class="panel-body">
-		<table width="100%"
-			class="table table-striped table-bordered table-hover"
-			id="dataTables-example">
-			<thead>
-				<tr>
-					<th><input type="checkbox" id="selectAll"
-						onclick="toggleAll(this)"></th>
-					<th>일자-No</th>
-					<th>거래처명</th>
-					<th>담당자명</th>
-					<th>품목명</th>
-					<th>유효기관</th>
-					<th>견적금액합계</th>
-					<th>진행상태</th>
-					<th>생성한 전표</th>
-				</tr>
-			</thead>
-			<c:forEach items="${list}" var="shopList">
-				<tr>
-				
-				</tr>
-			</c:forEach>
-		</table>
+		<!-- /.panel-heading -->
+		<div class="panel-body">
+			<table width="100%"
+				class="table table-striped table-bordered table-hover"
+				id="dataTables-example">
+				<thead>
+					<tr>
+						<th><input type="checkbox" id="selectAll"
+							onclick="toggleAll(this)"></th>
+						<th>일자-No</th>
+						<th>거래처명</th>
+						<th>담당자명</th>
+						<th>품목명</th>
+						<th>유효기관</th>
+						<th>견적금액합계</th>
+						<th>진행상태</th>
+						<th>생성한 전표</th>
+					</tr>
+				</thead>
+				<c:forEach items="${list}" var="shopList">
+					<tr>
 
-		<button type="button" class="btn btn-primary" data-toggle="modal"
-			data-target="#exampleModal">신규</button>
-
-
-
-		<div class='pull-right'>
-			<ul class="pagination">
-
-				<c:if test="${pageMaker.prev}">
-					<li class="paginate_button previous"><a
-						href="${pageMaker.startPage -1}">Previous</a></li>
-				</c:if>
-
-				<c:forEach var="num" begin="${pageMaker.startPage}"
-					end="${pageMaker.endPage}">
-					<li class="paginate_button  ${pageMaker.cri.pageNum == num ? "active":""} ">
-						<a href="${num}">${num}</a>
-					</li>
+					</tr>
 				</c:forEach>
+			</table>
 
-				<c:if test="${pageMaker.next}">
-					<li class="paginate_button next"><a
-						href="${pageMaker.endPage +1 }">Next</a></li>
-				</c:if>
-			</ul>
+			<button type="button" class="btn btn-primary" data-toggle="modal"
+				data-target="#exampleModal">신규</button>
+
+
+
+			<div class='pull-right'>
+				<ul class="pagination">
+
+					<c:if test="${pageMaker.prev}">
+						<li class="paginate_button previous"><a
+							href="${pageMaker.startPage -1}">Previous</a></li>
+					</c:if>
+
+					<c:forEach var="num" begin="${pageMaker.startPage}"
+						end="${pageMaker.endPage}">
+						<li class="paginate_button  ${pageMaker.cri.pageNum == num ? "active":""} ">
+							<a href="${num}">${num}</a>
+						</li>
+					</c:forEach>
+
+					<c:if test="${pageMaker.next}">
+						<li class="paginate_button next"><a
+							href="${pageMaker.endPage +1 }">Next</a></li>
+					</c:if>
+				</ul>
+			</div>
+			<!--  end Pagination -->
 		</div>
-		<!--  end Pagination -->
+
+
 	</div>
-
-
-</div>
-<!-- /.panel-body -->
+	<!-- /.panel-body -->
 </div>
 <!-- /.panel -->
 </div>
