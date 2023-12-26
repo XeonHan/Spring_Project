@@ -15,9 +15,9 @@ select * from item where item_code > 0
 			select seq_item.nextval from dual
 		</selectKey>
 		insert into item
-		(item_code,item_name,item_group,speci_name,pur_price,sales_price,item_cate)
+		(item_code,item_name,item_group,standard_name,pur_price,sales_price,item_cate)
 		values
-		(#{item_code},#{item_name},#{item_group},#{speci_name},#{pur_price},#{sales_price},
+		(#{item_code},#{item_name},#{item_group},#{standard_name},#{pur_price},#{sales_price},
 		#{item_cate})
 	</insert>
 
@@ -43,12 +43,12 @@ select * from item where item_code > 0
 	<select id="getListWithPaging"
 		resultType="org.zerock.domain.basicRegi.ItemVO">
   <![CDATA[
-    SELECT item_code, item_name, item_group, speci_name, pur_price, sales_price, item_cate
+    SELECT item_code, item_name, item_group, standard_name, pur_price, sales_price, item_cate
     FROM (
       SELECT /*+INDEX_DESC(item pk_item) */
-        ROWNUM rn, item_code, item_name, item_group, speci_name, pur_price, sales_price, item_cate
+        ROWNUM rn, item_code, item_name, item_group, standard_name, pur_price, sales_price, item_cate
       FROM (
-        SELECT item_code, item_name, item_group, speci_name, pur_price, sales_price, item_cate
+        SELECT item_code, item_name, item_group, standard_name, pur_price, sales_price, item_cate
         FROM item
         WHERE 
   ]]>
@@ -89,7 +89,7 @@ select * from item where item_code > 0
 		item_name = #{item_name},
 		item_group =
 		#{item_group},
-		speci_name = #{speci_name},
+		standard_name = #{standard_name},
 		pur_price = #{pur_price},
 		sales_price = #{sales_price},
 		item_cate = #{item_cate}
