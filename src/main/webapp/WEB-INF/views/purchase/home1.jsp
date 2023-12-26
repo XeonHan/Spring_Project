@@ -193,7 +193,7 @@ Bootstrap-datepicker JS
     	var modalTable = document.getElementById('modalTable');
         var newRow = modalTable.insertRow();
         
-        newRow.innerHTML = 
+        newRow.innerHTML = `
             <td><input type="text" class="form-control" name="itemCode[]"></td>
             <td><input type="text" class="form-control" name="itemName[]"></td>
             <td><input type="text" class="form-control" name="supplierCode[]"></td>
