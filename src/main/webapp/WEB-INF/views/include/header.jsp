@@ -46,7 +46,7 @@
 }
 
 #page-wrapper {
-    padding-top: 75px; /* 상단 메뉴의 높이만큼 여백을 주기 위한 값 (상황에 따라 조절) */
+    padding-top: 95px; /* 상단 메뉴의 높이만큼 여백을 주기 위한 값 (상황에 따라 조절) */
 }
 
 @media (min-width: 768px) {
