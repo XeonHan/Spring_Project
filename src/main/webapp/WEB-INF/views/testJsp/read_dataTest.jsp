@@ -5,108 +5,107 @@
 
 <%@include file="../include/header.jsp"%>
 
+<!-- 사이드 바 메뉴 -->
+<ul class="sidenav">
+	<li><a href="#">견적서</a>
+		<ul class="sidesub">
+			<li><a href="#">submenu01</a></li>
+			<li><a href="#">submenu02</a></li>
+			<li><a href="#">submenu03</a></li>
+			<li><a href="#">submenu04</a></li>
+			<li><a href="#">submenu05</a></li>
+		</ul></li>
+
+	<li><a href="#">주문서</a></li>
+
+	<li><a href="#">판매</a></li>
+	<li><a href="#">출하</a></li>
+</ul>
+</nav>
+<!-- /Navigation -->
+<div id="page-wrapper">
+	<!-- /사이드 바 메뉴 -->
 
 
 
-
-<div class="row">
-	<div class="col-lg-12">
-		<h1 class="page-header">쇼핑몰 등록</h1>
+	<div class="row">
+		<div class="col-lg-12">
+			<h1 class="page-header">쇼핑몰 등록</h1>
+		</div>
+		<!-- /.col-lg-12 -->
 	</div>
-	<!-- /.col-lg-12 -->
-</div>
-<!-- /.row -->
-<div class="row">
-	<div class="col-lg-12">
-		<div class="panel panel-default">
-			<div class="panel-heading">
-				Board List Page <input type='text' name='keyword'
-					value='<c:out value="${pageMaker.cri.keyword}"/>' /> <input
-					type='hidden' name='pageNum'
-					value='<c:out value="${pageMaker.cri.pageNum}"/>' /> <input
-					type='hidden' name='amount'
-					value='<c:out value="${pageMaker.cri.amount}"/>'
-					class="btn btn-xs pull-right" />
-				<button class='btn btn-default pull-right'>Search</button>
+	<!-- /.row -->
+	<div class="row">
+		<div class="col-lg-12">
+			<div class="panel panel-default">
+				<div class="panel-heading">
+					Board List Page <input type='text' name='keyword'
+						value='<c:out value="${pageMaker.cri.keyword}"/>' /> <input
+						type='hidden' name='pageNum'
+						value='<c:out value="${pageMaker.cri.pageNum}"/>' /> <input
+						type='hidden' name='amount'
+						value='<c:out value="${pageMaker.cri.amount}"/>'
+						class="btn btn-xs pull-right" />
+					<button class='btn btn-default pull-right'>Search</button>
 
+				</div>
 			</div>
 		</div>
-	</div>
-	<!-- /.panel-heading -->
-	<div class="panel-body">
-		<table width="100%"
-			class="table table-striped table-bordered table-hover"
-			id="dataTables-example">
-			<thead>
-				<tr>
-					<th><input type="checkbox" id="selectAll"
-						onclick="toggleAll(this)"></th>
-					<th>쇼핌몰 코드</th>
-					<th>쇼필몰 명</th>
-					<th>ID</th>
-					<th>거래처명</th>
-					<th>수집구분</th>
-					<th>상품관리</th>
-					<th>사용구분</th>
-					<th>진행상태</th>
-					<th>판매자사이트</th>
-				</tr>
-			</thead>
-			<c:forEach items="${list}" var="shopList">
-				<tr>
-					<td><input type="checkbox" name="selectedItems"
-						value="${item.item_code}"></td>
-					<td><c:out value="${mall.mallCode}" /></td>
-					<td><a class='move'
-						href='/board/get?bno=<c:out value="${mall.mallCode}"/>'> <c:out
-								value="${mall.mallName}" /></a></td>
+		<!-- /.panel-heading -->
+		<div class="panel-body">
+			<table width="100%"
+				class="table table-striped table-bordered table-hover"
+				id="dataTables-example">
+				<thead>
+					<tr>
+						<th><input type="checkbox" id="selectAll"
+							onclick="toggleAll(this)"></th>
+						<th>쇼핌몰 코드</th>
+						<th>쇼필몰 명</th>
+						<th>ID</th>
+						<th>거래처명</th>
+						<th>수집구분</th>
+						<th>상품관리</th>
+						<th>사용구분</th>
+						<th>진행상태</th>
+						<th>판매자사이트</th>
+					</tr>
+				</thead>
+				<c:forEach items="${list}" var="shopList">
+					<tr>
+						<td><input type="checkbox" name="selectedItems"
+							value="${item.item_code}"></td>
+						<td><c:out value="${mall.mallCode}" /></td>
+						<td><a class='move'
+							href='/board/get?bno=<c:out value="${mall.mallCode}"/>'> <c:out
+									value="${mall.mallName}" /></a></td>
 
 
-					<td><c:out value="${mall.ID}" /></td>
-					<td><c:out value="${mall.custName}" /></td>
-					<td><c:out value="${mall.coll}" /></td>
-					<td><c:out value="${mall.productManage}" /></td>
-					<td><c:out value="${mall.useMent}" /></td>
-					<td><c:out value="${mall.progress}" /></td>
-					<td><a class='move'
-						href='/board/get?bno=<c:out value="${mall.mallCode}"/>'> <c:out
-								value="이동" /></a></td>
-				</tr>
-			</c:forEach>
-		</table>
-
-		<button type="button" class="btn btn-primary" data-toggle="modal"
-			data-target="#exampleModal">New</button>
-
-
-
-		<div class='pull-right'>
-			<ul class="pagination">
-
-				<c:if test="${pageMaker.prev}">
-					<li class="paginate_button previous"><a
-						href="${pageMaker.startPage -1}">Previous</a></li>
-				</c:if>
-
-				<c:forEach var="num" begin="${pageMaker.startPage}"
-					end="${pageMaker.endPage}">
-					<li class="paginate_button  ${pageMaker.cri.pageNum == num ? "active":""} ">
-						<a href="${num}">${num}</a>
-					</li>
+						<td><c:out value="${mall.ID}" /></td>
+						<td><c:out value="${mall.custName}" /></td>
+						<td><c:out value="${mall.coll}" /></td>
+						<td><c:out value="${mall.productManage}" /></td>
+						<td><c:out value="${mall.useMent}" /></td>
+						<td><c:out value="${mall.progress}" /></td>
+						<td><a class='move'
+							href='/board/get?bno=<c:out value="${mall.mallCode}"/>'> <c:out
+									value="이동" /></a></td>
+					</tr>
 				</c:forEach>
+			</table>
 
-				<c:if test="${pageMaker.next}">
-					<li class="paginate_button next"><a
-						href="${pageMaker.endPage +1 }">Next</a></li>
-				</c:if>
-			</ul>
+			<button type="button" class="btn btn-primary" data-toggle="modal"
+				data-target="#exampleModal">New</button>
+
+
+
+
+			<!--  end Pagination -->
 		</div>
-		<!--  end Pagination -->
+
+
 	</div>
-
-
-</div>
-<!-- /.panel-body -->
+	<!-- /.panel-body -->
 </div>
 <!-- /.panel -->
 </div>
@@ -152,10 +151,9 @@
 	<div class="modal-dialog" role="document">
 		<div class="modal-content">
 			<div class="modal-header" style="background-color: #1f48d4;">
-				<h5 class="modal-title" id="exampleModalLabel" style="color: white;">거래처
-					등록</h5>
+				<span style="color: white;">거래처 등록</span>
 				<button type="button" class="close" data-dismiss="modal"
-					aria-label="Close" style="background-color: white;">
+					aria-label="Close">
 					<span aria-hidden="true">&times;</span>
 				</button>
 			</div>
@@ -219,23 +217,25 @@
 
 
 <script type="text/javascript">
-<!-- 쇼핑몰, 통합관리소루션 선택 버튼 용 JS -->
+
 function toggleAll(source) {
     const checkboxes = document.querySelectorAll('input[name="selectedItems"]');
     checkboxes.forEach(checkbox => {
         checkbox.checked = source.checked;
     });
 }
-	function showOptions(selectedOption) {
-		if (selectedOption === '통합관리솔루션') {
-			$('#secondOptions')
-					.html(
-							'<label><input type="radio" name="solutionType" value="전체" selected> 전체</label>'
-									+ '<label><input type="radio" name="solutionType" value="개별"> 개별</label>');
-		} else {
-			$('#secondOptions').html(''); // 통합관리솔루션이 아닌 경우 두 번째 선택창 비우기
-		}
-	}
+
+<!-- 쇼핑몰, 통합관리소루션 선택 버튼 용 JS -->
+function showOptions(selectedOption) {
+    if (selectedOption === '통합관리솔루션') {
+        $('#secondOptions').html('<label><input type="radio" name="solutionType" value="전체" selected> 전체</label>' +
+                                '<label><input type="radio" name="solutionType" value="개별"> 개별</label>');
+    } else {
+        $('#secondOptions').html(''); // 통합관리솔루션이 아닌 경우 두 번째 선택창 비우기
+    }
+}
+
+
 	$(document)
 			.ready(
 					function() {
