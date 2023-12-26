@@ -6,29 +6,11 @@
 <head>
 <title>발주요청입력</title>
 
-<!-- jQuery -->
-<script src="https://code.jquery.com/jquery-3.3.1.min.js"></script>
-
-<!-- Bootstrap CSS -->
-<link rel="stylesheet"
-	href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
-
-<!-- Bootstrap JS -->
-<script
-	src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
-
-<!-- Bootstrap-datepicker CSS -->
-<link rel="stylesheet"
-	href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.9.0/css/bootstrap-datepicker.min.css">
-
-<!-- Bootstrap-datepicker JS -->
-<script
-	src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.9.0/js/bootstrap-datepicker.min.js"></script>
 
 </head>
 <body>
 
-	<%@include file="../include/header2.jsp"%>
+	<%@include file="../include/header.jsp"%>
 
 
 	<ul class="sidenav">
@@ -63,13 +45,21 @@
 
 					<div class="tab-pane">
 						<ul class="wrapper-form wrapper-form-state-2">
+							<!-- <li>
+								<div class="title">일자</div>
+								<div class="form-group">
+									<input type="date" class="form-control" id="datepicker1"
+										name="date" readonly>
+								</div>
+							</li> -->
+							
 							<li>
 								<div class="title">일자</div>
 								<div class="form-group">
-									<input type="text" class="form-control" id="datepicker1"
-										name="date" readonly>
+									<input type="date" class="form-control">
 								</div>
 							</li>
+							
 							<li>
 								<div class="title">담당자</div>
 								<div class="form-group">
@@ -86,11 +76,18 @@
 								</div>
 							</li>
 
-							<li>
+							<!-- <li>
 								<div class="title">납기일자</div>
 								<div class="form-group">
 									<input type="text" class="form-control" id="datepicker2"
 										name="date" readonly>
+								</div>
+							</li> -->
+							
+							<li>
+								<div class="title">납기일자</div>
+								<div class="form-group">
+									<input type="date" class="form-control">
 								</div>
 							</li>
 
@@ -204,7 +201,7 @@
 	</script>
 
 	<script>
-    // noConflict를 사용하여 이전 jQuery 참조를 jq3에 저장합니다.
+   /*  // noConflict를 사용하여 이전 jQuery 참조를 jq3에 저장합니다.
     var jq3 = $.noConflict(true);
 
     // jq3를 사용하여 문서가 준비되었을 때 및 datepicker를 초기화합니다.
@@ -221,10 +218,10 @@
             todayHighlight: true,
             autoclose: true
         });
-    });
+    }); */
 </script>
 
-	<%@include file="../include/footer2.jsp"%>
+	<%@include file="../include/footer.jsp"%>
 
 </body>
 </html>
