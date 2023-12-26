@@ -28,7 +28,7 @@
 </head>
 <body>
 
-	<%@include file="../include/header2.jsp"%>
+	<%@include file="../include/header.jsp"%>
 
 
 	<ul class="sidenav">
@@ -224,7 +224,7 @@
     });
 </script>
 
-	<%@include file="../include/footer2.jsp"%>
+	<%@include file="../include/footer.jsp"%>
 
 </body>
 </html>
