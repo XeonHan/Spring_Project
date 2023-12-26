@@ -1,0 +1,97 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="org.zerock.mapper.ItemMapper">
+	<select id="getList" resultType="org.zerock.domain.ItemVO">
+<![CDATA[
+select * from item where item_code > 0
+]]>
+	</select>
+
+	<insert id="insertSelectKey">
+		<selectKey keyProperty="item_code" order="BEFORE"
+			resultType="int">
+			select seq_item.nextval from dual
+		</selectKey>
+		insert into item
+		(item_code,item_name,item_group,speci_name,pur_price,sales_price,item_cate)
+		values
+		(#{item_code},#{item_name},#{item_group},#{speci_name},#{pur_price},#{sales_price},
+		#{item_cate})
+	</insert>
+
+	<sql id="criteria">
+		<trim prefix="(" suffix=") AND " prefixOverrides="OR">
+			<foreach item='type' collection="typeArr">
+				<trim prefix="OR">
+					<choose>
+						<when test="type == 'N'.toString()">
+							item_name like '%'||#{keyword}||'%'
+						</when>
+						<when test="type == 'G'.toString()">
+							item_group like '%'||#{keyword}||'%'
+						</when>
+						<when test="type == 'C'.toString()">
+							item_cate like '%'||#{keyword}||'%'
+						</when>
+					</choose>
+				</trim>
+			</foreach>
+		</trim>
+	</sql>
+	<select id="getListWithPaging"
+		resultType="org.zerock.domain.ItemVO">
+  <![CDATA[
+    SELECT item_code, item_name, item_group, speci_name, pur_price, sales_price, item_cate
+    FROM (
+      SELECT /*+INDEX_DESC(item pk_item) */
+        ROWNUM rn, item_code, item_name, item_group, speci_name, pur_price, sales_price, item_cate
+      FROM (
+        SELECT item_code, item_name, item_group, speci_name, pur_price, sales_price, item_cate
+        FROM item
+        WHERE 
+  ]]>
+
+		<include refid="criteria"></include>
+      
+  <![CDATA[
+        ROWNUM <= #{pageNum} * #{amount}
+        ORDER BY item_code -- 이 부분이 변경되었습니다.
+      )
+    )
+    WHERE rn > (#{pageNum} - 1) * #{amount}
+  ]]>
+	</select>
+
+
+
+	<select id="getTotalCount" resultType="int">
+		select count(*) from item
+		where
+
+		<include refid="criteria"></include>
+
+		item_code > 0
+	</select>
+	<select id="read" resultType="org.zerock.domain.ItemVO">
+		select * from item where item_code
+		= #{item_code}
+	</select>
+
+
+	<delete id="delete">
+		delete from item where item_code = #{item_code}
+	</delete>
+
+	<update id="update">
+		update item set
+		item_name = #{item_name},
+		item_group =
+		#{item_group},
+		speci_name = #{speci_name},
+		pur_price = #{pur_price},
+		sales_price = #{sales_price},
+		item_cate = #{item_cate}
+	</update>
+</mapper>
