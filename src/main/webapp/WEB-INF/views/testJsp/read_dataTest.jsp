@@ -109,26 +109,56 @@
 <!-- /.col-lg-12 -->
 
 
-<h1>test</h1><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br>
+<h1>test</h1>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
 <h1>test</h1>
 <!-- Modal -->
 <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog"
 	aria-labelledby="exampleModalLabel" aria-hidden="true">
 	<div class="modal-dialog" role="document">
 		<div class="modal-content">
-			list.jsp
-			<div class="modal-header">
-				<h5 class="modal-title" id="exampleModalLabel">shop regi</h5>
+			<div class="modal-header" style="background-color: #1f48d4;">
+				<h5 class="modal-title" id="exampleModalLabel" style="color: white;">거래처
+					등록</h5>
 				<button type="button" class="close" data-dismiss="modal"
-					aria-label="Close">
+					aria-label="Close" style="background-color: white;">
 					<span aria-hidden="true">&times;</span>
 				</button>
 			</div>
-			<div class="modal-body">
-				<!-- /.panel-heading -->
-				<div class="panel-body">
-
-					<form role="form" action="/shop/register" method="post">
+			<form role="form" action="#####" method="post">
+				<div class="modal-body">
+					<!-- /.panel-heading -->
+					<div class="panel-body">
 						<div class="form-group">
 							<label>mall code</label> <input class="form-control"
 								name='mallCode'>
@@ -164,18 +194,16 @@
 							<label>ID</label> <input class="form-control" name='ID'>
 						</div>
 
-
-
-					</form>
-
+					</div>
 				</div>
-			</div>
-			<div class="modal-footer">
-				<button type="submit" class="btn btn-primary">Submit Button</button>
-				<button type="reset" class="btn btn-default">Reset Button</button>
-				<button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-			</div>
-			
+				<div class="modal-footer">
+					<button type="submit" class="btn btn-primary">Submit
+						Button</button>
+					<button type="reset" class="btn btn-default">Reset Button</button>
+					<button type="button" class="btn btn-secondary"
+						data-dismiss="modal">Close</button>
+				</div>
+			</form>
 		</div>
 	</div>
 </div>
@@ -198,87 +226,14 @@
 			$('#secondOptions').html(''); // 통합관리솔루션이 아닌 경우 두 번째 선택창 비우기
 		}
 	}
-
 	$(document)
 			.ready(
 					function() {
-
-						var result = '<c:out value="${result}"/>';
-
-						checkModal(result);
-
-						history.replaceState({}, null, null);
-
-						function checkModal(result) {
-
-							if (result === '' || history.state) {
-								return;
-							}
-
-							if (parseInt(result) > 0) {
-								$(".modal-body").html(
-										"게시글 " + parseInt(result)
-												+ " 번이 등록되었습니다.");
-							}
-
-							$("#myModal2").modal("show");
-						}
-
-						var actionForm = $("#actionForm");
-
-						$(".paginate_button a").on(
-								"click",
-								function(e) {
-
-									e.preventDefault();
-
-									console.log('click');
-
-									actionForm.find("input[name='pageNum']")
-											.val($(this).attr("href"));
-									actionForm.submit();
-								});
-
-						$(".move")
-								.on(
-										"click",
-										function(e) {
-											e.preventDefault();
-											actionForm
-													.append("<input type='hidden' name='bno' value='"
-															+ $(this).attr(
-																	"href")
-															+ "'>");
-											actionForm.attr("action",
-													"/shop/get");
-											actionForm.submit();
-										});
-						var searchForm = $("#searchForm");
-
-						$("#searchForm button").on(
-								"click",
-								function(e) {
-
-									if (!searchForm.find("option:selected")
-											.val()) {
-										alert("검색종류를 선택하세요");
-										return false;
-									}
-
-									if (!searchForm.find(
-											"input[name='keyword']").val()) {
-										alert("키워드를 입력하세요");
-										return false;
-									}
-
-									searchForm.find("input[name='pageNum']")
-											.val("1");
-									e.preventDefault();
-
-									searchForm.submit();
-
-								});
-
+						$('head')
+								.append(
+										'<style type="text/css">.modal .modal-body {max-height: '
+												+ ($('body').height() * .8)
+												+ 'px;overflow-y: auto;}.modal-open .modal{overflow-y: hidden !important;}</style>');
 					});
 </script>
 
