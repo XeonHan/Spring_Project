@@ -19,6 +19,6 @@ public interface ItemMapper {
 	public int delete(int item_code);
 
 	public int update(ItemVO item);
-
+	
 	public int getTotalCount(Criteria cri);
 }

@@ -27,12 +27,12 @@
 	</div>
 
 	<div class="panel-body">
+		<!-- 테이블 헤더 수정 -->
 		<table width="100%"
 			class="table table-striped table-boarded table-hover"
 			id="dataTables-item">
 			<thead>
 				<tr>
-
 					<th><input type="checkbox" id="selectAll"
 						onclick="toggleAll(this)"></th>
 					<th>품목코드</th>
@@ -44,13 +44,17 @@
 					<th>품목구분</th>
 				</tr>
 			</thead>
+
 			<c:forEach items="${itemList}" var="item">
 				<tr>
 					<td><input type="checkbox" name="selectedItems"
 						value="${item.item_code}"></td>
 					<td><c:out value="${item.item_code}" /></td>
-					<td><a class='move' href='<c:out value="${item.item_code}"/>'><c:out
-								value="${item.item_name}" /></a></td>
+					<td><a class='move' href='#'
+						data-item-code="${item.item_code}"
+						data-item-name="${item.item_name}"> <c:out
+								value="${item.item_name}" />
+					</a></td>
 					<td><c:out value="${item.item_group}" /></td>
 					<td><c:out value="${item.standard_name}" /></td>
 					<td><c:out value="${item.pur_price}" /></td>
@@ -59,14 +63,12 @@
 				</tr>
 			</c:forEach>
 		</table>
-
-
 	</div>
 
 	<div class="row">
 		<div class="col-lg-6 text-left">
 			<button type="button" class="btn btn-primary" data-toggle="modal"
-				data-target="#itemModal">신규</button>
+				data-target="#itemRegisterModal">신규</button>
 		</div>
 		<div class="col-lg-6 text-right">
 			<form id="searchForm" action="/basicRegi/itemList" method="get">
@@ -90,8 +92,9 @@
 
 </div>
 
-<div class="modal fade" id="itemModal" tabindex="-1" role="dialog"
-	aria-labelleby="itemModalLabel" aria-hidden="true">
+<div class="modal fade" id="itemRegisterModal" tabindex="-1"
+	role="dialog" aria-labelleby="itemRegisterModalLabel"
+	aria-hidden="true">
 	<div class="modal-dialog" role="document">
 		<div class="modal-content">
 			<div class="modal-header" style="background-color: #1f48d4;">
@@ -105,7 +108,8 @@
 				<div class="modal-body">
 					<div class="panel-body">
 						<div class="form-group">
-							<label>품목코드</label><input class="form-control" name="item_code">
+							<label>품목코드(40000~49999)</label><input class="form-control" name="item_code"
+								type="text">
 						</div>
 						<div class="form-group">
 							<label>품목명</label><input class="form-control" name="item_name">
@@ -129,19 +133,36 @@
 
 					</div>
 					<div class="modal-footer">
-						<button type="submit" class="btn btn-primary">저장</button>
+						<button type="button" class="btn btn-primary"
+							onclick="registerItem()" data-dismiss="modal">저장</button>
 						<button type="reset" class="btn btn-default">초기화</button>
 						<button type="button" class="btn btn-secondary"
 							data-dismiss="modal">닫기</button>
 					</div>
+
 				</div>
 			</form>
 		</div>
 	</div>
 </div>
+
+
+
 <script type="text/javascript">
+    function toggleAll(source) {
+        const checkboxes = document.querySelectorAll('input[name="selectedItems"]');
+        checkboxes.forEach(checkbox => {
+            checkbox.checked = source.checked;
+        });
+    }
+
     $(document).ready(function () {
         var actionForm = $("#actionForm");
+        var itemRegisterModal = $("#itemRegisterModal");
+
+        itemRegisterModal.on('show.bs.modal', function (e) {
+            getItemCode(); 
+        });
 
         $(".pagination a").on("click", function (e) {
             e.preventDefault();
@@ -153,7 +174,9 @@
         $(".move").on("click", function (e) {
             e.preventDefault();
             actionForm.append("<input type='hidden' name='item_code' value='" +
-                $(this).attr("href") + "'>");
+                $(this).attr("data-item-code") + "'>");
+            actionForm.append("<input type='hidden' name='item_name' value='" +
+                $(this).attr("data-item-name") + "'>");
             actionForm.attr("action", "basicRegi/itemModify");
             actionForm.submit();
         });
@@ -176,13 +199,29 @@
             searchForm.submit();
         });
     });
-</script>
-<script type="text/javascript">
-    function toggleAll(source) {
-        const checkboxes = document.querySelectorAll('input[name="selectedItems"]');
-        checkboxes.forEach(checkbox => {
-            checkbox.checked = source.checked;
+
+    function registerItem() {
+    	
+        $.ajax({
+            type: "POST",
+            url: "/basicRegi/itemRegister",
+            data: {
+            	item_code: $("input[name='item_code']").val(),
+                item_name: $("input[name='item_name']").val(),
+                item_group: $("input[name='item_group']").val(),
+                standard_name: $("input[name='standard_name']").val(),
+                pur_price: $("input[name='pur_price']").val(),
+                sales_price: $("input[name='sales_price']").val(),
+                item_cate: $("input[name='item_cate']").val()
+            },
+            success: function (data) {
+            	window.location.reload();
+            },
+            error: function () {
+                alert("저장 중 오류가 발생했습니다");
+            }
         });
     }
+	
 </script>
 <%@ include file="../include/footer.jsp"%>

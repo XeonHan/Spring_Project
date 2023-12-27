@@ -35,9 +35,10 @@ public class BasicRegiController {
 
 	@PostMapping("/itemRegister")
 	public String itemRegister(ItemVO item, RedirectAttributes rttr) {
+
 		itemService.register(item);
 
-		rttr.addFlashAttribute("result", item.getItem_code());
+		rttr.addFlashAttribute("result", "success");
 
 		return "redirect:/basicRegi/itemList";
 	}
