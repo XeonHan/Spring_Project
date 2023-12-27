@@ -7,3 +7,4 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 <select id="getList" resultType="org.zerock.domain.purchase.PurRequestVO">
 
 </select>
+</mapper>
