@@ -8,7 +8,9 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.zerock.domain.Criteria;
 import org.zerock.domain.basicRegi.ItemVO;
 import org.zerock.domain.quotation.QuotationVO;
@@ -42,6 +44,15 @@ public class BusinessManController {
 		Criteria cri = new Criteria();
 		List<ItemVO>data = itemService.getList(cri);
 		log.info(data);
+		return new ResponseEntity<>(data, HttpStatus.OK);
+	}
+	@GetMapping(value = "/searchcompany", produces = MediaType.APPLICATION_JSON_UTF8_VALUE)
+	public ResponseEntity<ItemVO> searchcompany(@RequestParam(name= "keyword")String keyword) {
+		
+		log.info(keyword);
+		Integer code = Integer.parseInt(keyword);
+		ItemVO data = itemService.get(code);
+		
 		return new ResponseEntity<>(data, HttpStatus.OK);
 	}
 }
