@@ -6,6 +6,7 @@
 <html>
 <head>
 <title>발주요청입력</title>
+
 <link rel="stylesheet"
 	href="https://fonts.googleapis.com/icon?family=Material+Icons">
 </head>
@@ -208,9 +209,17 @@
 					</button>
 				</div>
 
-				<div class="modal-body" id="modalBodyContent">
-					<!-- 동적으로 업데이트될 내용 -->
-					<p>This is the default content.</p>
+				<div class="modal-body">
+					<div class="panel-body text-center">
+						<div
+							class="form-group d-flex justify-content-center align-items-center"
+							id="searchData">
+							<input type="text" id="production_place" name="production_place"
+								style="width: 201px; height: 28px;">
+							<button class='btn btn-default btn-sm' id="searchButton" type="button">Search</button>
+						</div>
+						<div class="form-group" id="modalBodyContent"></div>
+					</div>
 				</div>
 				<div class="modal-footer">
 					<button type="button" class="btn btn-secondary"
@@ -231,20 +240,23 @@
 	        // 버튼에 연결된 데이터 가져오기 (예: data-content)
 	        var dynamicContent = button.data('content');
 			if(dynamicContent === 'company'){
+				
 				$('#modalheader').html('<span id="modalheader" style="color: white;">'+ '거래처'+ '</span>');
+            	
 				 $.ajax({
 			            url: '/business/company',  // 데이터를 가져올 URL
 			            dataType: 'json',  // 응답 데이터 형식
 			            success: function (data) {
+			            	// 테이블 헤드
 			            	var contentHtml = `<table width="100%"
 			                    class="table table-striped table-bordered table-hover"
 			                    id="dataTables-example">
 			                    <thead>
 			                        <tr>
-			                            <th>진행상태</th>
-			                            <th>생성한 전표</th>
-			                            <th>생성한 전표</th>
-			                            <th>생성한 전표</th>
+			                            <th>거래처코드</th>
+			                            <th>거래처명</th>
+			                            <th>검색창 내용</th>
+			                            <th>상세</th>
 			                        </tr>
 			                    </thead>`;
 			                data.forEach(function (item) {
@@ -269,14 +281,19 @@
 			                    };
 			                    $('#production_place').val(item.item_name);
 			                    $('#some_other_input').val(item.item_group);
-			                    
 			                });
 			            },
 			            error: function (xhr, status, err) {
 			                console.error('Failed to get data from the server:', err);
 			            }
 			        });
-				
+				 
+				 // 검색 버튼 눌렸을때
+					document.getElementById('searchButton').addEventListener('click', function() {
+				        // 클릭 시 실행될 코드
+						
+					});
+
 			}else if(dynamicContent === 'emp'){
 				$('#modalheader').html('<span id="modalheader" style="color: white;">'+ '담당자'+ '</span>');
 				$('#modalBodyContent').html('<p>' + dynamicContent  + '</p>');
