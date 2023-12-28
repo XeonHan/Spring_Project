@@ -6,9 +6,15 @@
 <html>
 <head>
 <title>발주요청입력</title>
+
 <link rel="stylesheet"
 	href="https://fonts.googleapis.com/icon?family=Material+Icons">
 </head>
+<!-- jQuery -->
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+
+<!-- 부트스트랩 JavaScript 파일 -->
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
 <body>
 
 	<%@include file="../include/header.jsp"%>
@@ -208,9 +214,18 @@
 					</button>
 				</div>
 
-				<div class="modal-body" id="modalBodyContent">
-					<!-- 동적으로 업데이트될 내용 -->
-					<p>This is the default content.</p>
+				<div class="modal-body">
+					<div class="panel-body text-center">
+						<div
+							class="form-group d-flex justify-content-center align-items-center"
+							id="searchData">
+							<input type="text" id="searchInput" name="production_place"
+								style="width: 201px; height: 28px;">
+							<button class='btn btn-default btn-sm' id="searchButton"
+								type="button">Search</button>
+						</div>
+						<div class="form-group" id="modalBodyContent"></div>
+					</div>
 				</div>
 				<div class="modal-footer">
 					<button type="button" class="btn btn-secondary"
@@ -220,7 +235,9 @@
 			</div>
 		</div>
 	</div>
-
+	
+	
+	
 	<script type="text/javascript"
 		src="/resources/js/business/quotation.js"></script>
 	<script>
@@ -231,52 +248,64 @@
 	        // 버튼에 연결된 데이터 가져오기 (예: data-content)
 	        var dynamicContent = button.data('content');
 			if(dynamicContent === 'company'){
-				$('#modalheader').html('<span id="modalheader" style="color: white;">'+ '거래처'+ '</span>');
-				 $.ajax({
-			            url: '/business/company',  // 데이터를 가져올 URL
-			            dataType: 'json',  // 응답 데이터 형식
-			            success: function (data) {
-			            	var contentHtml = `<table width="100%"
-			                    class="table table-striped table-bordered table-hover"
-			                    id="dataTables-example">
-			                    <thead>
-			                        <tr>
-			                            <th>진행상태</th>
-			                            <th>생성한 전표</th>
-			                            <th>생성한 전표</th>
-			                            <th>생성한 전표</th>
-			                        </tr>
-			                    </thead>`;
-			                data.forEach(function (item) {
-			                	contentHtml += '<tr>';
-			                    contentHtml += '<td class="i-name">' + item.item_name + '</li></td>';
-			                    contentHtml += '<td class="i-name">' + item.item_group + '</td>';
-			                    contentHtml += '<td class="i-name">' + item.standard_name + '</td>';
-			                    contentHtml += '<td class="i-name">' + item.pur_price + '</td>';
-			                    contentHtml += '</tr>';
-			                });
-			                contentHtml += '</table>';
-			                $('#modalBodyContent').html(contentHtml);
-			                
-			                $('#modalBodyContent').on('click', '.i-name', function() {
-			                	var clickedText = $(this).text();
-			                    var clickedRow = $(this).closest('tr');
-			                    var item = {
-			                        item_name: clickedRow.find('td:eq(0)').text(),
-			                        item_group: clickedRow.find('td:eq(1)').text(),
-			                        standard_name: clickedRow.find('td:eq(2)').text(),
-			                        pur_price: clickedRow.find('td:eq(3)').text()
-			                    };
-			                    $('#production_place').val(item.item_name);
-			                    $('#some_other_input').val(item.item_group);
-			                    
-			                });
-			            },
-			            error: function (xhr, status, err) {
-			                console.error('Failed to get data from the server:', err);
-			            }
-			        });
 				
+				$('#modalheader').html('<span id="modalheader" style="color: white;">'+ '거래처'+ '</span>');
+				basicListCompany();
+			
+				 
+				 // 검색 버튼 눌렸을때
+					document.getElementById('searchButton').addEventListener('click', function() {
+				        // 클릭 시 실행될 코드
+						var searchKeyword = $('#searchInput').val();
+				        if(searchKeyword.trim() !== '') {
+				        	$.ajax({
+			                    url: '/business/searchcompany',  // 검색을 처리할 서버 엔드포인트
+			                    type: 'GET',
+			                    data: { keyword: searchKeyword },  // 서버에 전달할 데이터
+			                    success: function (data) {
+			                    	var contentHtml = `<table width="100%"
+					                    class="table table-striped table-bordered table-hover"
+					                    id="dataTables-example">
+					                    <thead>
+					                        <tr>
+					                            <th>거래처코드</th>
+					                            <th>거래처명</th>
+					                            <th>검색창 내용</th>
+					                            <th>상세</th>
+					                        </tr>
+					                    </thead>`;
+					               
+					                contentHtml += '<tr>';
+					                contentHtml += '<td class="i-name">' + data.item_name + '</li></td>';
+					                contentHtml += '<td class="i-name">' + data.item_group + '</td>';
+					                contentHtml += '<td class="i-name">' + data.standard_name + '</td>';
+					                contentHtml += '<td class="i-name">' + data.pur_price + '</td>';
+					                contentHtml += '</tr>';
+					                contentHtml += '</table>';
+					                $('#modalBodyContent').html(contentHtml);
+					                
+					                $('#modalBodyContent').on('click', '.i-name', function() {
+					                	var clickedText = $(this).text();
+					                    var clickedRow = $(this).closest('tr');
+					                    var item = {
+					                        item_name: clickedRow.find('td:eq(0)').text(),
+					                        item_group: clickedRow.find('td:eq(1)').text(),
+					                        standard_name: clickedRow.find('td:eq(2)').text(),
+					                        pur_price: clickedRow.find('td:eq(3)').text()
+					                    };
+					                    $('#production_place').val(item.item_name);
+					                    $('#some_other_input').val(item.item_group);
+					                });
+					            },
+					            error: function (xhr, status, err) {
+					                console.error('Failed to get data from the server:', err);
+					            }
+				        	});
+				        }else {
+				        	basicListCompany();
+				        }
+					});
+
 			}else if(dynamicContent === 'emp'){
 				$('#modalheader').html('<span id="modalheader" style="color: white;">'+ '담당자'+ '</span>');
 				$('#modalBodyContent').html('<p>' + dynamicContent  + '</p>');
@@ -284,11 +313,65 @@
 				$('#modalheader').html('<span id="modalheader" style="color: white;">'+ '출하 창고'+ '</span>');
 				$('#modalBodyContent').html('<p>' + dynamicContent  + '</p>');
 			}
-	        // 모달 내용 업데이트
+	        
+			
+			
+			
+			// 거래처 기본 리스트
+			function basicListCompany(){
+				$.ajax({
+		            url: '/business/company',  // 데이터를 가져올 URL
+		            dataType: 'json',  // 응답 데이터 형식
+		            success: function (data) {
+		            	// 테이블 헤드
+		            	var contentHtml = `<table width="100%"
+		                    class="table table-striped table-bordered table-hover"
+		                    id="dataTables-example">
+		                    <thead>
+		                        <tr>
+		                            <th>거래처코드</th>
+		                            <th>거래처명</th>
+		                            <th>검색창 내용</th>
+		                            <th>상세</th>
+		                        </tr>
+		                    </thead>`;
+		                data.forEach(function (item) {
+		                	contentHtml += '<tr>';
+		                    contentHtml += '<td class="i-name">' + item.item_name + '</li></td>';
+		                    contentHtml += '<td class="i-name">' + item.item_group + '</td>';
+		                    contentHtml += '<td class="i-name">' + item.standard_name + '</td>';
+		                    contentHtml += '<td class="i-name">' + item.pur_price + '</td>';
+		                    contentHtml += '</tr>';
+		                });
+		                contentHtml += '</table>';
+		                $('#modalBodyContent').html(contentHtml);
+		                
+		                $('#modalBodyContent').on('click', '.i-name', function() {
+		                	var clickedText = $(this).text();
+		                    var clickedRow = $(this).closest('tr');
+		                    var item = {
+		                        item_name: clickedRow.find('td:eq(0)').text(),
+		                        item_group: clickedRow.find('td:eq(1)').text(),
+		                        standard_name: clickedRow.find('td:eq(2)').text(),
+		                        pur_price: clickedRow.find('td:eq(3)').text()
+		                    };
+		                    $('#production_place').val(item.item_name);
+		                    $('#some_other_input').val(item.item_group);
+		                });
+		            },
+		            error: function (xhr, status, err) {
+		                console.error('Failed to get data from the server:', err);
+		            }
+		        });
+			}
+			
+			
+			
 	    });
 
-
 	
+	 
+	 
 	// 추가 버튼 누르면 입력란 한줄 더 생김
     function addRow() {
         var tableBody = document.querySelector('table tbody');
