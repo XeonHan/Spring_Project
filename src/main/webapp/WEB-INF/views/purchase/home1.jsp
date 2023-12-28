@@ -1,69 +1,77 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
-<%@ page session="false"%>
-<html>
-<head>
-<title>발주요청조회</title>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt"%>
 
-<!-- <!-- Bootstrap CSS
-<link rel="stylesheet"
-	href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
+<%@include file="../include/header.jsp"%>
 
-Bootstrap-datepicker CSS
-<link rel="stylesheet"
-	href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.9.0/css/bootstrap-datepicker.min.css">
+<!-- 사이드 바 메뉴 -->
+<ul class="sidenav">
+	<li><a href="#">견적서</a>
+		<ul class="sidesub">
+			<li><a href="#">submenu01</a></li>
+			<li><a href="#">submenu02</a></li>
+			<li><a href="#">submenu03</a></li>
+			<li><a href="#">submenu04</a></li>
+			<li><a href="#">submenu05</a></li>
+		</ul></li>
 
-jQuery
-<script src="https://code.jquery.com/jquery-3.3.1.min.js"></script>
+	<li><a href="#">주문서</a></li>
 
-Bootstrap JS
-<script
-	src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
+	<li><a href="#">판매</a></li>
+	<li><a href="#">출하</a></li>
+</ul>
+</nav>
+<!-- /Navigation -->
+<div id="page-wrapper">
+	<!-- /사이드 바 메뉴 -->
 
-Bootstrap-datepicker JS
-<script
-	src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.9.0/js/bootstrap-datepicker.min.js"></script>
- -->
-</head>
-<body>
-
-	<%@include file="../include/header.jsp"%>
-
-	<ul class="sidenav">
-		<li><a href="#">견적서</a>
-			<ul class="sidesub">
-				<li><a href="#">submenu01</a></li>
-				<li><a href="#">submenu02</a></li>
-				<li><a href="#">submenu03</a></li>
-				<li><a href="#">submenu04</a></li>
-				<li><a href="#">submenu05</a></li>
-			</ul></li>
-
-		<li><a href="#">주문서</a></li>
-
-		<li><a href="#">판매</a></li>
-		<li><a href="#">출하</a></li>
-	</ul>
-
-	</nav>
-	<!-- /Navigation -->
-	<div id="page-wrapper">
-		<!-- /사이드 바 메뉴 -->
-
-		<div class="row">
-			<div class="col-lg-12">
-				<h1 class="page-header">발주요청조회</h1>
-			</div>
-			<!-- /.col-lg-12 -->
+	<div class="row">
+		<div class="col-lg-12">
+			<h1 class="page-header">발주요청조회</h1>
 		</div>
-		<!-- /.row -->
-		<div class="row">
-			<div class="col-lg-12">
-				<div class="panel panel-default">
-					<div class="panel-body">
-						<table border="1">
+		<!-- /.col-lg-12 -->
+	</div>
+	<!-- /.row -->
+
+	<!-- row -->
+	<div class="row">
+		<!-- col-lg-12 -->
+		<div class="col-lg-12">
+			<!-- panel-default -->
+			<div class="panel panel-default">
+				<!-- panel-heading -->
+				<div class="panel-heading">
+					<div class="pull-left">Board List Page</div>
+					<div class="pull-right">
+						<form class="form-inline">
+							<div class="form-group">
+								<input type='text' name='keyword' class="form-control input-sm"
+									placeholder="Search"
+									value='<c:out value="${pageMaker.cri.keyword}"/>' />
+							</div>
+							<input type='hidden' name='pageNum'
+								value='<c:out value="${pageMaker.cri.pageNum}"/>' /> <input
+								type='hidden' name='amount'
+								value='<c:out value="${pageMaker.cri.amount}"/>' />
+							<button class='btn btn-default btn-sm' type="button">Search</button>
+						</form>
+					</div>
+					<div class="clearfix"></div>
+
+				</div>
+				<!-- /.panel-heading -->
+
+
+				<!-- panel-body -->
+				<div class="panel-body">
+					<table width="100%"
+						class="table table-striped table-bordered table-hover"
+						id="dataTables-example">
+						<thead>
 							<tr>
+								<th><input type="checkbox" id="selectAll"
+									onclick="toggleAll(this)"></th>
 								<th>발주요청일자</th>
 								<th>거래처명</th>
 								<th>품목</th>
@@ -73,212 +81,144 @@ Bootstrap-datepicker JS
 								<th>종결여부</th>
 								<th>진행상태</th>
 							</tr>
+						</thead>
+
+						<c:forEach items="${list}" var="request">
 							<tr>
-								<td>23/12/14</td>
-								<td>(주)구로</td>
-								<td>사과</td>
-								<td>23/12/15</td>
-								<td>3,000</td>
-								<td>15,000</td>
-								<td><a href="#">진행중</a></td>
-								<td><a href="#">조회</a></td>
+								<td><input type="checkbox" name="selectedItems"
+									value="${item.item_code}"></td>
+
+								<%-- <td><c:out value="${mall.mallCode}" /></td>
+								<td><a class='move'
+									href='/board/get?bno=<c:out value="${mall.mallCode}"/>'> <c:out
+											value="${mall.mallName}" /></a></td> --%>
+
+
+								<td><c:out value="${request.request_No}" /></td>
+								<td><c:out value="${request.company_Name}" /></td>
+								<td><c:out value="${request.item_Name}" /></td>
+								<td><fmt:formatDate pattern="yyyy-MM-dd"
+										value="${request.delivery_Date}" /></td>
+								<td><c:out value="${request.amount}" /></td>
+								<td>${request.amount * request.unit_Price}</td>
+								<td>진행중</td>
+								<td><a class='move'
+									href='/board/get?bno=<c:out value="${mall.mallCode}"/>'> <c:out
+											value="조회" /></a></td>
 							</tr>
+						</c:forEach>
+					</table>
 
-						</table>
+					<button type="button" class="btn btn-primary" data-toggle="modal"
+						data-target="#exampleModal">New</button>
 
-						<div class="footer">
-							<!-- 버튼을 클릭하면 모달 창을 띄우기 위한 버튼 -->
-							<button type="button" data-toggle="modal" data-target="#myModal">신규</button>
-							<button id="remove">선택 삭제</button>
-						</div>
-
-					</div>
-					<!-- /.table-responsive -->
 				</div>
 				<!-- /.panel-body -->
 			</div>
-			<!-- /.panel -->
+			<!-- /.panel-default -->
 		</div>
-		<!-- /.col-lg-6 -->
-		<!-- /.row -->
+		<!-- /.panel -->
+	</div>
+	<!-- /.row -->
 
-
-		<!-- 모달 창 정의 -->
-		<div class="modal fade" id="myModal" role="dialog">
-			<div class="modal-dialog">
-
-				<!-- 모달 창 내용 -->
-				<div class="modal-content">
-					<div class="modal-header">
-						<button type="button" class="close" data-dismiss="modal">&times;</button>
-						<h4 class="modal-title">발주요청입력</h4>
-					</div>
+	<!-- Modal -->
+	<div class="modal fade" id="exampleModal" tabindex="-1" role="dialog"
+		aria-labelledby="exampleModalLabel" aria-hidden="true">
+		<div class="modal-dialog" role="document">
+			<div class="modal-content">
+				<div class="modal-header" style="background-color: #1f48d4;">
+					<span style="color: white;">거래처 등록</span>
+					<button type="button" class="close" data-dismiss="modal"
+						aria-label="Close">
+						<span aria-hidden="true">&times;</span>
+					</button>
+				</div>
+				<form role="form" action="#####" method="post">
 					<div class="modal-body">
-						<ul class="wrapper-form wrapper-form-state-2">
-							<!-- <li>
-							<div class="title">일자</div>
+						<!-- /.panel-heading -->
+						<div class="panel-body">
 							<div class="form-group">
-								<input type="text" class="form-control" id="datepicker1"
-									name="date" readonly>
+								<label>mall code</label> <input class="form-control"
+									name='mallCode'>
 							</div>
-						</li> -->
 
-							<li>
-								<div class="title">일자</div>
-								<div class="form-group">
-									<input type="date" class="form-control">
-								</div>
-							</li>
-
-							<li>
-								<div class="title">담당자</div>
-								<div class="form-group">
-									<input type="text" class="form-control"> <input
-										type="text" class="form-control">
-								</div>
-							</li>
-
-							<li>
-								<div class="title">입고될창고</div>
-								<div class="form-group">
-									<input type="text" class="form-control"> <input
-										type="text" class="form-control">
-								</div>
-							</li>
-
-							<!-- <li>
-							<div class="title">납기일자</div>
 							<div class="form-group">
-								<input type="text" class="form-control" id="datepicker2"
-									name="date" readonly>
+								<label>mall name</label> <input class="form-control"
+									name='mallName'>
 							</div>
-						</li> -->
 
-							<li>
-								<div class="title">납기일자</div>
-								<div class="form-group">
-									<input type="date" class="form-control">
+							<div class="form-group">
+								<label>수집처</label>
+								<div>
+									<!-- 쇼핑몰, 통합관리소루션 선택 버튼 -->
+									<label><input type="radio" name="solutionSelect"
+										value="쇼핑몰" onclick="showOptions(this.value)" selected>
+										쇼핑몰</label> <label><input type="radio" name="solutionSelect"
+										value="통합관리솔루션" onclick="showOptions(this.value)">
+										통합관리솔루션</label> <input class="form-control" name='coll'
+										placeholder="수집처">
+									<div id="secondOptions"></div>
+									<input class="form-control" name='client' placeholder="거래처"><br>
 								</div>
-							</li>
 
-							<li>
-								<div class="title">새로운 항목 추가</div>
-								<div class="form-group">
-									<input type="text" class="form-control"
-										placeholder="다양한 항목을 추가하여 활용할 수 있습니다." required>
-								</div>
-							</li>
 
-							<li>
-								<div class="title">첨부</div>
-							</li>
-						</ul>
 
-						<table id="modalTable" class="table">
-							<thead>
-								<tr>
-									<th>품목코드</th>
-									<th>품목명</th>
-									<th>거래처코드</th>
-									<th>거래처명</th>
-									<th>규격</th>
-									<th>수량</th>
-									<th>단가</th>
-									<th>금액(합계)</th>
-									<th>새로운 항목 추가</th>
-								</tr>
-							</thead>
-							<tbody>
-								<tr>
-									<td><input type="text" class="form-control"
-										name="itemCode[]"></td>
-									<td><input type="text" class="form-control"
-										name="itemName[]"></td>
-									<td><input type="text" class="form-control"
-										name="supplierCode[]"></td>
-									<td><input type="text" class="form-control"
-										name="supplierName[]"></td>
-									<td><input type="text" class="form-control"
-										name="specification[]"></td>
-									<td><input type="text" class="form-control"
-										name="quantity[]" oninput="calculateTotal(this)"></td>
-									<td><input type="text" class="form-control"
-										name="unitPrice[]" oninput="calculateTotal(this)"></td>
-									<td><input type="text" class="form-control"
-										name="totalAmount[]" readonly></td>
-									<td><input type="text" class="form-control" name="newNote"></td>
-								</tr>
-							</tbody>
-						</table>
-						<button class="btn btn-primary" onclick="addRow()">추가</button>
+							</div>
+							<div class="form-group">
+								<label>custname</label> <input class="form-control"
+									name='custName'>
+							</div>
+							<div class="form-group">
+								<label>ID</label> <input class="form-control" name='ID'>
+							</div>
+
+						</div>
 					</div>
 					<div class="modal-footer">
-						<button type="button" class="btn btn-default" data-dismiss="modal">닫기</button>
-						<button onclick="saveData()" class="btn btn-primary">저장</button>
-						<button onclick="resetForm()" class="btn btn-default">다시
-							작성</button>
+						<button type="submit" class="btn btn-primary">Submit
+							Button</button>
+						<button type="reset" class="btn btn-default">Reset Button</button>
+						<button type="button" class="btn btn-secondary"
+							data-dismiss="modal">Close</button>
 					</div>
-				</div>
+				</form>
 			</div>
 		</div>
+	</div>
 
-		<script>
-	// 추가 버튼 누르면 입력란 한줄 더 생김
-    function addRow() {
-    	// 모달 창에서 사용할 테이블 ID
-    	var modalTable = document.getElementById('modalTable');
-        var newRow = modalTable.insertRow();
-        
-        newRow.innerHTML = `
-            <td><input type="text" class="form-control" name="itemCode[]"></td>
-            <td><input type="text" class="form-control" name="itemName[]"></td>
-            <td><input type="text" class="form-control" name="supplierCode[]"></td>
-            <td><input type="text" class="form-control" name="supplierName[]"></td>
-            <td><input type="text" class="form-control" name="specification[]"></td>
-            <td><input type="text" class="form-control" name="quantity[]" oninput="calculateTotal(this)"></td>
-            <td><input type="text" class="form-control" name="unitPrice[]" oninput="calculateTotal(this)"></td>
-            <td><input type="text" class="form-control" name="totalAmount[]" readonly></td>
-            <td><input type="text" class="form-control" name="newNote"></td>
-        `;
+
+
+	<script type="text/javascript">
+
+function toggleAll(source) {
+    const checkboxes = document.querySelectorAll('input[name="selectedItems"]');
+    checkboxes.forEach(checkbox => {
+        checkbox.checked = source.checked;
+    });
+}
+
+<!-- 쇼핑몰, 통합관리소루션 선택 버튼 용 JS -->
+function showOptions(selectedOption) {
+    if (selectedOption === '통합관리솔루션') {
+        $('#secondOptions').html('<label><input type="radio" name="solutionType" value="전체" selected> 전체</label>' +
+                                '<label><input type="radio" name="solutionType" value="개별"> 개별</label>');
+    } else {
+        $('#secondOptions').html(''); // 통합관리솔루션이 아닌 경우 두 번째 선택창 비우기
     }
+}
 
-	// 단가 * 수량 = 금액 계산
-    function calculateTotal(input) {
-        var row = input.closest('tr');
-        var quantity = row.querySelector('[name="quantity[]"]').value;
-        var unitPrice = row.querySelector('[name="unitPrice[]"]').value;
-        var totalAmountInput = row.querySelector('[name="totalAmount[]"]');
-        var totalAmount = quantity * unitPrice;
-        totalAmountInput.value = isNaN(totalAmount) ? '' : totalAmount;
-    }
-	
-	// 다시 작성
-    function resetForm() {
-        var inputs = document.querySelectorAll('input[type="text"]');
-        inputs.forEach(function(input) {
-            input.value = '';
-        });
-    }
-	
-   /*  var jq3 = $.noConflict(true);
-	
-    jq3(document).ready(function() {
-		// Initialize datepicker
-		jq3('#datepicker1').datepicker({ // 일자
-			format : 'yyyy-mm-dd', 
-			todayHighlight : true,
-			autoclose : true
-		});
 
-	jq3('#datepicker2').datepicker({ // 납기일자
-			format : 'yyyy-mm-dd', 
-			todayHighlight : true,
-			autoclose : true
-		});
-	});
-	 */
-	</script>
+	$(document)
+			.ready(
+					function() {
+						$('head')
+								.append(
+										'<style type="text/css">.modal .modal-body {max-height: '
+												+ ($('body').height() * .8)
+												+ 'px;overflow-y: auto;}.modal-open .modal{overflow-y: hidden !important;}</style>');
+					});
+</script>
 
-		<%@include file="../include/footer.jsp"%>
-</body>
-</html>
+
+
+	<%@include file="../include/footer.jsp"%>

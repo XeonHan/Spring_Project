@@ -8,4 +8,5 @@ public interface PurchaseMapper {
 
 	public List<PurRequestVO> getList();
 	
+	public PurRequestVO read(Long request_No);
 }

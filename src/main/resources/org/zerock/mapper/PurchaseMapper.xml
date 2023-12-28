@@ -4,7 +4,19 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="org.zerock.mapper.PurchaseMapper">
 
-<select id="getList" resultType="org.zerock.domain.purchase.PurRequestVO">
+	<select id="getList"
+		resultType="org.zerock.domain.purchase.PurRequestVO">
+<![CDATA[
+select * from pur_request where request_no > 0
+]]>
+	</select>
 
-</select>
+	<select id="read"
+		resultType="org.zerock.domain.purchase.PurRequestVO">
+		select * from pur_request where request_No = #{requestNo}
+	</select>
+
+
+
+
 </mapper>

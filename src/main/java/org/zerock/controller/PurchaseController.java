@@ -1,8 +1,10 @@
 package org.zerock.controller;
 
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.zerock.service.PurchaseService;
 
 import lombok.AllArgsConstructor;
 import lombok.extern.log4j.Log4j;
@@ -13,6 +15,8 @@ import lombok.extern.log4j.Log4j;
 @AllArgsConstructor
 public class PurchaseController {
 
+	private PurchaseService service;
+	
 	@GetMapping("/test")
 	public void test() {
 		
@@ -20,9 +24,11 @@ public class PurchaseController {
 	}
 	
 	@GetMapping("/home1")
-	public void home1() {
+	public void list(Model model) {
 		
-		log.info("home1 test");
+		log.info("list");
+		
+		model.addAttribute("list", service.getList());
 	}
 	
 	@GetMapping("/home2")
