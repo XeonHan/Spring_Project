@@ -15,6 +15,6 @@ public interface ItemService {
 	public boolean remove(Integer item_code);
 
 	public List<ItemVO> getList(Criteria cri);
-	
+
 	public int getTotal(Criteria cri);
 }
