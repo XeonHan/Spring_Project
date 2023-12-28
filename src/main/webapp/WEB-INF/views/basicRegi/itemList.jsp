@@ -50,8 +50,8 @@
 					<td><input type="checkbox" name="selectedItems"
 						value="${item.item_code}"></td>
 					<td><c:out value="${item.item_code}" /></td>
-					<td><a class='move' href='#'
-						data-item-code="${item.item_code}"
+					<td><a class='move' href='#' data-toggle="modal"
+						data-target="#itemModifyModal" data-item-code="${item.item_code}"
 						data-item-name="${item.item_name}"> <c:out
 								value="${item.item_name}" />
 					</a></td>
@@ -108,8 +108,8 @@
 				<div class="modal-body">
 					<div class="panel-body">
 						<div class="form-group">
-							<label>품목코드(40000~49999)</label><input class="form-control" name="item_code"
-								type="text">
+							<label>품목코드(40000~49999)</label><input class="form-control"
+								name="item_code" type="text">
 						</div>
 						<div class="form-group">
 							<label>품목명</label><input class="form-control" name="item_name">
@@ -135,6 +135,59 @@
 					<div class="modal-footer">
 						<button type="button" class="btn btn-primary"
 							onclick="registerItem()" data-dismiss="modal">저장</button>
+						<button type="reset" class="btn btn-default">초기화</button>
+						<button type="button" class="btn btn-secondary"
+							data-dismiss="modal">닫기</button>
+					</div>
+
+				</div>
+			</form>
+		</div>
+	</div>
+</div>
+
+<div class="modal fade" id="itemModifyModal" tabindex="-1" role="dialog"
+	aria-labelleby="itemModifyModalLabel" aria-hidden="true">
+	<div class="modal-dialog" role="document">
+		<div class="modal-content">
+			<div class="modal-header" style="background-color: #1f48d4;">
+				<span style="color: white;">품목 등록</span>
+				<button type="button" class="close" data-dismiss="modal"
+					aria-label="Close">
+					<span aria-hidden="true">&times;</span>
+				</button>
+			</div>
+			<form role="form" action="basicRegi/itemModify" method="post">
+				<div class="modal-body">
+					<div class="panel-body">
+						<div class="form-group">
+							<label>품목코드(40000~49999)</label><input class="form-control"
+								name="item_code" type="text">
+						</div>
+						<div class="form-group">
+							<label>품목명</label><input class="form-control" name="item_name">
+						</div>
+						<div class="form-group">
+							<label>품목그룹</label><input class="form-control" name="item_group">
+						</div>
+						<div class="form-group">
+							<label>규격명</label><input class="form-control"
+								name="standard_name">
+						</div>
+						<div class="form-group">
+							<label>입고단가</label><input class="form-control" name="pur_price">
+						</div>
+						<div class="form-group">
+							<label>출고단가</label><input class="form-control" name="sales_price">
+						</div>
+						<div class="form-group">
+							<label>품목구분</label><input class="form-control" name="item_cate">
+						</div>
+
+					</div>
+					<div class="modal-footer">
+						<button type="button" class="btn btn-primary"
+							onclick="modifyItem()" data-dismiss="modal">저장</button>
 						<button type="reset" class="btn btn-default">초기화</button>
 						<button type="button" class="btn btn-secondary"
 							data-dismiss="modal">닫기</button>
@@ -173,13 +226,36 @@
 
         $(".move").on("click", function (e) {
             e.preventDefault();
-            actionForm.append("<input type='hidden' name='item_code' value='" +
-                $(this).attr("data-item-code") + "'>");
-            actionForm.append("<input type='hidden' name='item_name' value='" +
-                $(this).attr("data-item-name") + "'>");
-            actionForm.attr("action", "basicRegi/itemModify");
-            actionForm.submit();
+
+            var itemCode = $(this).data("item-code");
+            var itemName = $(this).data("item-name");
+
+            $.ajax({
+                type: "GET",
+                url: "/basicRegi/itemGet",
+                data: {
+                    item_code: itemCode
+                },
+                dataType: "json",
+                success: function (data) {
+                    $("#itemModifyModal input[name='item_code']").val(itemCode);
+                    $("#itemModifyModal input[name='item_name']").val(itemName);
+                    $("#itemModifyModal input[name='item_group']").val(data.item_group);
+                    $("#itemModifyModal input[name='standard_name']").val(data.standard_name);
+                    $("#itemModifyModal input[name='pur_price']").val(data.pur_price);
+                    $("#itemModifyModal input[name='sales_price']").val(data.sales_price);
+                    $("#itemModifyModal input[name='item_cate']").val(data.item_cate);
+
+                    $("#itemModifyModal").modal("show");
+                },
+                error: function () {
+                    alert("데이터를 가져오는 중 오류가 발생했습니다");
+                }
+            });
         });
+
+
+       
 
         var searchForm = $("#searchForm");
 
@@ -223,5 +299,36 @@
         });
     }
 	
+    function modifyItem() {
+    	
+    	 var itemCode = $("#itemModifyModal input[name='item_code']").val();
+    	    var itemName = $("#itemModifyModal input[name='item_name']").val();
+    	    var itemGroup = $("#itemModifyModal input[name='item_group']").val();
+    	    var standardName = $("#itemModifyModal input[name='standard_name']").val();
+    	    var purPrice = $("#itemModifyModal input[name='pur_price']").val();
+    	    var salesPrice = $("#itemModifyModal input[name='sales_price']").val();
+    	    var itemCate = $("#itemModifyModal input[name='item_cate']").val();
+
+    	    $.ajax({
+    	    	type: "POST",
+    	    url: "/basicRegi/itemModify",
+    	    data: {
+    	    	  item_code: itemCode,
+    	            item_name: itemName,
+    	            item_group: itemGroup,
+    	            standard_name: standardName,
+    	            pur_price: purPrice,
+    	            sales_price: salesPrice,
+    	            item_cate: itemCate
+    	    },
+    	    success: function(data){
+    	    	window.location.reload();
+    	    },
+    	    error: function() {
+    	    	alert("수정 중 오류가 발생했습니다");
+    	    }
+    	    });
+    }
+    
 </script>
 <%@ include file="../include/footer.jsp"%>
