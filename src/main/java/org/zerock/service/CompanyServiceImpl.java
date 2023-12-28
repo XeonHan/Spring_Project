@@ -5,48 +5,47 @@ import java.util.List;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import org.zerock.domain.Criteria;
-import org.zerock.domain.basicRegi.ItemVO;
-import org.zerock.mapper.ItemMapper;
+import org.zerock.domain.basicRegi.CompanyVO;
+import org.zerock.mapper.CompanyMapper;
 
 import lombok.AllArgsConstructor;
 
-
 @Service
 @AllArgsConstructor
-public class ItemServiceImpl implements ItemService {
-	private ItemMapper mapper;
+public class CompanyServiceImpl implements CompanyService {
+	private CompanyMapper mapper;
 
 	@Override
 	@Transactional
-	public void register(ItemVO item) {
+	public void register(CompanyVO company) {
 		// TODO Auto-generated method stub
-		mapper.insertSelectKey(item);
+		mapper.insertSelectKey(company);
 	}
 
 	@Override
 	@Transactional
-	public ItemVO get(Integer item_code) {
+	public CompanyVO get(Integer company_code) {
 		// TODO Auto-generated method stub
-		return mapper.read(item_code);
+		return mapper.read(company_code);
 	}
 
 	@Override
 	@Transactional
-	public boolean modify(ItemVO item) {
+	public boolean modify(CompanyVO company) {
 		// TODO Auto-generated method stub
-		return mapper.update(item) == 1;
+		return mapper.update(company) == 1;
 	}
 
 	@Override
 	@Transactional
-	public boolean remove(Integer item_code) {
+	public boolean remove(Integer company_code) {
 		// TODO Auto-generated method stub
-		return mapper.delete(item_code) == 1;
+		return mapper.delete(company_code) == 1;
 	}
 
 	@Override
 	@Transactional
-	public List<ItemVO> getList(Criteria cri) {
+	public List<CompanyVO> getList(Criteria cri) {
 		// TODO Auto-generated method stub
 		return mapper.getListWithPaging(cri);
 	}

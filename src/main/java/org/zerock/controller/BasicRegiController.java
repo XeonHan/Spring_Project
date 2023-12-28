@@ -13,15 +13,63 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 import org.zerock.domain.Criteria;
 import org.zerock.domain.PageDTO;
+import org.zerock.domain.basicRegi.CompanyVO;
 import org.zerock.domain.basicRegi.ItemVO;
+import org.zerock.service.CompanyService;
 import org.zerock.service.ItemService;
 
-import lombok.extern.log4j.Log4j;
+
 
 @Controller
-@Log4j
 @RequestMapping("/basicRegi/*")
 public class BasicRegiController {
+
+	// Company
+	@Autowired
+	private CompanyService companyService;
+
+	@GetMapping("/companyList")
+	public void companyList(Criteria cri, Model model) {
+		model.addAttribute("companyList", companyService.getList(cri));
+
+		int total = companyService.getTotal(cri);
+
+		model.addAttribute("pageMaker", new PageDTO(cri, total));
+	}
+
+	@PostMapping("/companyRegister")
+	public String companyRegister(CompanyVO company, RedirectAttributes rttr) {
+
+		companyService.register(company);
+
+		rttr.addFlashAttribute("result", "success");
+
+		return "redirect:/basicRegi/companyList";
+	}
+
+	@GetMapping("/companyGet")
+	@ResponseBody
+	public ResponseEntity<CompanyVO> companyGet(@RequestParam("company_code") Integer company_code) {
+		CompanyVO company = companyService.get(company_code);
+		return new ResponseEntity<>(company, HttpStatus.OK);
+	}
+
+	@PostMapping("/companyModify")
+	public String companyModify(CompanyVO company, RedirectAttributes rttr) {
+
+		if (companyService.modify(company)) {
+			rttr.addFlashAttribute("result", "success");
+		}
+		return "redirect:/basicRegi/companyList";
+	}
+
+	@PostMapping("/companyRemove")
+	public String companyRemove(@RequestParam("company_code") Integer company_code, RedirectAttributes rttr) {
+		if (companyService.remove(company_code)) {
+			rttr.addFlashAttribute("result", "success");
+		}
+		return "redirect:/basicRegi/companyList";
+	}
 
 	// Item
 	@Autowired
@@ -63,7 +111,7 @@ public class BasicRegiController {
 	}
 
 	@PostMapping("/itemRemove")
-	public String ItemRemove(@RequestParam("item_code") Integer item_code, RedirectAttributes rttr) {
+	public String itemRemove(@RequestParam("item_code") Integer item_code, RedirectAttributes rttr) {
 		if (itemService.remove(item_code)) {
 			rttr.addFlashAttribute("result", "success");
 		}

@@ -5,11 +5,11 @@ import lombok.Data;
 @Data
 public class CompanyVO {
 
-	private int company_code;
+	private Integer company_code;
 	private String company_name;
-	private String master;
+	private String company_master;
 	private String telephone;
-	private String mobile;
+	private String mobile_phone;
 	private String company_search;
 	private String company_usage;
 	private String transfer_info;

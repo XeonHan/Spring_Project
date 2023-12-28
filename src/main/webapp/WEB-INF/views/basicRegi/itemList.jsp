@@ -6,7 +6,7 @@
 <%@include file="../include/header.jsp"%>
 
 <ul class="sidenav">
-	<li><a href="#">거래처등록</a></li>
+	<li><a href="/basicRegi/companyList">거래처등록</a></li>
 	<li><a href="#">부서등록</a></li>
 	<li><a href="#">창고등록</a></li>
 	<li><a href="/basicRegi/itemList">품목등록</a></li>
@@ -198,8 +198,6 @@
 		</div>
 	</div>
 </div>
-
-
 
 <script type="text/javascript">
     function toggleAll(source) {

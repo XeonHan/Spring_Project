@@ -1,0 +1,109 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="org.zerock.mapper.CompanyMapper">
+
+	<select id="getList"
+		resultType="org.zerock.domain.basicRegi.CompanyVO">
+        <![CDATA[
+            SELECT * FROM company
+            WHERE company_code > 0
+        ]]>
+	</select>
+
+	<insert id="insertSelectKey"
+		parameterType="org.zerock.domain.basicRegi.CompanyVO"
+		useGeneratedKeys="false">
+		INSERT INTO company (company_code, company_name,
+		company_master, telephone,
+		mobile_phone, company_search, company_usage,
+		transfer_info, address)
+		VALUES (#{company_code}, #{company_name},
+		#{company_master},
+		#{telephone},
+		#{mobile_phone}, #{company_search]},
+		#{company_usage}, #{transger_info}, #{address})
+	</insert>
+
+
+	<sql id="criteria">
+		<trim prefix="" suffix=" AND " prefixOverrides="OR">
+			<foreach item='type' collection="typeArr">
+				<trim prefix="OR">
+					<choose>
+						<when test="type == 'N'.toString()">
+							company_name LIKE '%' || #{keyword} || '%'
+						</when>
+						<when test="type == 'M'.toString()">
+							company_master LIKE '%' || #{keyword} || '%'
+						</when>
+						<when test="type == 'S'.toString()">
+							company_search LIKE '%' || #{keyword} || '%'
+						</when>
+					</choose>
+				</trim>
+			</foreach>
+		</trim>
+	</sql>
+
+	<select id="getListWithPaging"
+		resultType="org.zerock.domain.basicRegi.CompanyVO"
+		parameterType="org.zerock.domain.Criteria">
+        <![CDATA[
+            SELECT company_code, company_name, company_master, telephone,
+    mobile_phone, company_search, company_usage, transfer_info, address
+            FROM (
+                SELECT ROWNUM rn, company_code, company_name, company_master, telephone,
+    mobile_phone, company_search, company_usage, transfer_info, address
+                FROM (
+                    SELECT company_code, company_name, company_master, telephone,
+    mobile_phone, company_search, company_usage, transfer_info, address
+                    FROM company
+                    WHERE
+        ]]>
+
+		<include refid="criteria"></include>
+
+        <![CDATA[
+                    ROWNUM <= #{pageNum} * #{amount}
+                    ORDER BY company_code
+                )
+            )
+            WHERE rn > (#{pageNum} - 1) * #{amount}
+        ]]>
+	</select>
+
+	<select id="getTotalCount" resultType="int">
+		SELECT COUNT(*) FROM company
+		WHERE
+		<include refid="criteria"></include>
+		company_code > 0
+	</select>
+
+	<select id="read"
+		resultType="org.zerock.domain.basicRegi.CompanyVO">
+		SELECT * FROM company WHERE company_code = #{company_code}
+	</select>
+
+	<delete id="delete">
+		DELETE FROM company WHERE company_code =
+		#{company_code}
+	</delete>
+
+	<update id="update">
+		UPDATE company SET
+		company_name = #{company_name},
+		company_master =
+		#{company_master},
+		telephone = #{telephone},
+		mobile_phone =
+		#{mobile_phone},
+		company_search = #{company_search},
+		company_usage = #{company_usage},
+		transfer_info = #{transfer_info},
+		address = #{address}
+		WHERE company_code = #{company_code}
+	</update>
+
+</mapper>
