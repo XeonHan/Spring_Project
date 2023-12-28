@@ -7,19 +7,18 @@ import lombok.Data;
 @Data
 public class PurRequestVO {
 
-	private String requestNo;
-	private Date requestDate;
-	private String employeeName;
-	private String companyName;
-	private Date deliveryDate;
-	private String wareName;
-	private Long itemCode;
-	private String itemName;
-	private Long companyCode;
+	private Long request_No;
+	private Date request_Date;
+	private String employee_Name;
+	private String company_Name;
+	private Date delivery_Date;
+	private String ware_Name;
+	private Long item_Code;
+	private String item_Name;
+	private Long company_Code;
 	private String standard;
 	private Integer amount;
-	private Double unitPrice;
-	private Double supplyTotal;
+	private Double unit_Price;
 	private String completion;
 	private String progress;
 
