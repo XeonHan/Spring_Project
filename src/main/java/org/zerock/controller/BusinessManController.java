@@ -12,8 +12,10 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.zerock.domain.Criteria;
+import org.zerock.domain.basicRegi.CompanyVO;
 import org.zerock.domain.basicRegi.ItemVO;
 import org.zerock.domain.quotation.QuotationVO;
+import org.zerock.service.CompanyService;
 import org.zerock.service.ItemService;
 import org.zerock.service.business.QuotationService;
 
@@ -26,7 +28,9 @@ import lombok.extern.log4j.Log4j;
 @AllArgsConstructor
 public class BusinessManController {
 	private QuotationService service;
+	private CompanyService comService;
 	private ItemService itemService;
+	
 	@GetMapping("/quoteInquiry")
 	public void quoteInquiry(Model model) {
 		List<QuotationVO> data= service.readList();
@@ -40,19 +44,30 @@ public class BusinessManController {
 	}
 	
 	@GetMapping(value = "/company", produces = MediaType.APPLICATION_JSON_UTF8_VALUE)
-	public ResponseEntity<List<ItemVO>> company() {
+	public ResponseEntity<List<CompanyVO>> company() {
 		Criteria cri = new Criteria();
-		List<ItemVO>data = itemService.getList(cri);
+		List<CompanyVO>data = comService.getList(cri);
 		log.info(data);
 		return new ResponseEntity<>(data, HttpStatus.OK);
 	}
 	@GetMapping(value = "/searchcompany", produces = MediaType.APPLICATION_JSON_UTF8_VALUE)
-	public ResponseEntity<ItemVO> searchcompany(@RequestParam(name= "keyword")String keyword) {
+	public ResponseEntity<CompanyVO> searchcompany(@RequestParam(name= "keyword")String keyword) {
 		
 		log.info(keyword);
 		Integer code = Integer.parseInt(keyword);
-		ItemVO data = itemService.get(code);
+		CompanyVO data = comService.get(code);
 		
+		return new ResponseEntity<>(data, HttpStatus.OK);
+	}
+	
+	@GetMapping(value = "/searchitem", produces = MediaType.APPLICATION_JSON_UTF8_VALUE)
+	public ResponseEntity<ItemVO> searchitem(@RequestParam(name= "keyword")String keyword) {
+		
+		log.info(keyword);
+		Integer code = Integer.parseInt(keyword);
+		
+		ItemVO data = itemService.get(code);
+		log.info(data);
 		return new ResponseEntity<>(data, HttpStatus.OK);
 	}
 }

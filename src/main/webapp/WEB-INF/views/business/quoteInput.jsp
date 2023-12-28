@@ -135,13 +135,11 @@
 					</div>
 
 
-					<table class="table">
+					<table class="table" id="itemTable">
 						<thead>
 							<tr>
 								<th>품목코드</th>
 								<th>품목명</th>
-								<th>거래처코드</th>
-								<th>거래처명</th>
 								<th>규격</th>
 								<th>수량</th>
 								<th>단가</th>
@@ -152,13 +150,9 @@
 						<tbody>
 							<tr>
 								<td><input type="text" class="form-control"
-									name="itemCode[]"></td>
+									name="itemCode[]" onblur="logInputValue(this)"></td>
 								<td><input type="text" class="form-control"
 									name="itemName[]"></td>
-								<td><input type="text" class="form-control"
-									name="supplierCode[]"></td>
-								<td><input type="text" class="form-control"
-									name="supplierName[]"></td>
 								<td><input type="text" class="form-control"
 									name="specification[]"></td>
 								<td><input type="text" class="form-control"
@@ -378,10 +372,8 @@
         var newRow = tableBody.insertRow();
         
         newRow.innerHTML = `
-            <td><input type="text" class="form-control" name="itemCode[]"></td>
+            <td><input type="text" class="form-control" id="itemcodeSearch" onblur="logInputValue(this)" name="itemCode[]"></td>
             <td><input type="text" class="form-control" name="itemName[]"></td>
-            <td><input type="text" class="form-control" name="supplierCode[]"></td>
-            <td><input type="text" class="form-control" name="supplierName[]"></td>
             <td><input type="text" class="form-control" name="specification[]"></td>
             <td><input type="text" class="form-control" name="quantity[]" oninput="calculateTotal(this)"></td>
             <td><input type="text" class="form-control" name="unitPrice[]" oninput="calculateTotal(this)"></td>
@@ -389,7 +381,46 @@
             <td><input type="text" class="form-control" name="newNote"></td>
         `;
     }
-
+    function logInputValue(inputElement) {
+        var inputValue = inputElement.value;
+        
+        if(inputValue.trim() !== '') {
+        	$.ajax({
+                url: '/business/searchitem',  // 검색을 처리할 서버 엔드포인트
+                type: 'GET',
+                data: { keyword: inputValue },  // 서버에 전달할 데이터
+                success: function (data) {
+                	
+                	 if (typeof data === 'undefined' || data === null) {
+                		return;
+                	}
+                	
+                	var tableRow = inputElement.closest('tr');
+                	// 현재 input이 있는 행의 정보 출력
+                	var targetField = tableRow.querySelector('td input[name="itemName[]"]');
+                	if (targetField) {
+                    	targetField.value = data.item_name;
+                	}
+                	var targetField = tableRow.querySelector('td input[name="specification[]"]');
+                	if (targetField) {
+                    	targetField.value = data.standard_name;
+                	}
+                	var targetField = tableRow.querySelector('td input[name="unitPrice[]"]');
+                	if (targetField) {
+                    	targetField.value = data.sales_price;
+                	}
+                },
+                error: function (xhr, status, err) {
+	                console.error('no data');
+                }
+        	});
+        }else{
+        	return;
+        }
+    }
+	
+	
+	
 	// 단가 * 수량 = 금액 계산
     function calculateTotal(input) {
         var row = input.closest('tr');
@@ -400,6 +431,8 @@
         totalAmountInput.value = isNaN(totalAmount) ? '' : totalAmount;
     }
 	
+	
+	
 	// 다시 작성
     function resetForm() {
         var inputs = document.querySelectorAll('input[type="text"]');
@@ -408,6 +441,8 @@
         });
     }
 
+	
+	
 	
 	</script>
 
