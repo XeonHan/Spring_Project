@@ -15,9 +15,9 @@ public interface CompanyMapper {
 	
 	public void insertSelectKey(CompanyVO company);
 	
-	public CompanyVO read(int company_code);
+	public CompanyVO read(Integer company_code);
 	
-	public int delete(int company_code);
+	public int delete(Integer company_code);
 	
 	public int update(CompanyVO company);
 	

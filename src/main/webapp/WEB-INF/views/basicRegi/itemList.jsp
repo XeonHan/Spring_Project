@@ -207,6 +207,10 @@
         });
     }
 
+    function isItemCodeValid(itemCode){
+    	return itemCode >= 40000 && itemCode <= 49999;
+    }
+    
     $(document).ready(function () {
         var actionForm = $("#actionForm");
         var itemRegisterModal = $("#itemRegisterModal");
@@ -275,12 +279,18 @@
     });
 
     function registerItem() {
-    	
+    	 var itemCode = $("input[name='item_code']").val();
+
+        if (!isItemCodeValid(itemCode)) {
+            alert("잘못된 코드번호입니다 (40000~49999)");
+            return;
+        }
+        
         $.ajax({
             type: "POST",
             url: "/basicRegi/itemRegister",
             data: {
-            	item_code: $("input[name='item_code']").val(),
+            	item_code: itemCode,
                 item_name: $("input[name='item_name']").val(),
                 item_group: $("input[name='item_group']").val(),
                 standard_name: $("input[name='standard_name']").val(),
@@ -307,6 +317,12 @@
     	    var salesPrice = $("#itemModifyModal input[name='sales_price']").val();
     	    var itemCate = $("#itemModifyModal input[name='item_cate']").val();
 
+
+            if (!isItemCodeValid(itemCode)) {
+                alert("잘못된 코드번호입니다 (40000~49999)");
+                return;
+            }
+            
     	    $.ajax({
     	    	type: "POST",
     	    url: "/basicRegi/itemModify",

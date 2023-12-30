@@ -22,8 +22,8 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		VALUES (#{company_code}, #{company_name},
 		#{company_master},
 		#{telephone},
-		#{mobile_phone}, #{company_search]},
-		#{company_usage}, #{transger_info}, #{address})
+		#{mobile_phone}, #{company_search},
+		#{company_usage}, #{transfer_info}, #{address})
 	</insert>
 
 

@@ -14,5 +14,6 @@ public class CompanyVO {
 	private String company_usage;
 	private String transfer_info;
 	private String address;
-	
+
+
 }
