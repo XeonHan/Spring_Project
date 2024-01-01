@@ -15,14 +15,63 @@ import org.zerock.domain.Criteria;
 import org.zerock.domain.PageDTO;
 import org.zerock.domain.basicRegi.CompanyVO;
 import org.zerock.domain.basicRegi.ItemVO;
+import org.zerock.domain.basicRegi.WarehouseVO;
 import org.zerock.service.CompanyService;
 import org.zerock.service.ItemService;
-
-
+import org.zerock.service.WarehouseService;
 
 @Controller
 @RequestMapping("/basicRegi/*")
 public class BasicRegiController {
+
+	// Warehouse
+	@Autowired
+	private WarehouseService wareService;
+
+	@GetMapping("/wareList")
+	public void wareList(Criteria cri, Model model) {
+		model.addAttribute("wareList", wareService.getList(cri));
+
+		int total = wareService.getTotal(cri);
+
+		model.addAttribute("pageMaker", new PageDTO(cri, total));
+	}
+
+	@PostMapping("/wareRegister")
+	@ResponseBody
+	public ResponseEntity<String> wareRegister(WarehouseVO ware, RedirectAttributes rttr) {
+		try {
+			wareService.register(ware);
+			return new ResponseEntity<>("success", HttpStatus.OK);
+		} catch (Exception e) {
+			e.printStackTrace();
+			return new ResponseEntity<>("error", HttpStatus.INTERNAL_SERVER_ERROR);
+		}
+	}
+
+	@GetMapping("/wareGet")
+	@ResponseBody
+	public ResponseEntity<WarehouseVO> wareGet(@RequestParam("ware_code") Integer ware_code) {
+		WarehouseVO ware = wareService.get(ware_code);
+		return new ResponseEntity<>(ware, HttpStatus.OK);
+	}
+
+	@PostMapping("/wareModify")
+	public String wareModify(WarehouseVO ware, RedirectAttributes rttr) {
+
+		if (wareService.modify(ware)) {
+			rttr.addFlashAttribute("result", "success");
+		}
+		return "redirect:/basicRegi/wareList";
+	}
+
+	@PostMapping("/wareRemove")
+	public String wareRemove(@RequestParam("ware_code") Integer ware_code, RedirectAttributes rttr) {
+		if (wareService.remove(ware_code)) {
+			rttr.addFlashAttribute("result", "success");
+		}
+		return "redirect:/basicRegi/wareList";
+	}
 
 	// Company
 	@Autowired

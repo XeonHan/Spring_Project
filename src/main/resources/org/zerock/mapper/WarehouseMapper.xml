@@ -1,0 +1,98 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="org.zerock.mapper.WarehouseMapper">
+
+	<select id="getList"
+		resultType="org.zerock.domain.basicRegi.WarehouseVO">
+        <![CDATA[
+            SELECT * FROM item
+            WHERE ware_code > 0
+        ]]>
+	</select>
+
+	<insert id="insertSelectKey"
+		parameterType="org.zerock.domain.basicRegi.WarehouseVO"
+		useGeneratedKeys="false">
+		INSERT INTO warehouse (ware_code, ware_name,
+		ware_cate, progress_name,
+		ware_usage)
+		VALUES (#{ware_code},
+		#{ware_name}, #{ware_cate}, #{progress_name},
+		#{ware_usage})
+	</insert>
+
+
+	<sql id="criteria">
+		<trim prefix="" suffix=" AND " prefixOverrides="OR">
+			<foreach item='type' collection="typeArr">
+				<trim prefix="OR">
+					<choose>
+						<when test="type == 'N'.toString()">
+							ware_name LIKE '%' || #{keyword} || '%'
+						</when>
+						<when test="type == 'C'.toString()">
+							ware_cate LIKE '%' || #{keyword} || '%'
+						</when>
+						<when test="type == 'P'.toString()">
+							progress_name LIKE '%' || #{keyword} || '%'
+						</when>
+					</choose>
+				</trim>
+			</foreach>
+		</trim>
+	</sql>
+
+	<select id="getListWithPaging"
+		resultType="org.zerock.domain.basicRegi.WarehouseVO"
+		parameterType="org.zerock.domain.Criteria">
+        <![CDATA[
+            SELECT ware_code, ware_name, ware_cate, progress_name, ware_usage
+            FROM (
+                SELECT ROWNUM rn, ware_code, ware_name, ware_cate, progress_name, ware_usage
+                FROM (
+                    SELECT ware_code, ware_name, ware_cate, progress_name, ware_usage
+                    FROM warehouse
+                    WHERE
+        ]]>
+
+		<include refid="criteria"></include>
+
+        <![CDATA[
+                    ROWNUM <= #{pageNum} * #{amount}
+                    ORDER BY ware_code
+                )
+            )
+            WHERE rn > (#{pageNum} - 1) * #{amount}
+        ]]>
+	</select>
+
+	<select id="getTotalCount" resultType="int">
+		SELECT COUNT(*) FROM warehouse
+		WHERE
+		<include refid="criteria"></include>
+		ware_code > 0
+	</select>
+
+	<select id="read"
+		resultType="org.zerock.domain.basicRegi.WarehouseVO">
+		SELECT * FROM warehouse WHERE ware_code = #{ware_code}
+	</select>
+
+	<delete id="delete">
+		DELETE FROM warehouse WHERE ware_code = #{ware_code}
+	</delete>
+
+	<update id="update">
+		UPDATE warehouse SET
+		ware_name = #{ware_name},
+		ware_cate =
+		#{ware_cate},
+		progress_name = #{progress_name},
+		ware_usage =
+		#{ware_usage}
+		WHERE ware_code = #{ware_code}
+	</update>
+
+</mapper>
