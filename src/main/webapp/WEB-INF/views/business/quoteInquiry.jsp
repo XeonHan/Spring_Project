@@ -89,13 +89,13 @@
 								<td><input type="checkbox" name="selectedItems"
 									value="${item.item_code}"></td>
 								<td><c:out value="${quotation.qhodate_no}" /></td>
-								<td><c:out value="${quotation.company_name}" /></td>
+								<td><c:out value="${quotation.company_code}" /></td>
 
 
-								<td><c:out value="${quotation.employee_name}" /></td>
+								<td><c:out value="${quotation.employee_code}" /></td>
 								<td><c:out value="${quotation.item_name}" /></td>
 								<td><c:out value="${quotation.valid_date}" /></td>
-								<td><c:out value="${quotation.supply_total}" /></td>
+								<td><c:out value="총 합계" /></td>
 								<td><c:out value="${quotation.progress}" /></td>
 								<td>생성한 전표</td>
 

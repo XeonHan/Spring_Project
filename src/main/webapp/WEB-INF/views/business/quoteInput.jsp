@@ -14,7 +14,8 @@
 <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 
 <!-- 부트스트랩 JavaScript 파일 -->
-<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
+<script
+	src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
 <body>
 
 	<%@include file="../include/header.jsp"%>
@@ -49,141 +50,134 @@
 		<!-- /.row -->
 		<div class="row">
 			<div class="col-lg-12">
-				<div class="panel panel-default">
-					<div class="panel-body">
+				<form role="form" action="/business/regist" method="post">
+					<div class="panel panel-default">
+						<div class="panel-body">
 
 
 
-						<div class="tab-pane">
-							<ul class="wrapper-form wrapper-form-state-2">
-								<div class="row">
-									<!-- 첫 번째 줄 -->
-									<div class="col-md-6">
-										<!-- 일자 -->
-										<div class="form-group">
-											<label for="date1">일자</label> <input type="date"
-												class="form-control" id="date1"
-												style="width: 251px; height: 38px;">
+							<div class="tab-pane">
+								<ul class="wrapper-form wrapper-form-state-2">
+									<div class="row">
+										<!-- 첫 번째 줄 -->
+										<div class="col-md-6">
+											<!-- 일자 -->
+											<div class="form-group">
+												<label for="date1">일자</label> <input type="date"
+													class="form-control" id="date_index" name="qhodate_no"
+													style="width: 251px; height: 38px;">
+											</div>
+										</div>
+										<div class="col-md-6">
+											<!-- 거래처 -->
+											<div class="form-group">
+												<label for="production_place1">거래처</label>
+												<div class="input-group">
+													<input type="text" id="company_code"
+														name="company_code" style="width: 121px; height: 28px;">
+													<button class="my-custom-button material-icons"
+														type="button" data-function="button"
+														data-function-id="code.openpopup" data-cid="cust"
+														data-toggle="modal" data-target="#exampleModal"
+														id="openModalBtn" data-content="company"
+														style="width: 28px; height: 28px; vertical-align: top;"></button>
+													<input type="text" id="company_name" readonly
+														name="company_name"
+														style="width: 121px; height: 28px;">
+
+												</div>
+											</div>
 										</div>
 									</div>
+								</ul>
+							</div>
+							<ul class="wrapper-form wrapper-form-state-2">
+								<div class="row">
+									<!-- 두 번째 줄 -->
 									<div class="col-md-6">
-										<!-- 거래처 -->
 										<div class="form-group">
-											<label for="production_place1">거래처</label>
+											<label for="production_place1">담당자</label>
 											<div class="input-group">
-												<input type="text" id="production_place"
-													name="production_place" style="width: 121px; height: 28px;">
+												<input type="text" id="employee_code"
+													name="employee_code" style="width: 121px; height: 28px;">
 												<button class="my-custom-button material-icons"
 													data-function="button" data-function-id="code.openpopup"
-													data-cid="cust" data-toggle="modal"
+													data-cid="cust" data-toggle="modal" type="button"
 													data-target="#exampleModal" id="openModalBtn"
-													data-content="company"
+													data-content="emp"
 													style="width: 28px; height: 28px; vertical-align: top;"></button>
-												<input type="text" id="some_other_input" readonly
-													name="some_other_input" style="width: 121px; height: 28px;">
+												<input type="text" id="employee_name" readonly
+													name="employee_name" style="width: 121px; height: 28px;">
+
+											</div>
+										</div>
+									</div>
+
+									<div class="col-md-6">
+										<!-- 납품처 -->
+										<div class="form-group">
+											<label for="production_place1">출하창고</label>
+											<div class="input-group">
+												<input type="text" id="ware_code" name="ware_code"
+													style="width: 121px; height: 28px;">
+												<button class="my-custom-button material-icons"
+													data-function="button" data-function-id="code.openpopup"
+													data-cid="cust" data-toggle="modal" type="button"
+													data-target="#exampleModal" id="openModalBtn"
+													data-content="warehouse"
+													style="width: 28px; height: 28px; vertical-align: top;"></button>
+												<input type="text" id="ware_name" readonly
+													name="ware_name" style="width: 121px; height: 28px;">
 
 											</div>
 										</div>
 									</div>
 								</div>
+
+
+							</ul>
+
 						</div>
 
-						<div class="row">
-							<!-- 두 번째 줄 -->
-							<div class="col-md-6">
-								<!-- 일자 -->
-								<div class="form-group">
-									<label for="production_place1">담당자</label>
-									<div class="input-group">
-										<input type="text" id="production_place"
-											name="production_place" style="width: 121px; height: 28px;">
-										<button class="my-custom-button material-icons"
-											data-function="button" data-function-id="code.openpopup"
-											data-cid="cust" data-toggle="modal"
-											data-target="#exampleModal" id="openModalBtn"
-											data-content="emp"
-											style="width: 28px; height: 28px; vertical-align: top;"></button>
-										<input type="text" id="some_other_input" readonly
-											name="some_other_input" style="width: 121px; height: 28px;">
+						<table class="table" id="itemTable">
+							<thead>
+								<tr>
+									<th>품목코드</th>
+									<th>품목명</th>
+									<th>규격</th>
+									<th>수량</th>
+									<th>단가</th>
+									<th>금액(합계)</th>
+									<th>새로운 항목 추가</th>
+								</tr>
+							</thead>
+							<tbody>
+								<tr>
 
-									</div>
-								</div>
-							</div>
-							<div class="col-md-6">
-								<!-- 납품처 -->
-								<div class="form-group">
-									<label for="production_place1">출하창고</label>
-									<div class="input-group">
-										<input type="text" id="production_place"
-											name="production_place" style="width: 121px; height: 28px;">
-										<button class="my-custom-button material-icons"
-											data-function="button" data-function-id="code.openpopup"
-											data-cid="cust" data-toggle="modal"
-											data-target="#exampleModal" id="openModalBtn"
-											data-content="warehouse"
-											style="width: 28px; height: 28px; vertical-align: top;"></button>
-										<input type="text" id="some_other_input" readonly
-											name="some_other_input" style="width: 121px; height: 28px;">
+								</tr>
+							</tbody>
 
-									</div>
-								</div>
-							</div>
+						</table>
+
+						<div>
+							<p>
+								<button type="button" class="btn btn-primary" onclick="addRow()">추가</button>
+							</p>
+						</div>
+
+						<div class="pull-left">
+							<button type="submit">저장</button>
+							<button onclick="resetForm()">다시 작성</button>
+							<button type="button" class="btn btn-primary" data-toggle="modal"
+								data-target="#exampleModal" id="openModalBtn"
+								data-content="aasd">Open Modal</button>
+
 						</div>
 
 
-						</ul>
 					</div>
-
-
-					<table class="table" id="itemTable">
-						<thead>
-							<tr>
-								<th>품목코드</th>
-								<th>품목명</th>
-								<th>규격</th>
-								<th>수량</th>
-								<th>단가</th>
-								<th>금액(합계)</th>
-								<th>새로운 항목 추가</th>
-							</tr>
-						</thead>
-						<tbody>
-							<tr>
-								<td><input type="text" class="form-control"
-									name="itemCode[]" onblur="logInputValue(this)"></td>
-								<td><input type="text" class="form-control"
-									name="itemName[]"></td>
-								<td><input type="text" class="form-control"
-									name="specification[]"></td>
-								<td><input type="text" class="form-control"
-									name="quantity[]" oninput="calculateTotal(this)"></td>
-								<td><input type="text" class="form-control"
-									name="unitPrice[]" oninput="calculateTotal(this)"></td>
-								<td><input type="text" class="form-control"
-									name="totalAmount[]" readonly></td>
-								<td><input type="text" class="form-control" name="newNote"></td>
-							</tr>
-						</tbody>
-
-					</table>
-
-					<div>
-						<p>
-							<button class="btn btn-primary" onclick="addRow()">추가</button>
-						</p>
-					</div>
-
-					<div class="pull-left">
-						<button onclick="saveData()">저장</button>
-						<button onclick="resetForm()">다시 작성</button>
-						<button type="button" class="btn btn-primary" data-toggle="modal"
-							data-target="#exampleModal" id="openModalBtn" data-content="aasd">Open
-							Modal</button>
-
-					</div>
-
-				</div>
-				<!-- /.table-responsive -->
+					<!-- /.table-responsive -->
+				</form>
 			</div>
 			<!-- /.panel-body -->
 		</div>
@@ -229,12 +223,48 @@
 			</div>
 		</div>
 	</div>
-	
-	
-	
+
+
+
 	<script type="text/javascript"
 		src="/resources/js/business/quotation.js"></script>
 	<script>
+	// 시작시 행 추가
+	$(document).ready(function() {
+		addRow();
+	});
+	$("button[type='submit']").on("click", function(e){
+		var company = document.getElementById("company_name").value.trim();
+		var ware = document.getElementById("ware_name").value.trim();
+		var date = document.getElementById("date_index").value.trim();
+		
+		if(company==='' || ware==='' || date===''){
+			 alert("모든 필드를 입력하세요.");
+		     event.preventDefault(); // 제출을 막음
+		}
+		
+		var formObj = $("form[role='form']");
+		e.preventDefault();
+		var str ="";
+		$("#itemTable tbody tr").each(function(i ,row){
+			if(i == 0)
+				return true;
+			
+			// 각 행에서 필요한 정보를 가져와서 처리
+		    var itemCode = $(row).find('input[name="item_code"]').val();
+		    var amount = $(row).find('input[name="amount"]').val();
+			
+			i = i-1;
+		    // 가져온 정보를 이용하여 문자열 생성
+		    str += "<input type='hidden' name='item_data["+i+"].item_code' value='" + itemCode +"'>";
+		    str += "<input type='hidden' name='item_data["+i+"].amount' value='" + amount +"'>";
+		});
+		//formObj.append(str).submit();
+	});
+	
+	
+	
+	
 	 $('#exampleModal').on('show.bs.modal', function (event) {
 	        // 클릭한 버튼 가져오기
 	        var button = $(event.relatedTarget);
@@ -259,7 +289,7 @@
 			                    success: function (data) {
 			                    	var contentHtml = `<table width="100%"
 					                    class="table table-striped table-bordered table-hover"
-					                    id="dataTables-example">
+					                    id="dataTables-company">
 					                    <thead>
 					                        <tr>
 					                            <th>거래처코드</th>
@@ -278,7 +308,7 @@
 					                contentHtml += '</table>';
 					                $('#modalBodyContent').html(contentHtml);
 					                
-					                $('#modalBodyContent').on('click', '.i-name', function() {
+					                $('#dataTables-company').on('click', '.i-name', function() {
 					                	var clickedText = $(this).text();
 					                    var clickedRow = $(this).closest('tr');
 					                    var item = {
@@ -287,8 +317,8 @@
 					                        standard_name: clickedRow.find('td:eq(2)').text(),
 					                        pur_price: clickedRow.find('td:eq(3)').text()
 					                    };
-					                    $('#production_place').val(item.item_name);
-					                    $('#some_other_input').val(item.item_group);
+					                    $('#company_code').val(item.item_name);
+					                    $('#company_name').val(item.item_group);
 					                });
 					            },
 					            error: function (xhr, status, err) {
@@ -302,12 +332,118 @@
 
 			}else if(dynamicContent === 'emp'){
 				$('#modalheader').html('<span id="modalheader" style="color: white;">'+ '담당자'+ '</span>');
-				$('#modalBodyContent').html('<p>' + dynamicContent  + '</p>');
+				basicListEmployee();
+			
+				 
+				 // 검색 버튼 눌렸을때
+					document.getElementById('searchButton').addEventListener('click', function() {
+				        // 클릭 시 실행될 코드
+						var searchKeyword = $('#searchInput').val();
+				        if(searchKeyword.trim() !== '') {
+				        	$.ajax({
+			                    url: '/business/searchemployee',  // 검색을 처리할 서버 엔드포인트
+			                    type: 'GET',
+			                    data: { keyword: searchKeyword },  // 서버에 전달할 데이터
+			                    success: function (data) {
+			                    	var contentHtml = `<table width="100%"
+					                    class="table table-striped table-bordered table-hover"
+					                    id="dataTables-employee">
+					                    <thead>
+					                        <tr>
+					                            <th>사원 코드</th>
+					                            <th>담당자 이름</th>
+					                        </tr>
+					                    </thead>`;
+					               
+					                contentHtml += '<tr>';
+					                contentHtml += '<td class="i-name">' + data.empl_code + '</li></td>';
+					                contentHtml += '<td class="i-name">' + data.empl_name + '</td>';
+					                contentHtml += '</tr>';
+					                contentHtml += '</table>';
+					                $('#modalBodyContent').html(contentHtml);
+					                
+					                $('#dataTables-employee').on('click', '.i-name', function() {
+					                	var clickedText = $(this).text();
+					                    var clickedRow = $(this).closest('tr');
+					                    var item = {
+					                        item_name: clickedRow.find('td:eq(0)').text(),
+					                        item_group: clickedRow.find('td:eq(1)').text(),
+					                        standard_name: clickedRow.find('td:eq(2)').text(),
+					                        pur_price: clickedRow.find('td:eq(3)').text()
+					                    };
+					                    $('#employee_code').val(item.empl_code);
+					                    $('#employee_name').val(item.empl_name);
+					                    return;
+					                });
+					            },
+					            error: function (xhr, status, err) {
+					                console.error('Failed to get data from the server:', err);
+					            }
+				        	});
+				        }else {
+				        	basicListEmployee();
+				        }
+					});
 			}else if(dynamicContent === 'warehouse') {
 				$('#modalheader').html('<span id="modalheader" style="color: white;">'+ '출하 창고'+ '</span>');
-				$('#modalBodyContent').html('<p>' + dynamicContent  + '</p>');
+				basicListWareHouse();
+				
+				 
+				 // 검색 버튼 눌렸을때
+					document.getElementById('searchButton').addEventListener('click', function() {
+				        // 클릭 시 실행될 코드
+						var searchKeyword = $('#searchInput').val();
+				        if(searchKeyword.trim() !== '') {
+				        	$.ajax({
+			                    url: '/business/searchwarehouse',  // 검색을 처리할 서버 엔드포인트
+			                    type: 'GET',
+			                    data: { keyword: searchKeyword },  // 서버에 전달할 데이터
+			                    success: function (data) {
+			                    	var contentHtml = `<table width="100%"
+					                    class="table table-striped table-bordered table-hover"
+					                    id="dataTables-warehouse">
+					                    <thead>
+					                        <tr>
+					                            <th>창고 코드</th>
+					                            <th>창고 이름</th>
+					                        </tr>
+					                    </thead>`;
+					               
+					                contentHtml += '<tr>';
+					                contentHtml += '<td class="i-name">' + data.ware_code + '</li></td>';
+					                contentHtml += '<td class="i-name">' + data.ware_name + '</td>';
+					                contentHtml += '</tr>';
+					                contentHtml += '</table>';
+					                $('#modalBodyContent').html(contentHtml);
+					                
+					                $('#dataTables-warehouse').on('click', '.i-name', function() {
+					                	if(dynamicContent === 'warehouse'){
+					                					
+					                		var clickedText = $(this).text();
+					                    	var clickedRow = $(this).closest('tr');
+					                    	var item = {
+					                        	item_name: clickedRow.find('td:eq(0)').text(),
+					                        	item_group: clickedRow.find('td:eq(1)').text(),
+					                        	standard_name: clickedRow.find('td:eq(2)').text(),
+					                        	pur_price: clickedRow.find('td:eq(3)').text()
+					                    	};
+					                    	$('#employee_code').val(item.empl_code);
+					                    	$('#employee_name').val(item.empl_name);
+					                	}else{
+					                		
+					                	}
+					                });
+					            },
+					            error: function (xhr, status, err) {
+					                console.error('Failed to get data from the server:', err);
+					            }
+				        	});
+				        }else {
+				        	basicListWareHouse();
+				        }
+					});
 			}
-	        
+	    });
 			
 			
 			
@@ -320,7 +456,7 @@
 		            	// 테이블 헤드
 		            	var contentHtml = `<table width="100%"
 		                    class="table table-striped table-bordered table-hover"
-		                    id="dataTables-example">
+		                    id="dataTables-company">
 		                    <thead>
 		                        <tr>
 		                            <th>거래처코드</th>
@@ -331,16 +467,16 @@
 		                    </thead>`;
 		                data.forEach(function (item) {
 		                	contentHtml += '<tr>';
-		                    contentHtml += '<td class="i-name">' + item.item_name + '</li></td>';
-		                    contentHtml += '<td class="i-name">' + item.item_group + '</td>';
-		                    contentHtml += '<td class="i-name">' + item.standard_name + '</td>';
-		                    contentHtml += '<td class="i-name">' + item.pur_price + '</td>';
+		                    contentHtml += '<td class="i-name">' + item.company_code + '</li></td>';
+		                    contentHtml += '<td class="i-name">' + item.company_name + '</td>';
+		                    contentHtml += '<td class="i-name">' + '기타'+ '</td>';
+		                    contentHtml += '<td class="i-name">' + '조회' + '</td>';
 		                    contentHtml += '</tr>';
 		                });
 		                contentHtml += '</table>';
 		                $('#modalBodyContent').html(contentHtml);
 		                
-		                $('#modalBodyContent').on('click', '.i-name', function() {
+		                $('#dataTables-company').on('click', '.i-name', function() {
 		                	var clickedText = $(this).text();
 		                    var clickedRow = $(this).closest('tr');
 		                    var item = {
@@ -349,8 +485,8 @@
 		                        standard_name: clickedRow.find('td:eq(2)').text(),
 		                        pur_price: clickedRow.find('td:eq(3)').text()
 		                    };
-		                    $('#production_place').val(item.item_name);
-		                    $('#some_other_input').val(item.item_group);
+		                    $('#company_code').val(item.item_name);
+		                    $('#company_name').val(item.item_group);
 		                });
 		            },
 		            error: function (xhr, status, err) {
@@ -359,9 +495,90 @@
 		        });
 			}
 			
-			
-			
-	    });
+			// 담당자 기본 리스트
+			function basicListEmployee(){
+				$.ajax({
+		            url: '/business/employee',  // 데이터를 가져올 URL
+		            dataType: 'json',  // 응답 데이터 형식
+		            success: function (data) {
+		            	// 테이블 헤드
+		            	var contentHtml = `<table width="100%"
+		                    class="table table-striped table-bordered table-hover"
+		                    id="dataTables-employee">
+		                    <thead>
+		                        <tr>
+		                            <th>담당자 코드</th>
+		                            <th>담당자 명</th>
+		                        </tr>
+		                    </thead>`;
+		                data.forEach(function (item) {
+		                	contentHtml += '<tr>';
+		                    contentHtml += '<td class="i-name">' + item.empl_code + '</li></td>';
+		                    contentHtml += '<td class="i-name">' + item.empl_name + '</td>';
+		                    contentHtml += '</tr>';
+		                });
+		                contentHtml += '</table>';
+		                $('#modalBodyContent').html(contentHtml);
+		                
+		                $('#dataTables-employee').on('click', '.i-name', function() {
+		                	var clickedText = $(this).text();
+		                    var clickedRow = $(this).closest('tr');
+		                    var item = {
+		                        item_name: clickedRow.find('td:eq(0)').text(),
+		                        item_group: clickedRow.find('td:eq(1)').text(),
+		                        standard_name: clickedRow.find('td:eq(2)').text(),
+		                        pur_price: clickedRow.find('td:eq(3)').text()
+		                    };
+		                    $('#employee_code').val(item.empl_code);
+		                    $('#employee_name').val(item.empl_name);
+		                });
+		            },
+		            error: function (xhr, status, err) {
+		                console.error('Failed to get data from the server:', err);
+		            }
+		        });
+			}
+			function basicListWareHouse(){
+				$.ajax({
+		            url: '/business/warehouse',  // 데이터를 가져올 URL
+		            dataType: 'json',  // 응답 데이터 형식
+		            success: function (data) {
+		            	// 테이블 헤드
+		            	var contentHtml = `<table width="100%"
+		                    class="table table-striped table-bordered table-hover"
+		                    id="dataTables-warehouse">
+		                    <thead>
+		                        <tr>
+		                            <th>담당자 코드</th>
+		                            <th>담당자 명</th>
+		                        </tr>
+		                    </thead>`;
+		                data.forEach(function (item) {
+		                	contentHtml += '<tr>';
+		                    contentHtml += '<td class="i-name">' + item.ware_code + '</li></td>';
+		                    contentHtml += '<td class="i-name">' + item.ware_name + '</td>';
+		                    contentHtml += '</tr>';
+		                });
+		                contentHtml += '</table>';
+		                $('#modalBodyContent').html(contentHtml);
+		                
+		                $('#dataTables-warehouse').on('click', '.i-name', function() {
+		                	var clickedText = $(this).text();
+		                    var clickedRow = $(this).closest('tr');
+		                    var item = {
+		                        item_name: clickedRow.find('td:eq(0)').text(),
+		                        item_group: clickedRow.find('td:eq(1)').text(),
+		                    };
+		                    $('#ware_code').val(item.item_name);
+		                    $('#ware_name').val(item.item_group);
+		                });
+		            },
+		            error: function (xhr, status, err) {
+		                console.error('Failed to get data from the server:', err);
+		            }
+		        });
+			}
+	
 
 	
 	 
@@ -372,14 +589,21 @@
         var newRow = tableBody.insertRow();
         
         newRow.innerHTML = `
-            <td><input type="text" class="form-control" id="itemcodeSearch" onblur="logInputValue(this)" name="itemCode[]"></td>
-            <td><input type="text" class="form-control" name="itemName[]"></td>
-            <td><input type="text" class="form-control" name="specification[]"></td>
-            <td><input type="text" class="form-control" name="quantity[]" oninput="calculateTotal(this)"></td>
-            <td><input type="text" class="form-control" name="unitPrice[]" oninput="calculateTotal(this)"></td>
-            <td><input type="text" class="form-control" name="totalAmount[]" readonly></td>
+            <td><input type="text" class="form-control" id="itemcodeSearch" onblur="logInputValue(this)" name="item_code"></td>
+            <td><input type="text" class="form-control" name="item_name"></td>
+            <td><input type="text" class="form-control" name="standard_name"></td>
+            <td><input type="text" class="form-control" name="amount" oninput="calculateTotal(this)"></td>
+            <td><input type="text" class="form-control" name="sales_price" oninput="calculateTotal(this)"></td>
+            <td><input type="text" class="form-control" name="totalAmount" readonly></td>
             <td><input type="text" class="form-control" name="newNote"></td>
         `;
+        // 아이템 코드
+        // 아이템 이름
+        // 아이템 규격
+        // 아이템 수량
+        // 아이템 단가
+        // 아이템 총합
+        // 기타
     }
     function logInputValue(inputElement) {
         var inputValue = inputElement.value;
@@ -391,21 +615,21 @@
                 data: { keyword: inputValue },  // 서버에 전달할 데이터
                 success: function (data) {
                 	
-                	 if (typeof data === 'undefined' || data === null) {
-                		return;
-                	}
                 	
                 	var tableRow = inputElement.closest('tr');
                 	// 현재 input이 있는 행의 정보 출력
-                	var targetField = tableRow.querySelector('td input[name="itemName[]"]');
+                	 if (typeof data === 'undefined' || data === null) {
+                		console.log("no data");
+                	}
+                	var targetField = tableRow.querySelector('td input[name="item_name"]');
                 	if (targetField) {
                     	targetField.value = data.item_name;
                 	}
-                	var targetField = tableRow.querySelector('td input[name="specification[]"]');
+                	var targetField = tableRow.querySelector('td input[name="standard_name"]');
                 	if (targetField) {
                     	targetField.value = data.standard_name;
                 	}
-                	var targetField = tableRow.querySelector('td input[name="unitPrice[]"]');
+                	var targetField = tableRow.querySelector('td input[name="sales_price"]');
                 	if (targetField) {
                     	targetField.value = data.sales_price;
                 	}
@@ -424,9 +648,9 @@
 	// 단가 * 수량 = 금액 계산
     function calculateTotal(input) {
         var row = input.closest('tr');
-        var quantity = row.querySelector('[name="quantity[]"]').value;
-        var unitPrice = row.querySelector('[name="unitPrice[]"]').value;
-        var totalAmountInput = row.querySelector('[name="totalAmount[]"]');
+        var quantity = row.querySelector('[name="amount"]').value;
+        var unitPrice = row.querySelector('[name="sales_price"]').value;
+        var totalAmountInput = row.querySelector('[name="totalAmount"]');
         var totalAmount = quantity * unitPrice;
         totalAmountInput.value = isNaN(totalAmount) ? '' : totalAmount;
     }
@@ -440,9 +664,6 @@
             input.value = '';
         });
     }
-
-	
-	
 	
 	</script>
 
