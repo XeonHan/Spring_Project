@@ -359,7 +359,7 @@ function modifyCompany() {
     var companyMaster = $("#companyModifyModal input[name='company_master']").val();
     var telephone = $("#companyModifyModal input[name='telephone']").val();
     var mobilePhone = $("#companyModifyModal input[name='mobile_phone']").val();
-    var companyUsage = modifyUsageCheckbox.is(":checked");
+    var companyUsage = modifyUsageCheckbox.is(":checked")  ? "사용" : "비사용";
     var companyNonUsage = modifyNonUsageCheckbox.is(":checked");
     var companySearch = $("#companyModifyModal input[name='company_search']").val();
     var transferInfo = $("#companyModifyModal input[name='transfer_info']").val();

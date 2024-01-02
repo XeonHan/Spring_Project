@@ -1,0 +1,83 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="org.zerock.mapper.DepartmentMapper">
+
+	<select id="getList"
+		resultType="org.zerock.domain.basicRegi.DepartmentVO">
+        <![CDATA[
+            SELECT * FROM department
+            WHERE depart_code > 0
+        ]]>
+	</select>
+
+	<insert id="insertSelectKey"
+		parameterType="org.zerock.domain.basicRegi.DepartmentVO"
+		useGeneratedKeys="false">
+		INSERT INTO department (depart_code, depart_name)
+		VALUES (#{depart_code}, #{depart_name})
+	</insert>
+
+	<sql id="criteria">
+		<trim prefix="" suffix=" AND " prefixOverrides="OR">
+			<foreach item='type' collection="typeArr">
+				<trim prefix="OR">
+					<choose>
+						<when test="type == 'N'.toString()">
+							depart_name LIKE '%' || #{keyword} || '%'
+						</when>
+					</choose>
+				</trim>
+			</foreach>
+		</trim>
+	</sql>
+
+	<select id="getListWithPaging"
+		resultType="org.zerock.domain.basicRegi.DepartmentVO"
+		parameterType="org.zerock.domain.Criteria">
+        <![CDATA[
+            SELECT depart_code, depart_name
+            FROM (
+                SELECT ROWNUM rn, depart_code, depart_name
+                FROM (
+                    SELECT depart_code, depart_name
+                    FROM department
+                    WHERE
+        ]]>
+
+		<include refid="criteria"></include>
+
+        <![CDATA[
+                    ROWNUM <= #{pageNum} * #{amount}
+                    ORDER BY depart_code
+                )
+            )
+            WHERE rn > (#{pageNum} - 1) * #{amount}
+        ]]>
+	</select>
+
+	<select id="getTotalCount" resultType="int">
+		SELECT COUNT(*) FROM department
+		WHERE
+		<include refid="criteria"></include>
+		depart_code > 0
+	</select>
+
+	<select id="read"
+		resultType="org.zerock.domain.basicRegi.DepartmentVO">
+		SELECT * FROM department WHERE depart_code = #{depart_code}
+	</select>
+
+	<delete id="delete">
+		DELETE FROM department WHERE depart_code =
+		#{depart_code}
+	</delete>
+
+	<update id="update">
+		UPDATE department SET
+		depart_name = #{depart_name}
+		WHERE depart_code = #{depart_code}
+	</update>
+
+</mapper>

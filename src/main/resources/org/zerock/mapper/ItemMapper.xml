@@ -20,7 +20,6 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
     #{pur_price}, #{sales_price}, #{item_cate})
 </insert>
 
-
 	<sql id="criteria">
 		<trim prefix="" suffix=" AND " prefixOverrides="OR">
 			<foreach item='type' collection="typeArr">

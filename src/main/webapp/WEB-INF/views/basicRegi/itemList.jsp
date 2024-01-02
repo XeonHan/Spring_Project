@@ -7,7 +7,7 @@
 
 <ul class="sidenav">
 	<li><a href="/basicRegi/companyList">거래처등록</a></li>
-	<li><a href="#">부서등록</a></li>
+	<li><a href="/basicRegi/departList">부서등록</a></li>
 	<li><a href="/basicRegi/wareList">창고등록</a></li>
 	<li><a href="/basicRegi/itemList">품목등록</a></li>
 	<li><a href="#">단가등록</a>
@@ -27,7 +27,7 @@
 	</div>
 
 	<div class="panel-body">
-		<!-- 테이블 헤더 수정 -->
+	
 		<table width="100%"
 			class="table table-striped table-boarded table-hover"
 			id="dataTables-item">
@@ -89,7 +89,6 @@
 			</form>
 		</div>
 	</div>
-
 </div>
 
 <div class="modal fade" id="itemRegisterModal" tabindex="-1"
@@ -130,7 +129,6 @@
 						<div class="form-group">
 							<label>품목구분</label><input class="form-control" name="item_cate">
 						</div>
-
 					</div>
 					<div class="modal-footer">
 						<button type="button" class="btn btn-primary"
@@ -139,7 +137,6 @@
 						<button type="button" class="btn btn-secondary"
 							data-dismiss="modal">닫기</button>
 					</div>
-
 				</div>
 			</form>
 		</div>

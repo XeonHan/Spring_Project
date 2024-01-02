@@ -14,15 +14,64 @@ import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 import org.zerock.domain.Criteria;
 import org.zerock.domain.PageDTO;
 import org.zerock.domain.basicRegi.CompanyVO;
+import org.zerock.domain.basicRegi.DepartmentVO;
 import org.zerock.domain.basicRegi.ItemVO;
 import org.zerock.domain.basicRegi.WarehouseVO;
 import org.zerock.service.CompanyService;
+import org.zerock.service.DepartmentService;
 import org.zerock.service.ItemService;
 import org.zerock.service.WarehouseService;
 
 @Controller
 @RequestMapping("/basicRegi/*")
 public class BasicRegiController {
+
+	// Department
+	@Autowired
+	private DepartmentService departService;
+
+	@GetMapping("/departList")
+	public void departList(Criteria cri, Model model) {
+		model.addAttribute("departList", departService.getList(cri));
+
+		int total = departService.getTotal(cri);
+
+		model.addAttribute("pageMaker", new PageDTO(cri, total));
+	}
+
+	@PostMapping("/departRegister")
+	public String departRegister(DepartmentVO depart, RedirectAttributes rttr) {
+
+		departService.register(depart);
+
+		rttr.addFlashAttribute("result", "success");
+
+		return "redirect:/basicRegi/departList";
+	}
+
+	@GetMapping("/departGet")
+	@ResponseBody
+	public ResponseEntity<DepartmentVO> departGet(@RequestParam("depart_code") int depart_code) {
+		DepartmentVO depart = departService.get(depart_code);
+		return new ResponseEntity<>(depart, HttpStatus.OK);
+	}
+
+	@PostMapping("/departModify")
+	public String departModify(DepartmentVO depart, RedirectAttributes rttr) {
+
+		if (departService.modify(depart)) {
+			rttr.addFlashAttribute("result", "success");
+		}
+		return "redirect:/basicRegi/departList";
+	}
+
+	@PostMapping("/departRemove")
+	public String departRemove(@RequestParam("depart_code") Integer depart_code, RedirectAttributes rttr) {
+		if (departService.remove(depart_code)) {
+			rttr.addFlashAttribute("result", "success");
+		}
+		return "redirect:/basicRegi/departList";
+	}
 
 	// Warehouse
 	@Autowired
