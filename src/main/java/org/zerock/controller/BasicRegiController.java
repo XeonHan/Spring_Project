@@ -15,16 +15,65 @@ import org.zerock.domain.Criteria;
 import org.zerock.domain.PageDTO;
 import org.zerock.domain.basicRegi.CompanyVO;
 import org.zerock.domain.basicRegi.DepartmentVO;
+import org.zerock.domain.basicRegi.EmployeeVO;
 import org.zerock.domain.basicRegi.ItemVO;
 import org.zerock.domain.basicRegi.WarehouseVO;
 import org.zerock.service.CompanyService;
 import org.zerock.service.DepartmentService;
+import org.zerock.service.EmployeeService;
 import org.zerock.service.ItemService;
 import org.zerock.service.WarehouseService;
 
 @Controller
 @RequestMapping("/basicRegi/*")
 public class BasicRegiController {
+
+	// Employee
+	@Autowired
+	private EmployeeService emplService;
+
+	@GetMapping("/emplList")
+	public void emplList(Criteria cri, Model model) {
+		model.addAttribute("emplList", emplService.getList(cri));
+
+		int total = emplService.getTotal(cri);
+
+		model.addAttribute("pageMaker", new PageDTO(cri, total));
+	}
+
+	@PostMapping("/emplRegister")
+	public String emplRegister(EmployeeVO empl, RedirectAttributes rttr) {
+
+		emplService.register(empl);
+
+		rttr.addFlashAttribute("result", "success");
+
+		return "redirect:/basicRegi/emplList";
+	}
+
+	@GetMapping("/emplGet")
+	@ResponseBody
+	public ResponseEntity<EmployeeVO> emplGet(@RequestParam("empl_code") Integer empl_code) {
+		EmployeeVO empl = emplService.get(empl_code);
+		return new ResponseEntity<>(empl, HttpStatus.OK);
+	}
+
+	@PostMapping("/emplModify")
+	public String emplModify(EmployeeVO empl, RedirectAttributes rttr) {
+
+		if (emplService.modify(empl)) {
+			rttr.addFlashAttribute("result", "success");
+		}
+		return "redirect:/basicRegi/emplList";
+	}
+
+	@PostMapping("/emplRemove")
+	public String emplRemove(@RequestParam("empl_code") Integer empl_code, RedirectAttributes rttr) {
+		if (emplService.remove(empl_code)) {
+			rttr.addFlashAttribute("result", "success");
+		}
+		return "redirect:/basicRegi/emplList";
+	}
 
 	// Department
 	@Autowired

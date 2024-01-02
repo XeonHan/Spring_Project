@@ -15,7 +15,7 @@
 			<li><a href="#">특별단가등록</a></li>
 			<li><a href="#">품목별단가</a></li>
 		</ul></li>
-	<li><a href="#">사원(담당)등록</a></li>
+	<li><a href="/basicRegi/emplList">사원(담당)등록</a></li>
 </ul>
 </nav>
 <div id="page-wrapper">
@@ -27,7 +27,7 @@
 	</div>
 
 	<div class="panel-body">
-	
+
 		<table width="100%"
 			class="table table-striped table-boarded table-hover"
 			id="dataTables-item">
@@ -251,10 +251,7 @@
                     alert("데이터를 가져오는 중 오류가 발생했습니다");
                 }
             });
-        });
-
-
-       
+        });       
 
         var searchForm = $("#searchForm");
 

@@ -7,7 +7,7 @@
 
 <ul class="sidenav">
 	<li><a href="/basicRegi/companyList">거래처등록</a></li>
-	<li><a href="#">부서등록</a></li>
+	<li><a href="/basicRegi/departList">부서등록</a></li>
 	<li><a href="/basicRegi/wareList">창고등록</a></li>
 	<li><a href="/basicRegi/itemList">품목등록</a></li>
 	<li><a href="#">단가등록</a>
@@ -142,7 +142,7 @@
 								name="company_search" type="text">
 						</div>
 						<div class="form-group">
-							<label>이체정보</label><input class="form-control"
+							<label>이체정보(은행명/계좌번호)</label><input class="form-control"
 								name="transfer_info" type="text">
 						</div>
 						<div class="form-group">
@@ -208,7 +208,7 @@
 									name="company_search" type="text">
 							</div>
 							<div class="form-group">
-								<label>이체정보</label><input class="form-control"
+								<label>이체정보(은행명/계좌번호)</label><input class="form-control"
 									name="transfer_info" type="text">
 							</div>
 							<div class="form-group">

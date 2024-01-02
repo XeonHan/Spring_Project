@@ -1,0 +1,94 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="org.zerock.mapper.EmployeeMapper">
+
+	<select id="getList"
+		resultType="org.zerock.domain.basicRegi.EmployeeVO">
+    <![CDATA[
+        SELECT * FROM employee
+        WHERE empl_code > 0
+    ]]>
+	</select>
+
+	<insert id="insertSelectKey"
+		parameterType="org.zerock.domain.basicRegi.EmployeeVO"
+		useGeneratedKeys="false">
+		INSERT INTO employee (empl_code, empl_name,
+		empl_search, phone,
+		email, address_info)
+		VALUES (#{empl_code},
+		#{empl_name}, #{empl_search}, #{phone},
+		#{email}, #{address_info})
+	</insert>
+
+	<sql id="criteria">
+		<trim prefix="" suffix=" AND " prefixOverrides="OR">
+			<foreach item='type' collection="typeArr">
+				<trim prefix="OR">
+					<choose>
+						<when test="type == 'N'.toString()">
+							empl_name LIKE '%' || #{keyword} || '%'
+						</when>
+						<when test="type == 'S'.toString()">
+							empl_search LIKE '%' || #{keyword} || '%'
+						</when>
+					</choose>
+				</trim>
+			</foreach>
+		</trim>
+	</sql>
+
+	<select id="getListWithPaging"
+		resultType="org.zerock.domain.basicRegi.EmployeeVO"
+		parameterType="org.zerock.domain.Criteria">
+        <![CDATA[
+            SELECT empl_code, empl_name, empl_search, phone, email, address_info
+            FROM (
+                SELECT ROWNUM rn, empl_code, empl_name, empl_search, phone, email, address_info
+                FROM (
+                    SELECT empl_code, empl_name, empl_search, phone, email, address_info
+                    FROM employee
+                    WHERE
+        ]]>
+
+		<include refid="criteria"></include>
+
+        <![CDATA[
+                    ROWNUM <= #{pageNum} * #{amount}
+                    ORDER BY empl_code
+                )
+            )
+            WHERE rn > (#{pageNum} - 1) * #{amount}
+        ]]>
+	</select>
+
+	<select id="getTotalCount" resultType="int">
+		SELECT COUNT(*) FROM employee
+		WHERE
+		<include refid="criteria"></include>
+		empl_code > 0
+	</select>
+
+	<select id="read"
+		resultType="org.zerock.domain.basicRegi.EmployeeVO">
+		SELECT * FROM employee WHERE empl_code = #{empl_code}
+	</select>
+
+	<delete id="delete">
+		DELETE FROM employee WHERE empl_code = #{empl_code}
+	</delete>
+
+	<update id="update">
+		UPDATE employee SET
+		empl_name = #{empl_name},
+		empl_search =
+		#{empl_search},
+		phone = #{phone},
+		email =
+		#{email},
+		address_info = #{address_info}
+		WHERE empl_code = #{empl_code}
+	</update>
+</mapper>
