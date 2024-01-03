@@ -50,8 +50,12 @@ public class BusinessManController {
 	}
 	@PostMapping("/regist")
 	public String regist(QuotationVO data) {
+		Integer count = service.countDateByDate(data.getQhodate_no());
+		count +=1;
+		data.setQhodate_no(data.getQhodate_no()+ " -" +count.toString());
 		
 		
+		service.register(data);
 		
 		return "redirect:/business/quoteInquiry";
 	}

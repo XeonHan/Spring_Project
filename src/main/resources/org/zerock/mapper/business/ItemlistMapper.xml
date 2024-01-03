@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="org.zerock.mapper.business.ItemlistMapper">
+	<insert id="regist">
+		insert into itemlist (ino,item_code,qhodate_no,orderdate_no ,salesdate_no, shipment_no,amount)
+		values ( il_seq.nextval, #{item_code}, #{qhodate_no ,jdbcType=VARCHAR},#{orderdate_no ,jdbcType=VARCHAR},
+		#{salesdate_no ,jdbcType=VARCHAR},#{shipment_no, jdbcType=VARCHAR},#{amount})
+	</insert>
+	
+</mapper>

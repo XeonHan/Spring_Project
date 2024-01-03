@@ -3,6 +3,8 @@
 PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="org.zerock.mapper.business.QuotationMapper">
+
+	<!-- 리스트 가져오기 -->
 	<select id="getList"
 		resultType="org.zerock.domain.quotation.QuotationVO">
 <![CDATA[
@@ -10,4 +12,18 @@ select * from quotation
 ]]>
 	</select>
 
+	<!-- 등록 -->
+	<insert id="regist">
+		insert into quotation (qhodate_no,company_code,employee_code,ware_code ,valid_date, progress)
+		values (#{qhodate_no}, #{company_code}, #{employee_code},#{ware_code},#{valid_date,jdbcType=DATE},#{progress, jdbcType=VARCHAR})
+	</insert>
+
+	<!-- 날짜 카운트 계산 -->
+	 <select id= "getCountDate" parameterType="java.lang.String" resultType="java.lang.Integer">
+		<![CDATA[
+		SELECT COUNT(*)
+	  	FROM quotation
+	  	WHERE TO_DATE(SUBSTR(qhodate_no, 1, 10), 'YYYY-MM-DD') = TO_DATE(#{qhodate_no}, 'YYYY-MM-DD')
+		]]> 
+ 	</select> 
 </mapper>

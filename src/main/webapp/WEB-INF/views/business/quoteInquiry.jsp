@@ -93,7 +93,7 @@
 
 
 								<td><c:out value="${quotation.employee_code}" /></td>
-								<td><c:out value="${quotation.item_name}" /></td>
+								<td><c:out value="아이템 코드" /></td>
 								<td><c:out value="${quotation.valid_date}" /></td>
 								<td><c:out value="총 합계" /></td>
 								<td><c:out value="${quotation.progress}" /></td>
