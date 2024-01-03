@@ -238,10 +238,7 @@
 		var ware = document.getElementById("ware_name").value.trim();
 		var date = document.getElementById("date_index").value.trim();
 		
-		if(company==='' || ware==='' || date===''){
-			 alert("모든 필드를 입력하세요.");
-		     event.preventDefault(); // 제출을 막음
-		}
+
 		
 		var formObj = $("form[role='form']");
 		e.preventDefault();
@@ -259,7 +256,13 @@
 		    str += "<input type='hidden' name='item_data["+i+"].item_code' value='" + itemCode +"'>";
 		    str += "<input type='hidden' name='item_data["+i+"].amount' value='" + amount +"'>";
 		});
-		//formObj.append(str).submit();
+		if(company==='' || ware==='' || date===''){
+			 alert("모든 필드를 입력하세요.");
+		     event.preventDefault(); // 제출을 막음
+		}
+		else{
+			formObj.append(str).submit();		
+		}
 	});
 	
 	
@@ -367,12 +370,11 @@
 					                    var clickedRow = $(this).closest('tr');
 					                    var item = {
 					                        item_name: clickedRow.find('td:eq(0)').text(),
-					                        item_group: clickedRow.find('td:eq(1)').text(),
-					                        standard_name: clickedRow.find('td:eq(2)').text(),
-					                        pur_price: clickedRow.find('td:eq(3)').text()
+					                        item_group: clickedRow.find('td:eq(1)').text()
+					                      
 					                    };
-					                    $('#employee_code').val(item.empl_code);
-					                    $('#employee_name').val(item.empl_name);
+					                    $('#employee_code').val(item.item_name);
+					                    $('#employee_name').val(item.item_group);
 					                    return;
 					                });
 					            },
@@ -525,12 +527,11 @@
 		                    var clickedRow = $(this).closest('tr');
 		                    var item = {
 		                        item_name: clickedRow.find('td:eq(0)').text(),
-		                        item_group: clickedRow.find('td:eq(1)').text(),
-		                        standard_name: clickedRow.find('td:eq(2)').text(),
-		                        pur_price: clickedRow.find('td:eq(3)').text()
+		                        item_group: clickedRow.find('td:eq(1)').text()
+		                        
 		                    };
-		                    $('#employee_code').val(item.empl_code);
-		                    $('#employee_name').val(item.empl_name);
+		                    $('#employee_code').val(item.item_name);
+		                    $('#employee_name').val(item.item_group);
 		                });
 		            },
 		            error: function (xhr, status, err) {
@@ -605,6 +606,7 @@
         // 아이템 총합
         // 기타
     }
+	// 마우스 다른데 클릭시 아이템 코드 검색
     function logInputValue(inputElement) {
         var inputValue = inputElement.value;
         

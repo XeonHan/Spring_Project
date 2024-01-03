@@ -88,14 +88,15 @@
 							<tr>
 								<td><input type="checkbox" name="selectedItems"
 									value="${item.item_code}"></td>
-								<td><c:out value="${quotation.qhodate_no}" /></td>
+								<td><a href="#" id="openModalLink" data-target="#exampleModal">
+								<c:out value="${quotation.qhodate_no}" /></a></td>
 								<td><c:out value="${quotation.company_code}" /></td>
 
 
 								<td><c:out value="${quotation.employee_code}" /></td>
-								<td><c:out value="${quotation.item_name}" /></td>
+								<td><c:out value="${quotation.itemInfo}" /></td>
 								<td><c:out value="${quotation.valid_date}" /></td>
-								<td><c:out value="총 합계" /></td>
+								<td><c:out value="${quotation.totalCount}" /></td>
 								<td><c:out value="${quotation.progress}" /></td>
 								<td>생성한 전표</td>
 
@@ -189,6 +190,24 @@
 
 
 	<script type="text/javascript">
+	$(document).ready(function () {
+		$("#openModalLink").click(function() {
+			console.log("click!");
+			$("#exampleModal").modal("show");
+		});
+	});
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
 function toggleAll(source) {
     const checkboxes = document.querySelectorAll('input[name="selectedItems"]');
     checkboxes.forEach(checkbox => {
