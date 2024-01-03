@@ -17,4 +17,6 @@ public class QuotationVO {
 	private List<ItemDataVO> item_data;
 	
 	// only read data
+	private String itemInfo;	// 조회시 출력될 아이템 정보
+	private int totalCount;
 }

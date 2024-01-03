@@ -1,5 +1,7 @@
 package org.zerock.controller;
 
+import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.forwardedUrl;
+
 import java.util.List;
 
 import org.springframework.http.HttpStatus;
@@ -17,6 +19,7 @@ import org.zerock.domain.basicRegi.CompanyVO;
 import org.zerock.domain.basicRegi.EmployeeVO;
 import org.zerock.domain.basicRegi.ItemVO;
 import org.zerock.domain.basicRegi.WarehouseVO;
+import org.zerock.domain.quotation.ItemDataVO;
 import org.zerock.domain.quotation.QuotationVO;
 import org.zerock.service.CompanyService;
 import org.zerock.service.EmployeeService;
@@ -41,6 +44,32 @@ public class BusinessManController {
 	@GetMapping("/quoteInquiry")
 	public void quoteInquiry(Model model) {
 		List<QuotationVO> data= service.readList();
+		for(int i=0; i<data.size(); i++) {
+			String quoDate = data.get(i).getQhodate_no();
+			List<ItemDataVO> itemData = service.getItemList(quoDate);
+			if(itemData.size() <=0)
+				continue;
+			ItemVO itemInfo = itemService.get(itemData.get(0).getItem_code());
+			
+			int totalAmount =0;
+			if(itemData.size()>1) {
+				Integer count = itemData.size()-1;
+				data.get(i).setItemInfo(itemInfo.getItem_name() + " 외 " + count.toString() + "건");
+				
+			}else {
+				data.get(i).setItemInfo(itemInfo.getItem_name());
+			}
+			
+			String cmCode = data.get(i).getCompany_code();
+			data.get(i).setCompany_code(comService.get(Integer.parseInt(cmCode)).getCompany_name());
+			String empCode = data.get(i).getEmployee_code();
+			data.get(i).setEmployee_code(empService.get(Integer.parseInt(empCode)).getEmpl_name());
+			
+			for(int j =0; j<itemData.size(); j++) {
+				totalAmount += (itemData.get(j).getAmount() *itemService.get(itemData.get(j).getItem_code()).getSales_price());
+				data.get(i).setTotalCount(totalAmount);
+			}
+		}
 		model.addAttribute("list", data);
 	}
 	

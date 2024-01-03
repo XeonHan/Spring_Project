@@ -4,6 +4,7 @@ import java.util.List;
 
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
+import org.zerock.domain.quotation.ItemDataVO;
 import org.zerock.domain.quotation.QuotationVO;
 import org.zerock.mapper.business.ItemlistMapper;
 import org.zerock.mapper.business.QuotationMapper;
@@ -37,5 +38,10 @@ public class QuotationServiceImpl implements QuotationService {
 	@Override
 	public int countDateByDate(String date) {
 		return mapper.getCountDate(date);
+	}
+	
+	@Override
+	public List<ItemDataVO> getItemList(String date){
+		return itemMapper.getQuoItemList(date);
 	}
 }
