@@ -10,7 +10,7 @@
 	<li><a href="/basicRegi/departList">부서등록</a></li>
 	<li><a href="/basicRegi/wareList">창고등록</a></li>
 	<li><a href="/basicRegi/itemList">품목등록</a></li>
-	<li><a href="#">단가등록</a>
+	<li><a href="#">단가관리</a>
 		<ul class="sidesub">
 			<li><a href="/basicRegi/specList">특별단가등록</a></li>
 			<li><a href="#">품목별단가</a></li>
@@ -23,7 +23,7 @@
 
 	<div class="row">
 		<div class="col-lg-12">
-			<h2 class="page-header">특별단가등록 리스트</h2>
+			<h2 class="page-header">특별단가 리스트</h2>
 		</div>
 	</div>
 
@@ -104,7 +104,8 @@
 								name="spec_name">
 						</div>
 						<div class="form-group">
-							<label>할인율</label><input class="form-control" name="discount">
+							<label>할인율</label> <input class="form-control" name="discount"
+								oninput="convertToPercentage(this)">
 						</div>
 					</div>
 					<div class="modal-footer">
@@ -285,5 +286,14 @@ function modifySpec() {
 	    }
 	    });
 }
+
+function convertToPercentage(input) {
+    var inputValue = input.value.trim();
+
+    if (!isNaN(inputValue)) {
+        input.value = inputValue + '%';
+    }
+}
+
 </script>
 <%@ include file="../include/footer.jsp"%>
