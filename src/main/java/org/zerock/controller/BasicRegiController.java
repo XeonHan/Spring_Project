@@ -2,7 +2,6 @@ package org.zerock.controller;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
-import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -17,14 +16,12 @@ import org.zerock.domain.PageDTO;
 import org.zerock.domain.basicRegi.CompanyVO;
 import org.zerock.domain.basicRegi.DepartmentVO;
 import org.zerock.domain.basicRegi.EmployeeVO;
-import org.zerock.domain.basicRegi.ItemPriceVO;
 import org.zerock.domain.basicRegi.ItemVO;
 import org.zerock.domain.basicRegi.SpecialPriceVO;
 import org.zerock.domain.basicRegi.WarehouseVO;
 import org.zerock.service.CompanyService;
 import org.zerock.service.DepartmentService;
 import org.zerock.service.EmployeeService;
-import org.zerock.service.ItemPriceService;
 import org.zerock.service.ItemService;
 import org.zerock.service.SpecialPriceService;
 import org.zerock.service.WarehouseService;
@@ -32,53 +29,6 @@ import org.zerock.service.WarehouseService;
 @Controller
 @RequestMapping("/basicRegi/*")
 public class BasicRegiController {
-
-	// ItemPrice
-	@Autowired
-	private ItemPriceService priceService;
-
-	@GetMapping("/priceList")
-	public void priceList(Criteria cri, Model model) {
-		model.addAttribute("priceList", priceService.getList(cri));
-
-		int total = priceService.getTotal(cri);
-
-		model.addAttribute("pageMaker", new PageDTO(cri, total));
-	}
-
-	@PostMapping("/priceRegister")
-	public String priceRegister(ItemPriceVO price, RedirectAttributes rttr) {
-
-		priceService.register(price);
-
-		rttr.addFlashAttribute("result", "success");
-
-		return "redirect:/basicRegi/priceList";
-	}
-
-	@GetMapping("/priceGet")
-	@ResponseBody
-	public ResponseEntity<ItemPriceVO> priceGet(@RequestParam("item_code") Integer item_code) {
-		ItemPriceVO price = priceService.get(item_code);
-		return new ResponseEntity<>(price, HttpStatus.OK);
-	}
-
-	@PostMapping("/priceModify")
-	public String priceModify(ItemPriceVO price, RedirectAttributes rttr) {
-
-		if (priceService.modify(price)) {
-			rttr.addFlashAttribute("result", "success");
-		}
-		return "redirect:/basicRegi/priceList";
-	}
-
-	@PostMapping("/priceRemove")
-	public String priceRemove(@RequestParam("item_code") Integer item_code, RedirectAttributes rttr) {
-		if (priceService.remove(item_code)) {
-			rttr.addFlashAttribute("result", "success");
-		}
-		return "redirect:/basicRegi/priceList";
-	}
 
 	// SpecialPrice
 	@Autowired
@@ -362,19 +312,5 @@ public class BasicRegiController {
 			rttr.addFlashAttribute("result", "success");
 		}
 		return "redirect:/basicRegi/itemList";
-	}
-	
-	@GetMapping(value = "/searchitem", produces = MediaType.APPLICATION_JSON_UTF8_VALUE)
-	public ResponseEntity<ItemVO> searchitem(@RequestParam(name= "keyword")String keyword) {
-		
-
-		Integer code = Integer.parseInt(keyword);
-		
-		ItemVO data = itemService.get(code);
-		if(data != null) {
-			return new ResponseEntity<>(data, HttpStatus.OK);			
-		}else {
-			return new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
-		}
 	}
 }

@@ -10,10 +10,10 @@
 	<li><a href="/basicRegi/departList">부서등록</a></li>
 	<li><a href="/basicRegi/wareList">창고등록</a></li>
 	<li><a href="/basicRegi/itemList">품목등록</a></li>
-	<li><a href="#">단가관리</a>
+	<li><a href="#">단가등록</a>
 		<ul class="sidesub">
 			<li><a href="/basicRegi/specList">특별단가등록</a></li>
-			<li><a href="/basicRegi/priceList">품목별단가</a></li>
+			<li><a href="#">품목별단가</a></li>
 		</ul></li>
 	<li><a href="/basicRegi/emplList">사원(담당)등록</a></li>
 </ul>
