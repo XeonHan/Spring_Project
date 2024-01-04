@@ -201,8 +201,9 @@ $(document).ready(function () {
     var actionForm = $("#actionForm");
     var emplRegisterModal = $("#emplRegisterModal");
 
-    emplRegisterModal.on('show.bs.modal', function (e) {
-        getEmplCode(); 
+    $("#emplRegisterModal").on("click", function () {
+        emplRegisterModal.modal("show");
+   
     });
 
     $(".pagination a").on("click", function (e) {

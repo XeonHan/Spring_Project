@@ -12,7 +12,7 @@
 	<li><a href="/basicRegi/itemList">품목등록</a></li>
 	<li><a href="#">단가등록</a>
 		<ul class="sidesub">
-			<li><a href="#">특별단가등록</a></li>
+			<li><a href="/basicRegi/specList">특별단가등록</a></li>
 			<li><a href="#">품목별단가</a></li>
 		</ul></li>
 	<li><a href="/basicRegi/emplList">사원(담당)등록</a></li>
@@ -69,6 +69,7 @@
 		<div class="col-lg-6 text-left">
 			<button type="button" class="btn btn-primary" data-toggle="modal"
 				data-target="#itemRegisterModal">신규</button>
+
 		</div>
 		<div class="col-lg-6 text-right">
 			<form id="searchForm" action="/basicRegi/itemList" method="get">
@@ -212,10 +213,11 @@
         var actionForm = $("#actionForm");
         var itemRegisterModal = $("#itemRegisterModal");
 
-        itemRegisterModal.on('show.bs.modal', function (e) {
-            getItemCode(); 
+        $("#itemRegisterModal").on("click", function () {
+            itemRegisterModal.modal("show");
+       
         });
-
+         
         $(".pagination a").on("click", function (e) {
             e.preventDefault();
             console.log('click');
@@ -330,7 +332,7 @@
     	            item_cate: itemCate
     	    },
     	    success: function(data){
-    	    	window.location.reload();
+    	    	 window.location.reload(); 
     	    },
     	    error: function() {
     	    	alert("수정 중 오류가 발생했습니다");

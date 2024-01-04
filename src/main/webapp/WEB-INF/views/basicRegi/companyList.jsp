@@ -15,7 +15,7 @@
 			<li><a href="#">특별단가등록</a></li>
 			<li><a href="#">품목별단가</a></li>
 		</ul></li>
-	<li><a href="#">사원(담당)등록</a></li>
+	<li><a href="/basicRegi/emplList">사원(담당)등록</a></li>
 </ul>
 </nav>
 
@@ -247,9 +247,10 @@ $(document).ready(function (){
 	var actionForm = $("#actionForm");
 	var companyRegisterModal = $("#companyRegisterModal");
 	
-	companyRegisterModal.on('show.bs.modal', function(e){
-		getCompanyCode();
-	});
+	  $("#companyRegisterModal").on("click", function () {
+          companyRegisterModal.modal("show");
+     
+      });
 	
 	 $(".pagination a").on("click", function (e) {
          e.preventDefault();

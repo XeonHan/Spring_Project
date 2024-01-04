@@ -1,0 +1,83 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="org.zerock.mapper.SpecialPriceMapper">
+
+	<select id="getList"
+		resultType="org.zerock.domain.basicRegi.SpecialPriceVO">
+        <![CDATA[
+            SELECT * FROM special_price
+            WHERE spec_code > 0
+        ]]>
+	</select>
+
+	<insert id="insertSelectKey"
+    parameterType="org.zerock.domain.basicRegi.ItemVO" useGeneratedKeys="false">
+    INSERT INTO item (spec_code, spec_name, discount)
+    VALUES (#{spec_code}, #{spec_name}, #{discount})
+</insert>
+
+	<sql id="criteria">
+		<trim prefix="" suffix=" AND " prefixOverrides="OR">
+			<foreach item='type' collection="typeArr">
+				<trim prefix="OR">
+					<choose>
+						<when test="type == 'N'.toString()">
+							spec_name LIKE '%' || #{keyword} || '%'
+						</when>
+					</choose>
+				</trim>
+			</foreach>
+		</trim>
+	</sql>
+
+	<select id="getListWithPaging"
+		resultType="org.zerock.domain.basicRegi.SpecialPriceVO"
+		parameterType="org.zerock.domain.Criteria">
+        <![CDATA[
+            SELECT spec_code, spec_name, discount 
+            FROM (
+                SELECT ROWNUM rn, spec_code, spec_name, discount 
+                FROM (
+                    SELECT spec_code, spec_name, discount 
+                    FROM special_price
+                    WHERE
+        ]]>
+
+		<include refid="criteria"></include>
+
+        <![CDATA[
+                    ROWNUM <= #{pageNum} * #{amount}
+                    ORDER BY spec_code
+                )
+            )
+            WHERE rn > (#{pageNum} - 1) * #{amount}
+        ]]>
+	</select>
+
+	<select id="getTotalCount" resultType="int">
+		SELECT COUNT(*) FROM special_price
+		WHERE
+		<include refid="criteria"></include>
+		spec_code > 0
+	</select>
+
+	<select id="read"
+		resultType="org.zerock.domain.basicRegi.SpecialPriceO">
+		SELECT * FROM special_price WHERE spec_code = #{spec_code}
+	</select>
+
+	<delete id="delete">
+		DELETE FROM special_price WHERE spec_code = #{spec_code}
+	</delete>
+
+	<update id="update">
+		UPDATE special_price SET
+		spec_name = #{spec_name},
+		discount =
+		#{discount}
+		WHERE spec_code = #{spec_code}
+	</update>
+
+</mapper>
