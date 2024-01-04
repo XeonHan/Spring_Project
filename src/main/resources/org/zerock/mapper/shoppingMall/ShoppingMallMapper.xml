@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="org.zerock.mapper.shoppingMall.ShoppingMallMapper">
+
+
+
+	<select id="getList" resultType="org.zerock.domain.shoppingMall.ShoppingMallVO">
+	<![CDATA[
+		select * from shop_manage where shop_code > 0 
+		]]>
+	</select>
+	
+	<select id="insert" resultType="org.zerock.domain.shoppingMall.ShoppingMallVO">
+	<![CDATA[
+		insert into SHOP_MANAGE(shop_code, shop_name, mall_id, password, comp_name, site_Type) values(#{shop_Code}, #{shop_Name}, #{mall_ID}, #{password}, #{comp_Name}, #{site_Type})
+		]]>
+	</select>
+	
+	<select id="read" resultType="org.zerock.domain.shoppingMall.MallInfoVO">
+	<![CDATA[
+		select * from shop_manage where shop_code = #{shop_Code}
+		]]>
+	
+	</select>
+	
+		<select id="getinfo" resultType="org.zerock.domain.shoppingMall.MallInfoVO">
+	<![CDATA[
+		select * from shop_manage where shop_code = #{shop_Code}
+		]]>
+	
+	</select>
+	
+	<delete id="delete">
+
+		delete from shop_manage where shop_code = #{shop_Code}
+
+	</delete>
+	
+	<update id="update">
+		update shop_manage
+		set 
+		mall_ID= #{mall_ID},
+		password=#{password},
+		auth_Code = #{auth_Code},
+		comp_Name = #{comp_Name}
+		where shop_Code = #{shop_Code}
+	</update>
+	
+	
+
+	
+</mapper>
