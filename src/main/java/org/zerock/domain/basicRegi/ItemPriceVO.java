@@ -5,9 +5,10 @@ import lombok.Data;
 @Data
 public class ItemPriceVO {
 
-	private int item_code;
+	private Integer item_code;
+	private String item_name;
 	private String spec_name;
-	private int discount;
-	private int applied_price;
+	private Integer discount;
+	private Integer applied_price;
 
 }

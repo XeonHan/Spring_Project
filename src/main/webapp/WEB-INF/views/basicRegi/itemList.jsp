@@ -13,7 +13,7 @@
 	<li><a href="#">단가등록</a>
 		<ul class="sidesub">
 			<li><a href="/basicRegi/specList">특별단가등록</a></li>
-			<li><a href="#">품목별단가</a></li>
+			<li><a href="/basicRegi/priceList">품목별단가</a></li>
 		</ul></li>
 	<li><a href="/basicRegi/emplList">사원(담당)등록</a></li>
 </ul>

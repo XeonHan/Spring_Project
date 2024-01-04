@@ -16,12 +16,14 @@ import org.zerock.domain.PageDTO;
 import org.zerock.domain.basicRegi.CompanyVO;
 import org.zerock.domain.basicRegi.DepartmentVO;
 import org.zerock.domain.basicRegi.EmployeeVO;
+import org.zerock.domain.basicRegi.ItemPriceVO;
 import org.zerock.domain.basicRegi.ItemVO;
 import org.zerock.domain.basicRegi.SpecialPriceVO;
 import org.zerock.domain.basicRegi.WarehouseVO;
 import org.zerock.service.CompanyService;
 import org.zerock.service.DepartmentService;
 import org.zerock.service.EmployeeService;
+import org.zerock.service.ItemPriceService;
 import org.zerock.service.ItemService;
 import org.zerock.service.SpecialPriceService;
 import org.zerock.service.WarehouseService;
@@ -30,45 +32,92 @@ import org.zerock.service.WarehouseService;
 @RequestMapping("/basicRegi/*")
 public class BasicRegiController {
 
-	//SpecialPrice
+	// ItemPrice
+	@Autowired
+	private ItemPriceService priceService;
+
+	@GetMapping("/priceList")
+	public void priceList(Criteria cri, Model model) {
+		model.addAttribute("priceList", priceService.getList(cri));
+
+		int total = priceService.getTotal(cri);
+
+		model.addAttribute("pageMaker", new PageDTO(cri, total));
+	}
+
+	@PostMapping("/priceRegister")
+	public String priceRegister(ItemPriceVO price, RedirectAttributes rttr) {
+
+		priceService.register(price);
+
+		rttr.addFlashAttribute("result", "success");
+
+		return "redirect:/basicRegi/priceList";
+	}
+
+	@GetMapping("/priceGet")
+	@ResponseBody
+	public ResponseEntity<ItemPriceVO> priceGet(@RequestParam("item_code") Integer item_code) {
+		ItemPriceVO price = priceService.get(item_code);
+		return new ResponseEntity<>(price, HttpStatus.OK);
+	}
+
+	@PostMapping("/priceModify")
+	public String priceModify(ItemPriceVO price, RedirectAttributes rttr) {
+
+		if (priceService.modify(price)) {
+			rttr.addFlashAttribute("result", "success");
+		}
+		return "redirect:/basicRegi/priceList";
+	}
+
+	@PostMapping("/priceRemove")
+	public String priceRemove(@RequestParam("item_code") Integer item_code, RedirectAttributes rttr) {
+		if (priceService.remove(item_code)) {
+			rttr.addFlashAttribute("result", "success");
+		}
+		return "redirect:/basicRegi/priceList";
+	}
+
+	// SpecialPrice
 	@Autowired
 	private SpecialPriceService specService;
-	
+
 	@GetMapping("/specList")
 	public void specList(Criteria cri, Model model) {
 		model.addAttribute("specList", specService.getList(cri));
-		
+
 		int total = specService.getTotal(cri);
-		
+
 		model.addAttribute("pageMaker", new PageDTO(cri, total));
 	}
-	
+
 	@PostMapping("/specRegister")
 	public String specRegister(SpecialPriceVO spec, RedirectAttributes rttr) {
-		
+
 		specService.register(spec);
-		
+
 		rttr.addFlashAttribute("result", "success");
-		
+
 		return "redirect:/basicRegi/specList";
 	}
-	
+
 	@GetMapping("/specGet")
 	@ResponseBody
 	public ResponseEntity<SpecialPriceVO> specGet(@RequestParam("spec_code") Integer spec_code) {
 		SpecialPriceVO spec = specService.get(spec_code);
 		return new ResponseEntity<>(spec, HttpStatus.OK);
 	}
-	
+
 	@PostMapping("/specModify")
 	public String specModify(SpecialPriceVO spec, RedirectAttributes rttr) {
-		
+
 		if (specService.modify(spec)) {
 			rttr.addFlashAttribute("result", "success");
 		}
 		return "redirect:/basicRegi/specList";
 	}
-	
+
 	@PostMapping("/specRemove")
 	public String specRemove(@RequestParam("spec_code") Integer spec_code, RedirectAttributes rttr) {
 		if (specService.remove(spec_code)) {
@@ -76,7 +125,7 @@ public class BasicRegiController {
 		}
 		return "redirect:/basicRegi/specList";
 	}
-	
+
 	// Employee
 	@Autowired
 	private EmployeeService emplService;
