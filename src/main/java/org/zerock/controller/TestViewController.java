@@ -20,4 +20,9 @@ public class TestViewController {
 	public void regist_dataTest() {
 		
 	}
+	
+	@GetMapping("/frame")
+	public void frame() {
+		
+	}
 }
