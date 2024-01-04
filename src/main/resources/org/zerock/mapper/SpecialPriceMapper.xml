@@ -13,7 +13,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	</select>
 
 	<insert id="insertSelectKey"
-    parameterType="org.zerock.domain.basicRegi.ItemVO" useGeneratedKeys="false">
+    parameterType="org.zerock.domain.basicRegi.SpecialPriceVO" useGeneratedKeys="false">
     INSERT INTO item (spec_code, spec_name, discount)
     VALUES (#{spec_code}, #{spec_name}, #{discount})
 </insert>
@@ -64,7 +64,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	</select>
 
 	<select id="read"
-		resultType="org.zerock.domain.basicRegi.SpecialPriceO">
+		resultType="org.zerock.domain.basicRegi.SpecialPriceVO">
 		SELECT * FROM special_price WHERE spec_code = #{spec_code}
 	</select>
 
