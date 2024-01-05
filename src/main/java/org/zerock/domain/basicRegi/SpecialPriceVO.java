@@ -7,6 +7,6 @@ public class SpecialPriceVO {
 
 	private Integer spec_code;
 	private String spec_name;
-	private int discount;
+	private Integer discount;
 	
 }

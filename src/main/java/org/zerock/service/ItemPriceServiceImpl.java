@@ -13,8 +13,8 @@ import lombok.AllArgsConstructor;
 @Service
 @AllArgsConstructor
 public class ItemPriceServiceImpl implements ItemPriceService {
-private ItemPriceMapper mapper;
-
+	private ItemPriceMapper mapper;
+	
 	@Override
 	@Transactional
 	public void register(ItemPriceVO price) {

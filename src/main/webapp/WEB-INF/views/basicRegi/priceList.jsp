@@ -10,7 +10,7 @@
 	<li><a href="/basicRegi/departList">부서등록</a></li>
 	<li><a href="/basicRegi/wareList">창고등록</a></li>
 	<li><a href="/basicRegi/itemList">품목등록</a></li>
-	<li><a href="#">단가관리</a>
+	<li><a href="#">단가등록</a>
 		<ul class="sidesub">
 			<li><a href="/basicRegi/specList">특별단가등록</a></li>
 			<li><a href="/basicRegi/priceList">품목별단가</a></li>
@@ -18,7 +18,6 @@
 	<li><a href="/basicRegi/emplList">사원(담당)등록</a></li>
 </ul>
 </nav>
-
 <div id="page-wrapper">
 
 	<div class="row">
@@ -43,24 +42,23 @@
 					<th>적용단가</th>
 				</tr>
 			</thead>
-			<tbody>
-				<c:forEach var="item" items="${itemList}" varStatus="status">
-					<tr>
-						<td><input type="checkbox" name="selectedPrices"
-							value="${item.item_code}"></td>
-						<td><c:out value="${item.item_code}" /></td>
-						<td><a class='move' href='#' data-toggle="modal"
-							data-target="#priceModifyModal"
-							data-item-code="${item.item_code}"
-							data-item-name="${item.item_name}"> <c:out
-									value="${item.item_name}" />
-						</a></td>
-						<td><c:out value="${specList[status.index].spec_name}" /></td>
-						<td><c:out value="${specList[status.index].discount}" /></td>
-						<td><c:out value="${priceList[status.index].applied_price}" /></td>
-					</tr>
-				</c:forEach>
-			</tbody>
+
+			<c:forEach items="${priceList}" var="price">
+				<tr>
+					<td><input type="checkbox" name="selectedPrices"
+						value="${price.item_code}"></td>
+					<td><c:out value="${price.item_code}" /></td>
+					<td><a class='move' href='#' data-toggle="modal"
+						data-target="#priceModifyModal"
+						data-price-code="${price.item_code}"
+						data-price-name="${price.item_name}"> <c:out
+								value="${price.item_name}" />
+					</a></td>
+					<td><c:out value="${price.spec_name}" /></td>
+					<td><c:out value="${price.discount}" /></td>
+					<td><c:out value="${price.applied_price}" /></td>
+				</tr>
+			</c:forEach>
 		</table>
 	</div>
 
@@ -68,6 +66,7 @@
 		<div class="col-lg-6 text-left">
 			<button type="button" class="btn btn-primary" data-toggle="modal"
 				data-target="#priceRegisterModal">신규</button>
+
 		</div>
 		<div class="col-lg-6 text-right">
 			<form id="searchForm" action="/basicRegi/priceList" method="get">
@@ -76,8 +75,8 @@
 						<c:out value="${pageMaker.cri.type == null ? 'selected':''}"/>>--</option>
 					<option value="N"
 						<c:out value="${pageMaker.cri.type eq 'N' ? 'selected':''}"/>>품목명</option>
-					<option value="G"
-						<c:out value="${pageMaker.cri.type eq 'S' ? 'selected':''}"/>>특별단가그룹명</option>
+					<option value="SN"
+						<c:out value="${pageMaker.cri.type eq 'SN' ? 'selected':''}"/>>특별단가그룹명</option>
 				</select> <input type="text" name="keyword"
 					value='<c:out value="${pageMaker.cri.keyword}"/>' /> <input
 					type="hidden" name="pageNum" value="${pageMaker.cri.pageNum}">
@@ -89,7 +88,7 @@
 </div>
 
 <div class="modal fade" id="priceRegisterModal" tabindex="-1"
-	role="dialog" aria-labelleby="priceRegisterModalLabel"
+	role="dialog" aria-labelledby="priceRegisterModalLabel"
 	aria-hidden="true">
 	<div class="modal-dialog" role="document">
 		<div class="modal-content">
@@ -106,12 +105,9 @@
 						<table class="table" id="itemTable">
 							<thead>
 								<tr>
-									<th>품목코드</th>
+									<th>품목코드(40000~49999)</th>
 									<th>품목명</th>
-									<th>단가</th>
-									<th>특별단가그룹명</th>
-									<th>할인율(%)</th>
-									<th>적용가</th>
+									<th>출고단가</th>
 								</tr>
 							</thead>
 							<tbody>
@@ -123,20 +119,25 @@
 										name="item_name"></td>
 									<td><input type="text" class="form-control"
 										name="sales_price" oninput="appliedTotal(this)"></td>
-									<td><input type="text" class="form-control"
-										name="spec_name"></td>
-									<td><input type="text" class="form-control"
-										name="discount"
-										oninput="convertToPercentage(this); appliedTotal(this)"></td>
-									<td><input type="text" class="form-control"
-										name="applied_price" readonly></td>
 								</tr>
 							</tbody>
-
 						</table>
+						<div class="form-group">
+							<label>특별단가그룹명</label><input class="form-control"
+								name="spec_name">
+						</div>
+						<div class="form-group">
+							<label>할인율</label><input class="form-control" name="discount"
+								oninput="parsentDiscount(this), appliedTotal(this)">
+						</div>
+						<div class="form-group">
+							<label>적용단가</label><input class="form-control"
+								name="applied_price" readonly>
+						</div>
 					</div>
 					<div class="modal-footer">
-						<button type="submit" class="btn btn-primary" data-dismiss="modal">저장</button>
+						<button type="button" class="btn btn-primary"
+							onclick="registerPrice()" data-dismiss="modal">저장</button>
 						<button type="reset" class="btn btn-default">초기화</button>
 						<button type="button" class="btn btn-secondary"
 							data-dismiss="modal">닫기</button>
@@ -154,15 +155,19 @@ function toggleAll(source) {
         checkbox.checked = source.checked;
     });
 }
+function isItemCodeValid(itemCode){
+	return itemCode >= 40000 && itemCode <= 49999;
+}
 
-$(document).ready(function () {
+ $(document).ready(function () {
     var actionForm = $("#actionForm");
     var priceRegisterModal = $("#priceRegisterModal");
 
-    priceRegisterModal.on('show.bs.modal', function (e) {
-        getItemCode(); 
+    $("#priceRegisterModal").on("click", function () {
+        priceRegisterModal.modal("show");
+   
     });
-
+     
     $(".pagination a").on("click", function (e) {
         e.preventDefault();
         console.log('click');
@@ -189,7 +194,7 @@ $(document).ready(function () {
                 $("#priceModifyModal input[name='spec_name']").val(data.spec_name);
                 $("#priceModifyModal input[name='discount']").val(data.discount);
                 $("#priceModifyModal input[name='applied_price']").val(data.applied_price);
-             
+
                 $("#priceModifyModal").modal("show");
             },
             error: function () {
@@ -215,55 +220,88 @@ $(document).ready(function () {
         e.preventDefault();
         searchForm.submit();
     });
-});       
+});
+ 
+ function registerPrice() {
+	 var itemCode = $("input[name='item_code']").val();
 
-function logInputValue(inputElement) {
-	var inputValue = inputElement.value;
-	
-	if(inputValue.trim() !== ''){
-		$.ajax({
-			url: '/basicRegi/searchitem',
-		type: 'GET',
-		data: {keyword: inputValue},
-		success: function(data){
-			var tableRow = inputElement.closest('tr');
-			if(typeof data === 'undefined' || data === null){
-				console.log("no data");
-			}
-			var targetField = tableRow.querySelector('td input[name="item_name"]');
-		if(targetField) {
-			targetField.value = data.item_name;
-		}
-		var targetField = tableRow.querySelector('td input[name="sales_price"]');
-    	if (targetField) {
-        	targetField.value = data.sales_price;
-    	}
-    },
-    error: function (xhr, status, err){
-    	console.error('no data');
-    }
-		});
-	} else {
-		return;
-	}
+	  if (!isItemCodeValid(itemCode)) {
+          alert("잘못된 코드번호입니다 (40000~49999)");
+          return;
+      }
+	  
+    $.ajax({
+        type: "POST",
+        url: "/basicRegi/priceRegister",
+        data: {
+        	item_code: itemCode,
+            item_name: $("input[name='item_name']").val(),
+           	spec_name: $("input[name='spec_name']").val(),
+            discount: $("input[name='discount']").val(),
+            applied_price: $("input[name='applied_price']").val(),
+        },
+        success: function (data) {
+        	window.location.reload();
+        },
+        error: function () {
+            alert("저장 중 오류가 발생했습니다");
+        }
+    });
 }
-		function appliedTotal(input) {
-			var row = input.closest('tr');
-			var unitPrice = row.querySelector('[name="sales_price"]').value;
-			var sales = row.querySelector('[name="discount"]').value;
-			var applied_priceInput = row.querySelector('[name="applied_price"]');
-			var applied_price = unitPrice * (100-sales);
-			applied_priceInput.value = isNaN(applied_price) ? '' : applied_price;
-		}
-		
+ 
+ function parsentDiscount(inputElement) {
+	    let inputValue = inputElement.value.trim();
 
-	    function convertToPercentage(input) {
-	        var inputValue = input.value.trim();
+	    if (!isNaN(inputValue)) {
+	        let numericValue = parseFloat(inputValue);
 
-	        if (!isNaN(inputValue)) {
-	            input.value = inputValue + '%';
-	        }
+	        return numericValue + '%';
 	    }
-	
+
+	    return '0%';
+	}
+	function logInputValue(inputElement) {
+		var inputValue = inputElement.value;
+
+		if (inputValue.trim() !== '') {
+			$.ajax({
+				url : '/basicRegi/searchitem',
+				type : 'GET',
+				data : {
+					keyword : inputValue
+				},
+				success : function(data) {
+					var tableRow = inputElement.closest('tr');
+					if (typeof data === 'undined' || data === null) {
+						console.log("no data");
+					}
+					var targetField = tableRow
+							.querySelector('td input[name="item_name"]');
+					if (targetField) {
+						targetField.value = data.item_name;
+					}
+					var targetField = tableRow
+							.querySelector('td input[name="sales_price"]');
+					if (targetField) {
+						targetField.value = data.sales_price;
+					}
+				},
+				error : function(xhr, status, err) {
+					console.error('no data');
+				}
+			});
+		} else {
+			return;
+		}
+	}
+
+	function appliedTotal(input) {
+	    var row = input.closest('tr');
+	    var unitPrice = row.querySelector('[name="sales_price"]').value;
+	    var discount = row.querySelector('[name="discount"]').value; // discount 변수 정의
+	    var applied_priceInput = row.querySelector('[name="applied_price"]');
+	    var applied_price = unitPrice * (100 - discount) / 100;
+	    applied_priceInput.value = isNaN(applied_price) ? '' : applied_price;
+	}
 </script>
 <%@ include file="../include/footer.jsp"%>

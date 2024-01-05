@@ -6,6 +6,7 @@ import lombok.Data;
 public class ItemPriceVO {
 
 	private Integer item_code;
+	private String item_name;
 	private String spec_name;
 	private Integer discount;
 	private Integer applied_price;

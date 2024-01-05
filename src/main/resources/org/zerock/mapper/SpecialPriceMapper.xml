@@ -13,12 +13,10 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	</select>
 
 	<insert id="insertSelectKey"
-		parameterType="org.zerock.domain.basicRegi.SpecialPriceVO"
-		useGeneratedKeys="false">
-		INSERT INTO special_price (spec_code, spec_name,
-		discount)
-		VALUES (#{spec_code}, #{spec_name}, #{discount})
-	</insert>
+    parameterType="org.zerock.domain.basicRegi.SpecialPriceVO" useGeneratedKeys="false">
+    INSERT INTO item (spec_code, spec_name, discount)
+    VALUES (#{spec_code}, #{spec_name}, #{discount})
+</insert>
 
 	<sql id="criteria">
 		<trim prefix="" suffix=" AND " prefixOverrides="OR">
@@ -38,26 +36,24 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		resultType="org.zerock.domain.basicRegi.SpecialPriceVO"
 		parameterType="org.zerock.domain.Criteria">
         <![CDATA[
- SELECT spec_code, spec_name, discount 
- FROM (
-    SELECT ROWNUM rn, spec_code, spec_name, discount 
-    FROM (
-        SELECT spec_code, spec_name, discount   
-        FROM special_price
-        WHERE
-]]>
+            SELECT spec_code, spec_name, discount 
+            FROM (
+                SELECT ROWNUM rn, spec_code, spec_name, discount 
+                FROM (
+                    SELECT spec_code, spec_name, discount 
+                    FROM special_price
+                    WHERE
+        ]]>
 
 		<include refid="criteria"></include>
 
-<![CDATA[
- 
-         ROWNUM <= #{pageNum} * #{amount}
-        ORDER BY spec_code
-    )
-    )
-    WHERE rn > (#{pageNum} - 1) * #{amount}
-]]>
-
+        <![CDATA[
+                    ROWNUM <= #{pageNum} * #{amount}
+                    ORDER BY spec_code
+                )
+            )
+            WHERE rn > (#{pageNum} - 1) * #{amount}
+        ]]>
 	</select>
 
 	<select id="getTotalCount" resultType="int">
@@ -73,8 +69,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	</select>
 
 	<delete id="delete">
-		DELETE FROM special_price WHERE spec_code =
-		#{spec_code}
+		DELETE FROM special_price WHERE spec_code = #{spec_code}
 	</delete>
 
 	<update id="update">
@@ -84,4 +79,5 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		#{discount}
 		WHERE spec_code = #{spec_code}
 	</update>
+
 </mapper>

@@ -9,13 +9,13 @@ import org.zerock.domain.basicRegi.SpecialPriceVO;
 public interface SpecialPriceService {
 	public void register(SpecialPriceVO spec);
 
-	public SpecialPriceVO  get(Integer spec_code);
+	public SpecialPriceVO get(Integer spec_code);
 
-	public boolean modify(SpecialPriceVO  spec);
+	public boolean modify(SpecialPriceVO spec);
 
 	public boolean remove(Integer spec_code);
 
-	public List<SpecialPriceVO > getList(Criteria cri);
+	public List<SpecialPriceVO> getList(Criteria cri);
 
 	public int getTotal(Criteria cri);
 }

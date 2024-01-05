@@ -3,6 +3,67 @@
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt"%>
 
+<%@ include file="../include/head.jsp"%>
+
+<!-- side  -->
+<div class="wrapper-frame-local-nav open" id="menuAreaAddon">
+	<div class="wrapper-local-nav">
+		<ul class="on">
+			<li id="1" class="collapsed"><a href="/basicRegi/companyList" class=""> 거래처등록 </a>
+				<div class="nav-option">
+					<span class="navigation-remove"></span>
+				</div></li>
+			<li id="2" class="collapsed"><a href="/basicRegi/departList" class=""> 부서등록 </a>
+				<div class="nav-option">
+					<span class="navigation-remove"></span>
+				</div></li>
+			<li id="3" class="collapsed"><a href="/basicRegi/wareList" class=""> 창고등록 </a>
+				<div class="nav-option">
+					<span class="navigation-remove"></span>
+				</div></li>
+			<li id="4" class="active"><a href="/basicRegi/itemList" class=""> 품목등록 </a>
+				<div class="nav-option">
+					 <span class="navigation-remove"></span>
+				</div></li>
+			<li id="5" class="collapsed"><a href="#" class=""> 단가등록 </a>
+				<div class="nav-option">
+					<span class="icon-nav-arrow "></span> <span
+						class="navigation-remove"></span>
+				</div>
+				<ul>
+					<li id="501" class="active"><a href="/basicRegi/specList"
+						id="ma540" class=""> 특별단가등록 </a>
+						<div class="nav-option">
+							<span class="new-window"></span> <span class="navigation-remove"></span>
+						</div></li>
+					<li id="502" class=""><a href="/basicRegi/priceList"
+						id="ma539" class=""> 품목별단가 </a>
+						<div class="nav-option">
+							<span class="new-window"></span> <span class="navigation-remove"></span>
+						</div></li>
+				</ul></li>
+			<li id="6" data-role="menu.listedItem" class=""><a href="/basicRegi/emplList"
+				data-role="menu.anchor" id="ma205" class=""> 사원(담당)등록 </a>
+				<div class="nav-option" data-role="menu.listedItem">
+					<span data-role="button.delete" class="navigation-remove"></span>
+				</div></li>
+		</ul>
+		<div class="local-nav-option">
+			<div class="local-nav-option-pin" data-role="flipswitch"></div>
+		</div>
+		<div class="local-nav-toggler" data-role="menu.itemContainer"></div>
+	</div>
+</div>
+
+
+
+
+
+<%-- <%@ page language="java" contentType="text/html; charset=UTF-8"
+	pageEncoding="UTF-8"%>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt"%>
+
 <%@include file="../include/header.jsp"%>
 
 <ul class="sidenav">
@@ -10,14 +71,15 @@
 	<li><a href="/basicRegi/departList">부서등록</a></li>
 	<li><a href="/basicRegi/wareList">창고등록</a></li>
 	<li><a href="/basicRegi/itemList">품목등록</a></li>
-	<li><a href="#">단가관리</a>
+	<li><a href="#">단가등록</a>
 		<ul class="sidesub">
 			<li><a href="/basicRegi/specList">특별단가등록</a></li>
 			<li><a href="/basicRegi/priceList">품목별단가</a></li>
 		</ul></li>
 	<li><a href="/basicRegi/emplList">사원(담당)등록</a></li>
 </ul>
-</nav>
+</nav> --%>
+
 <div id="page-wrapper">
 
 	<div class="row">
@@ -35,13 +97,13 @@
 				<tr>
 					<th><input type="checkbox" id="selectAll"
 						onclick="toggleAll(this)"></th>
-					<th>품목코드</th>
-					<th>품목명</th>
-					<th>그룹명</th>
-					<th>규격명</th>
-					<th>입고단가</th>
-					<th>출고단가</th>
-					<th>품목구분</th>
+					 <th>品目コード</th>
+                    <th>品目名</th>
+                    <th>グループ名</th>
+                    <th>規格名</th>
+                    <th>入庫単価</th>
+                    <th>出庫単価</th>
+                    <th>品目区分</th>
 				</tr>
 			</thead>
 
@@ -68,7 +130,8 @@
 	<div class="row">
 		<div class="col-lg-6 text-left">
 			<button type="button" class="btn btn-primary" data-toggle="modal"
-				data-target="#itemRegisterModal">신규</button>
+				data-target="#itemRegisterModal">新規</button>
+
 		</div>
 		<div class="col-lg-6 text-right">
 			<form id="searchForm" action="/basicRegi/itemList" method="get">
@@ -82,60 +145,60 @@
 					<option value="C"
 						<c:out value="${pageMaker.cri.type eq 'C' ? 'selected':''}"/>>종류</option>
 				</select> <input type="text" name="keyword"
-					value='<c:out value="${pageMaker.cri.keyword}"/>' /> <input
-					type="hidden" name="pageNum" value="${pageMaker.cri.pageNum}">
-				<input type="hidden" name="amount" value="${pageMaker.cri.amount}">
-				<button class="btn btn-default">검색</button>
+                    value='<c:out value="${pageMaker.cri.keyword}"/>' /> <input
+                    type="hidden" name="pageNum" value="${pageMaker.cri.pageNum}">
+                <input type="hidden" name="amount" value="${pageMaker.cri.amount}">
+                <button class="btn btn-default">検索</button>
 			</form>
 		</div>
 	</div>
 </div>
 
 <div class="modal fade" id="itemRegisterModal" tabindex="-1"
-	role="dialog" aria-labelleby="itemRegisterModalLabel"
+	role="dialog" aria-labelledby="itemRegisterModalLabel"
 	aria-hidden="true">
 	<div class="modal-dialog" role="document">
 		<div class="modal-content">
 			<div class="modal-header" style="background-color: #1f48d4;">
-				<span style="color: white;">품목 등록</span>
+				<span style="color: white;">品目登録</span>
 				<button type="button" class="close" data-dismiss="modal"
 					aria-label="Close">
-					<span aria-hidden="true">&times;</span>
+				
 				</button>
 			</div>
 			<form role="form" action="basicRegi/itemRegister" method="post">
-				<div class="modal-body">
-					<div class="panel-body">
-						<div class="form-group">
-							<label>품목코드(40000~49999)</label><input class="form-control"
-								name="item_code" type="text">
-						</div>
-						<div class="form-group">
-							<label>품목명</label><input class="form-control" name="item_name">
-						</div>
-						<div class="form-group">
-							<label>품목그룹</label><input class="form-control" name="item_group">
-						</div>
-						<div class="form-group">
-							<label>규격명</label><input class="form-control"
-								name="standard_name">
-						</div>
-						<div class="form-group">
-							<label>입고단가</label><input class="form-control" name="pur_price">
-						</div>
-						<div class="form-group">
-							<label>출고단가</label><input class="form-control" name="sales_price">
-						</div>
-						<div class="form-group">
-							<label>품목구분</label><input class="form-control" name="item_cate">
-						</div>
-					</div>
+                <div class="modal-body">
+                    <div class="panel-body">
+                        <div class="form-group">
+                            <label>品目コード(40000~49999)</label><input class="form-control"
+                                name="item_code" type="text">
+                        </div>
+                        <div class="form-group">
+                            <label>品目名</label><input class="form-control" name="item_name">
+                        </div>
+                        <div class="form-group">
+                            <label>品目グループ</label><input class="form-control" name="item_group">
+                        </div>
+                        <div class="form-group">
+                            <label>規格名</label><input class="form-control"
+                                name="standard_name">
+                        </div>
+                        <div class="form-group">
+                            <label>入庫単価</label><input class="form-control" name="pur_price">
+                        </div>
+                        <div class="form-group">
+                            <label>出庫単価</label><input class="form-control" name="sales_price">
+                        </div>
+                        <div class="form-group">
+                            <label>品目区分</label><input class="form-control" name="item_cate">
+                        </div>
+                    </div>
 					<div class="modal-footer">
-						<button type="button" class="btn btn-primary"
-							onclick="registerItem()" data-dismiss="modal">저장</button>
-						<button type="reset" class="btn btn-default">초기화</button>
-						<button type="button" class="btn btn-secondary"
-							data-dismiss="modal">닫기</button>
+					 <button type="button" class="btn btn-primary"
+                            onclick="registerItem()" data-dismiss="modal">保存</button>
+                        <button type="reset" class="btn btn-default">初期化</button>
+                        <button type="button" class="btn btn-secondary"
+                            data-dismiss="modal">閉じる</button>
 					</div>
 				</div>
 			</form>
@@ -148,7 +211,7 @@
 	<div class="modal-dialog" role="document">
 		<div class="modal-content">
 			<div class="modal-header" style="background-color: #1f48d4;">
-				<span style="color: white;">품목 등록</span>
+				<span style="color: white;">品目登録</span>
 				<button type="button" class="close" data-dismiss="modal"
 					aria-label="Close">
 					<span aria-hidden="true">&times;</span>
@@ -158,36 +221,35 @@
 				<div class="modal-body">
 					<div class="panel-body">
 						<div class="form-group">
-							<label>품목코드(40000~49999)</label><input class="form-control"
-								name="item_code" type="text">
-						</div>
-						<div class="form-group">
-							<label>품목명</label><input class="form-control" name="item_name">
-						</div>
-						<div class="form-group">
-							<label>품목그룹</label><input class="form-control" name="item_group">
-						</div>
-						<div class="form-group">
-							<label>규격명</label><input class="form-control"
-								name="standard_name">
-						</div>
-						<div class="form-group">
-							<label>입고단가</label><input class="form-control" name="pur_price">
-						</div>
-						<div class="form-group">
-							<label>출고단가</label><input class="form-control" name="sales_price">
-						</div>
-						<div class="form-group">
-							<label>품목구분</label><input class="form-control" name="item_cate">
-						</div>
-
+							  <label>品目コード(40000~49999)</label><input class="form-control"
+                                name="item_code" type="text">
+                        </div>
+                        <div class="form-group">
+                            <label>品目名</label><input class="form-control" name="item_name">
+                        </div>
+                        <div class="form-group">
+                            <label>品目グループ</label><input class="form-control" name="item_group">
+                        </div>
+                        <div class="form-group">
+                            <label>規格名</label><input class="form-control"
+                                name="standard_name">
+                        </div>
+                        <div class="form-group">
+                            <label>入庫単価</label><input class="form-control" name="pur_price">
+                        </div>
+                        <div class="form-group">
+                            <label>出庫単価</label><input class="form-control" name="sales_price">
+                        </div>
+                        <div class="form-group">
+                            <label>品目区分</label><input class="form-control" name="item_cate">
+                        </div>
 					</div>
 					<div class="modal-footer">
-						<button type="button" class="btn btn-primary"
-							onclick="modifyItem()" data-dismiss="modal">저장</button>
-						<button type="reset" class="btn btn-default">초기화</button>
-						<button type="button" class="btn btn-secondary"
-							data-dismiss="modal">닫기</button>
+						 <button type="button" class="btn btn-primary"
+                            onclick="modifyItem()" data-dismiss="modal">保存</button>
+                        <button type="reset" class="btn btn-default">初期化</button>
+                        <button type="button" class="btn btn-secondary"
+                            data-dismiss="modal">閉じる</button>
 					</div>
 
 				</div>
@@ -212,10 +274,11 @@
         var actionForm = $("#actionForm");
         var itemRegisterModal = $("#itemRegisterModal");
 
-        itemRegisterModal.on('show.bs.modal', function (e) {
-            getItemCode(); 
+        $("#itemRegisterModal").on("click", function () {
+            itemRegisterModal.modal("show");
+       
         });
-
+         
         $(".pagination a").on("click", function (e) {
             e.preventDefault();
             console.log('click');
@@ -248,7 +311,7 @@
                     $("#itemModifyModal").modal("show");
                 },
                 error: function () {
-                    alert("데이터를 가져오는 중 오류가 발생했습니다");
+                    alert("データの取得中にエラーが発生しました");
                 }
             });
         });       
@@ -257,12 +320,12 @@
 
         $("#searchForm button").on("click", function (e) {
             if (!searchForm.find("option:selected").val()) {
-                alert("검색종류를 선택하세요");
+                alert("検索タイプを選択してください");
                 return false;
             }
 
             if (!searchForm.find("input[name='keyword']").val()) {
-                alert("키워드를 입력하세요");
+                alert("キーワードを入力してください");
                 return false;
             }
 
@@ -276,7 +339,7 @@
     	 var itemCode = $("input[name='item_code']").val();
 
         if (!isItemCodeValid(itemCode)) {
-            alert("잘못된 코드번호입니다 (40000~49999)");
+            alert("無効なコード番号です (40000~49999)");
             return;
         }
         
@@ -296,7 +359,7 @@
             	window.location.reload();
             },
             error: function () {
-                alert("저장 중 오류가 발생했습니다");
+                alert("保存中にエラーが発生しました");
             }
         });
     }
@@ -313,7 +376,7 @@
 
 
             if (!isItemCodeValid(itemCode)) {
-                alert("잘못된 코드번호입니다 (40000~49999)");
+                alert("無効なコード番号です (40000~49999)");
                 return;
             }
             
@@ -330,13 +393,13 @@
     	            item_cate: itemCate
     	    },
     	    success: function(data){
-    	    	window.location.reload();
+    	    	 window.location.reload(); 
     	    },
     	    error: function() {
-    	    	alert("수정 중 오류가 발생했습니다");
+    	    	alert("修正中にエラーが発生しました");
     	    }
     	    });
     }
     
 </script>
-<%@ include file="../include/footer.jsp"%>
+<%@ include file="../include/foot.jsp"%>

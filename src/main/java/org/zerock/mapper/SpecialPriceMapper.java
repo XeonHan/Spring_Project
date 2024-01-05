@@ -3,8 +3,8 @@ package org.zerock.mapper;
 import java.util.List;
 
 import org.zerock.domain.Criteria;
-
 import org.zerock.domain.basicRegi.SpecialPriceVO;
+
 
 public interface SpecialPriceMapper {
 	public List<SpecialPriceVO> getList();
