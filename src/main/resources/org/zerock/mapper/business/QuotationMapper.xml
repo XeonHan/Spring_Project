@@ -26,4 +26,22 @@ select * from quotation
 	  	WHERE TO_DATE(SUBSTR(qhodate_no, 1, 10), 'YYYY-MM-DD') = TO_DATE(#{qhodate_no}, 'YYYY-MM-DD')
 		]]> 
  	</select> 
+ 	
+ 	<!-- 하나 씩 가져오기 -->
+ 	<select id="read" resultType="org.zerock.domain.quotation.QuotationVO">
+ 		select * from quotation where qhodate_no = #{date}
+ 	</select>
+ 	
+ 	<update id="modify">
+    update quotation
+    set 
+        qhodate_no=#{data.qhodate_no},
+        company_code=#{data.company_code},
+        employee_code=#{data.employee_code},
+        ware_code=#{data.ware_code},
+        valid_date=#{data.valid_date},
+        progress=#{data.progress}
+    where qhodate_no=#{originDate}
+</update>
+ 	
 </mapper>

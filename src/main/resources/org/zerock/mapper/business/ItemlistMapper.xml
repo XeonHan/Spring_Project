@@ -14,4 +14,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		#{date}
 	</select>
 	
+	<delete id="deleteAll">
+		delete itemlist where qhodate_no = #{date}
+	</delete>
 </mapper>
