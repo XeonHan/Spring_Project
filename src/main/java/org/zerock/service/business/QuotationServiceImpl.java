@@ -44,4 +44,23 @@ public class QuotationServiceImpl implements QuotationService {
 	public List<ItemDataVO> getItemList(String date){
 		return itemMapper.getQuoItemList(date);
 	}
+	@Override
+	public QuotationVO get(String date) {
+		return mapper.read(date);
+	}
+	
+	@Transactional
+	@Override
+	public void modify(QuotationVO data, String originDate) {
+		
+		itemMapper.deleteAll(originDate);
+		mapper.modify(data, originDate);
+		if (data.getItem_data() == null || data.getItem_data().size() <= 0) {
+			return;
+		}
+		data.getItem_data().forEach(itemdata -> {
+			itemdata.setQhodate_no(data.getQhodate_no());
+			itemMapper.regist(itemdata);
+		});
+	}
 }

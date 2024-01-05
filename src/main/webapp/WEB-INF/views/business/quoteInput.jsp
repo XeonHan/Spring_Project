@@ -489,6 +489,7 @@
 		                    };
 		                    $('#company_code').val(item.item_name);
 		                    $('#company_name').val(item.item_group);
+		                    $("#exampleModal").modal("hide");
 		                });
 		            },
 		            error: function (xhr, status, err) {
@@ -589,6 +590,7 @@
         var tableBody = document.querySelector('table tbody');
         var newRow = tableBody.insertRow();
         
+        
         newRow.innerHTML = `
             <td><input type="text" class="form-control" id="itemcodeSearch" onblur="logInputValue(this)" name="item_code"></td>
             <td><input type="text" class="form-control" name="item_name"></td>
@@ -606,6 +608,7 @@
         // 아이템 총합
         // 기타
     }
+
 	// 마우스 다른데 클릭시 아이템 코드 검색
     function logInputValue(inputElement) {
         var inputValue = inputElement.value;
@@ -623,6 +626,7 @@
                 	 if (typeof data === 'undefined' || data === null) {
                 		console.log("no data");
                 	}
+                	
                 	var targetField = tableRow.querySelector('td input[name="item_name"]');
                 	if (targetField) {
                     	targetField.value = data.item_name;

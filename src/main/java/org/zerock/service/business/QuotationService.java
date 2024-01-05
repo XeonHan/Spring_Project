@@ -13,4 +13,8 @@ public interface QuotationService {
 	public int countDateByDate(String date);
 	
 	public List<ItemDataVO> getItemList(String date);
+	
+	public QuotationVO get(String date);
+	
+	public void modify(QuotationVO data, String originDate);
 }
