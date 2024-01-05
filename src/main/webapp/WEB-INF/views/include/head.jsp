@@ -19,28 +19,28 @@
 
 <!-- 교재 -->
 <!-- Bootstrap Core CSS -->
-<link href="/resources/vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
+<link href="/resources/vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet" class="theme">
 
 <!-- MetisMenu CSS -->
 <link href="/resources/vendor/metisMenu/metisMenu.min.css"
-	rel="stylesheet">
+	rel="stylesheet" class="theme">
 
 <!-- DataTables CSS -->
 <link
 	href="/resources/vendor/datatables-plugins/dataTables.bootstrap.css"
-	rel="stylesheet">
+	rel="stylesheet" class="theme">
 
 <!-- DataTables Responsive CSS -->
 <link
 	href="/resources/vendor/datatables-responsive/dataTables.responsive.css"
-	rel="stylesheet">
+	rel="stylesheet" class="theme">
 
 <!-- Custom CSS -->
-<link href="/resources/dist/css/sb-admin-2.css" rel="stylesheet">
+<link href="/resources/dist/css/sb-admin-2.css" rel="stylesheet" class="theme">
 
 <!-- Custom Fonts -->
 <link href="/resources/vendor/font-awesome/css/font-awesome.min.css"
-	rel="stylesheet" type="text/css">
+	rel="stylesheet" type="text/css" class="theme">
 
 <!-- <link href="/resources/css/sidedropdown.css" rel="stylesheet" type="text/css">
  -->
@@ -58,19 +58,6 @@ html, body {
 		'Gulim';
 }
 </style>
-
-<script>
-document.querySelector('link[href="/resources/vendor/bootstrap/css/bootstrap.min.css"]').remove();
-document.querySelector('link[href="/resources/vendor/metisMenu/metisMenu.min.css"]').remove();
-document.querySelector('link[href="/resources/vendor/datatables-plugins/dataTables.bootstrap.css]').remove();
-document.querySelector('link[href="/resources/vendor/datatables-responsive/dataTables.responsive.css"]').remove();
-document.querySelector('link[href="/resources/dist/css/sb-admin-2.css"]').remove();
-document.querySelector('link[href="/resources/vendor/font-awesome/css/font-awesome.min.css"]').remove();
-document.querySelector('link[href="/resources/css/sidedropdown.css"]').remove();
-
-</script>
-
-
 
 </head>
 <body class="page-fluid-vertical navigation-type1 erp using-bookmark font-user-setting cursor-default zoom-100 responsive-web theme-blue"

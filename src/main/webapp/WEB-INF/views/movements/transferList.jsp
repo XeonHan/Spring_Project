@@ -13,7 +13,6 @@ document.querySelector('link[href="/resources/vendor/datatables-responsive/dataT
 document.querySelector('link[href="/resources/dist/css/sb-admin-2.css"]').remove();
 document.querySelector('link[href="/resources/vendor/font-awesome/css/font-awesome.min.css"]').remove();
 document.querySelector('link[href="/resources/css/sidedropdown.css"]').remove();
-
 </script>
 
 

@@ -80,7 +80,8 @@
 </ul>
 </nav> --%>
 
-<div id="page-wrapper">
+
+<div id="page-wrapper" style="overflow:scroll;">
 
 	<div class="row">
 		<div class="col-lg-12">
@@ -214,7 +215,7 @@
 				<span style="color: white;">品目登録</span>
 				<button type="button" class="close" data-dismiss="modal"
 					aria-label="Close">
-					<span aria-hidden="true">&times;</span>
+			
 				</button>
 			</div>
 			<form role="form" action="basicRegi/itemModify" method="post">
