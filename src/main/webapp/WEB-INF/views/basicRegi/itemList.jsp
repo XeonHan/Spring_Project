@@ -3,6 +3,67 @@
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt"%>
 
+<%@ include file="../include/head.jsp"%>
+
+<!-- side  -->
+<div class="wrapper-frame-local-nav open" id="menuAreaAddon">
+	<div class="wrapper-local-nav">
+		<ul class="on">
+			<li id="1" class="collapsed"><a href="/basicRegi/companyList" class=""> 거래처등록 </a>
+				<div class="nav-option">
+					<span class="navigation-remove"></span>
+				</div></li>
+			<li id="2" class="collapsed"><a href="/basicRegi/departList" class=""> 부서등록 </a>
+				<div class="nav-option">
+					<span class="navigation-remove"></span>
+				</div></li>
+			<li id="3" class="collapsed"><a href="/basicRegi/wareList" class=""> 창고등록 </a>
+				<div class="nav-option">
+					<span class="navigation-remove"></span>
+				</div></li>
+			<li id="4" class="active"><a href="/basicRegi/itemList" class=""> 품목등록 </a>
+				<div class="nav-option">
+					 <span class="navigation-remove"></span>
+				</div></li>
+			<li id="5" class="collapsed"><a href="#" class=""> 단가등록 </a>
+				<div class="nav-option">
+					<span class="icon-nav-arrow "></span> <span
+						class="navigation-remove"></span>
+				</div>
+				<ul>
+					<li id="501" class="active"><a href="/basicRegi/specList"
+						id="ma540" class=""> 특별단가등록 </a>
+						<div class="nav-option">
+							<span class="new-window"></span> <span class="navigation-remove"></span>
+						</div></li>
+					<li id="502" class=""><a href="/basicRegi/priceList"
+						id="ma539" class=""> 품목별단가 </a>
+						<div class="nav-option">
+							<span class="new-window"></span> <span class="navigation-remove"></span>
+						</div></li>
+				</ul></li>
+			<li id="6" data-role="menu.listedItem" class=""><a href="/basicRegi/emplList"
+				data-role="menu.anchor" id="ma205" class=""> 사원(담당)등록 </a>
+				<div class="nav-option" data-role="menu.listedItem">
+					<span data-role="button.delete" class="navigation-remove"></span>
+				</div></li>
+		</ul>
+		<div class="local-nav-option">
+			<div class="local-nav-option-pin" data-role="flipswitch"></div>
+		</div>
+		<div class="local-nav-toggler" data-role="menu.itemContainer"></div>
+	</div>
+</div>
+
+
+
+
+
+<%-- <%@ page language="java" contentType="text/html; charset=UTF-8"
+	pageEncoding="UTF-8"%>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt"%>
+
 <%@include file="../include/header.jsp"%>
 
 <ul class="sidenav">
@@ -17,7 +78,8 @@
 		</ul></li>
 	<li><a href="/basicRegi/emplList">사원(담당)등록</a></li>
 </ul>
-</nav>
+</nav> --%>
+
 <div id="page-wrapper">
 
 	<div class="row">
@@ -101,7 +163,7 @@
 				<span style="color: white;">품목 등록</span>
 				<button type="button" class="close" data-dismiss="modal"
 					aria-label="Close">
-					<span aria-hidden="true">&times;</span>
+				
 				</button>
 			</div>
 			<form role="form" action="basicRegi/itemRegister" method="post">
@@ -341,4 +403,4 @@
     }
     
 </script>
-<%@ include file="../include/footer.jsp"%>
+<%@ include file="../include/foot.jsp"%>
