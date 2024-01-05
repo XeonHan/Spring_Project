@@ -2,6 +2,7 @@ package org.zerock.controller;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
+import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -33,6 +34,20 @@ import org.zerock.service.WarehouseService;
 public class BasicRegiController {
 
 	// ItemPrice
+	@GetMapping(value = "/searchitem", produces = MediaType.APPLICATION_JSON_UTF8_VALUE)
+	public ResponseEntity<ItemVO> searchitem(@RequestParam(name= "keyword")String keyword) {
+		
+
+		Integer code = Integer.parseInt(keyword);
+		
+		ItemVO data = itemService.get(code);
+		if(data != null) {
+			return new ResponseEntity<>(data, HttpStatus.OK);			
+		}else {
+			return new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
+		}
+	}
+	
 	@Autowired
 	private ItemPriceService priceService;
 
