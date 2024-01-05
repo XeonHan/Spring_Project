@@ -11,7 +11,7 @@
 <div class="wrapper-sitemap hidden">
 	<div class="wrapper-overlay"></div>
 
-	<div class="sitemap-close" onclick=#></div>
+	<div class="sitemap-close" onclick=""></div>
 	<div class="sitemap"></div>
 </div>
 
@@ -142,6 +142,7 @@ $(document).ready(function() {
                 }
             });
         });
+        
         document.addEventListener('DOMContentLoaded', function() {
             var ulElement = document.querySelector('.wrapper-local-nav ul');
 
@@ -162,11 +163,12 @@ $(document).ready(function() {
                     var clickedLi = event.target.closest('li');
                     clickedLi.classList.add('active');
 
-                    // Toggle the "collapsed" class on the clicked li element
-                    clickedLi.classList.toggle('collapsed');
+                    // Navigate to the href of the clicked anchor
+                    window.location.href = event.target.getAttribute('href');
                 }
             });
         });
+
     </script>
 
 </body>

@@ -1,8 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 <!DOCTYPE html>
-<html style
-	class="--default-font-size: 10; --table-title-font-size: 12; --size-rate: 1; --space-rate: 1; --radius-rate: 1; --line-height-rate: 1;">
+<html style class="--default-font-size: 10; --table-title-font-size: 12; --size-rate: 1; --space-rate: 1; --radius-rate: 1; --line-height-rate: 1;">
 <head>
 <meta charset="UTF-8">
 <meta http-equiv="X-UA-Compatible" content="IE=Edge" />
@@ -219,7 +218,7 @@ html, body {
 					
 					<li id="2" class="mypage align-center"> <!-- active  -->
 						<div class="wrapper-depth1">
-							<a href="#"> 営業管理 </a>
+							<a href="/business/"> 営業管理 </a> <!-- 영업관리의 처음화면 판매화면 -->
 							<div class="nav-option">
 								<span data-role="button.delete" class="navigation-remove"></span>
 							</div>
@@ -236,7 +235,7 @@ html, body {
 					
 					<li id="3" class="mypage align-center"> <!-- active  -->
 						<div class="wrapper-depth1">
-							<a href="#"> 購買管理 </a>
+							<a href="#"> 購買管理 </a> <!--구매 관리의 첫번째로 보이는 화면 -->
 							<div class="nav-option">
 								<span data-role="button.delete" class="navigation-remove"></span>
 							</div>
@@ -268,14 +267,14 @@ html, body {
 					</li>
 					<li id="5" class="mypage align-center"> <!-- active  -->
 						<div class="wrapper-depth1">
-							<a href="#"> 其他移動  </a>
+							<a href="/movements/transferList"> 其他移動  </a>
 							<div class="nav-option">
 								<span data-role="button.delete" class="navigation-remove"></span>
 							</div>
 						</div>
 						<div class="wrapper-depth2"> <!-- active -->
 							<ul id="group_5" class=" ">
-								<li id="5-1" class=" "><a href="#"> 倉庫移動 </a></li>
+								<li id="5-1" class=" "><a href="/movements/transferList"> 倉庫移動 </a></li>
 								<li id="5-2" class=" "><a href="#"> 自己使用 </a></li>
 								<li id="5-3" class=" "><a href="#"> 自己使用 </a></li>
 								<li id="5-4" class=" "><a href="#"> 移動状況 </a></li>

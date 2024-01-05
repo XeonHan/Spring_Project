@@ -1,0 +1,92 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="org.zerock.mapper.movements.WareTransferMapper">
+
+<sql id="criteria">
+		<trim prefix="(" suffix=") AND " prefixOverrides="OR">
+			<foreach item='type' collection="typeArr">
+				<trim prefix="OR">
+					<choose>
+						<when test="type == 'T'.toString()">
+							send_ware like '%'||#{keyword}||'%'
+						</when>
+						<when test="type == 'I'.toString()">
+							item_name like '%'||#{keyword}||'%'
+						</when>
+						<when test="type == 'R'.toString()">
+							recieve_ware like '%'||#{keyword}||'%'
+						</when>
+					</choose>
+				</trim>
+			</foreach>
+		</trim>
+	</sql>
+	
+	<select id="getList" resultType="org.zerock.domain.movements.WareTransferVO">
+	<![CDATA[
+		select * from Ware_transfer where transfer_no > 0 
+		]]>
+	</select>
+
+	<insert id="insert">
+		insert into ware_transfer (transfer_no, send_ware, recieve_ware, item_name, amount, trans_date, empl_name, item_code, summary, progress)
+		values (seq_ware_transfer.nextval, #{send_ware}, #{recieve_ware}, #{item_name}, #{amount}, #{trans_date}, #{empl_name}, #{item_code}, #{summary}, #{progress})
+	</insert>
+
+	<select id="read" resultType="org.zerock.domain.movements.WareTransferVO">
+		select * from ware_transfer where transfer_NO = #{transfer_NO}
+	</select>
+
+	<delete id="delete">
+		delete ware_transfer where transfer_no = #{transfer_no}
+	</delete>
+
+	<update id="update">
+		update ware_transfer
+		set send_ware = #{send_ware},
+		recieve_ware = #{recieve_ware},
+		empl_name = #{empl_name},
+		trans_date = #{trans_date}
+		where transfer_NO =
+		#{transfer_NO}
+	</update>
+	
+	<update id="updateProgress">
+	
+	
+	</update>
+
+	<select id="getListWithPaging"
+		resultType="org.zerock.domain.movements.WareTransferVO">
+  		<![CDATA[
+  		select 
+    		transfer_no, trans_date, send_ware, recieve_ware, item_name, amount
+  		from 
+      		(
+      		select /*+INDEX_DESC(ware_transfer pk_ware) */
+        		rownum rn, transfer_no, trans_date, send_ware, recieve_ware, item_name, amount
+      		from 
+        		ware_transfer
+      		where 
+  		]]>
+
+		<include refid="criteria"></include>
+      
+  <![CDATA[    
+      rownum <= #{pageNum} * #{amount}
+      )
+  where rn > (#{pageNum} -1) * #{amount}   
+  ]]>
+	</select>
+
+	<select id="getTotalCount" resultType="int">
+		select count(*) from ware_transfer where
+
+		<include refid="criteria"></include>
+
+		transfer_no > 0
+	</select>
+	
+	
+</mapper>
