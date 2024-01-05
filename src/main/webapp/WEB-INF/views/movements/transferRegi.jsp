@@ -7,7 +7,7 @@
 <div class="wrapper-frame-local-nav open" id="menuAreaAddon">
 	<div class="wrapper-local-nav">
 		<ul class="on">
-			<li id="201" class="active"><a href="/movements/transferList"
+			<li id="201" class="active"><a href="#"
 				class=""> 창고이동 </a>
 				<div class="nav-option">
 					<span class="icon-nav-arrow "></span> <span
@@ -108,10 +108,6 @@
 
 <!-- body  -->
 
-
-
-
-<!-- body -->
 <div class="wrapper-frame-body">
 	<div style="display: block;">
 		<style></style>
@@ -808,6 +804,7 @@
 	</div>
 
 
+</div>
 
 
 
@@ -818,6 +815,4 @@
 
 
 
-
-<%@ include
-													file="../include/foot.jsp"%>
+<%@ include file="../include/foot.jsp"%>

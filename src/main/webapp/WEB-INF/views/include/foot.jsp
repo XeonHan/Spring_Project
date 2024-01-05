@@ -162,6 +162,9 @@ $(document).ready(function() {
                     // Add the "active" class to the clicked li element
                     var clickedLi = event.target.closest('li');
                     clickedLi.classList.add('active');
+                    
+                 // Toggle the "collapsed" class on the clicked li element
+                    clickedLi.classList.toggle('collapsed');
 
                     // Navigate to the href of the clicked anchor
                     window.location.href = event.target.getAttribute('href');

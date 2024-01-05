@@ -2,13 +2,15 @@
 	pageEncoding="UTF-8"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt"%>
+
 <%@ include file="../include/head.jsp"%>
+
 <!-- side  -->
  <div class="wrapper-frame-local-nav open" id="menuAreaAddon" > 
  <div class="wrapper-local-nav">
  <ul class="on">
  <li id="201" class="active" > 
- <a href="/movements/transferList" class=""> 창고이동 </a>   
+ <a href="#" class=""> 창고이동 </a>   
  <div class="nav-option">   
  <span class="icon-nav-arrow "></span>   
  <span class="navigation-remove"></span>   
@@ -148,8 +150,64 @@
 </div>
 </div>
 
+<!-- body -->
+<div class="wrapper-frame-body">
+<div style="display: block;">
+<style> </style>
+<div id="responsive-applied"></div>
+<div class="header header-fixed">
+ <div class="wrapper-title">
+ <div class="wrapper-toolbar" style="max-width: 755px;">
+ <div class="pull-left">
+ <span id="btn-header-bookmark" class="page-name page-bookmark">
+ 창고이동조회
+</span>
+<span class="wrapper-title-notification"> 
+<span id="progressMarkF" class="label label-primary title-notification-heading"></span> 
+<span id="progressMarkS" class="label label-primary title-notification-contents" style="display:none"></span>
+</span> 
+</div> 
+<div class="pull-right">
+<div class="control-set">
+<div class="control wrapper-title-simple-search  " > 
+<input type="text" class="form-control title-simple-search ible form-control first-child last-child" data-index="0" data-cid="__headerQuick" data-ecpath="ESM002M_3∫header∫∫∫∫__headerQuick∫" placeholder="입력 후 [Enter]" value> 
+<button type="button" class="btn btn-default btn-fn dropdown-toggle fn btn-sm hidden" data-function="fn" data-service="layer.fn" data-service-attr="layer.fixed" data-cid="__headerQuick"></button> 
+</div>
+</div>
+<div class="control-set"> 
+<div class="control   " > 
+<button id="tgHeaderSearch" class="btn btn-primary btn-title-search first-child last-child" data-index="0" data-cid="tgHeaderSearch" data-ecpath="ESM002M_3∫header∫∫∫∫tgHeaderSearch∫" data-role="{{ecRole}}">Search(F3)</button> 
+</div> 
+</div> 
+<div class="control-set    "> 
+<div class="control   " > 
+<button id="tgHeaderOption" class="btn btn-default btn-title-option dropdown-toggle first-child last-child" data-service="layer.dropdown" data-service-attr="layer.fixed">Option</button> 
+</div> 
+</div> 
+<div class="control-set    "> 
+<div class="control   " > 
+<button id="helper" class="btn btn-default btn-title-manual first-child last-child" data-role="{{ecRole}}">도움말</button> 
+</div> 
+</div> 
+</div> 
+</div> 
+</div> 
+<div class="wrapper-header-search" style="max-width: 755px;"> 
 
 
+
+
+
+
+
+
+
+
+
+
+
+ 
+<%-- 
 <!-- body -->
 <div class="wrapper-frame-body">
 <div style="display: block;">
@@ -157,7 +215,6 @@
 <div id="responsive-applied"></div>
 <div class="wrapper-overlay"></div>
 <div id="mainPage" data-ecpageid="ESM002M_18" class="page page-fluid page-loadComplete" style>
-
 <div class="header header-fixed">
  <div class="wrapper-title">
  <div class="wrapper-toolbar" style="max-width: 755px;">
@@ -213,7 +270,6 @@
 </li>
 <li class="tab-text text-danger hidden">검색기본값을 설정 후 저장 바랍니다.</li>
 </ul>
-
 <div class="tab-content" style>
 <div class="tab-pane" style="display: block;" data-container-id="ESM002M_18∫all">
 <ul class="wrapper-form wrapper-form-state-1" data-formid="form∬eb196mzp" data-ecpath="ESM002M_18∫header∫all∫form∬eb196mzp∫∫∫">
@@ -283,6 +339,14 @@
 </div>
 </div>
 </li>
+</ul>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
 
 
 
@@ -297,12 +361,7 @@
 
 
 
-
-
-
-
-
-
+ --%>
 
 
 
