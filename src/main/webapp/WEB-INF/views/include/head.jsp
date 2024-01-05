@@ -258,10 +258,9 @@ html, body {
 						</div>
 						<div class="wrapper-depth2"> <!-- active -->
 							<ul id="group_4" class=" ">
-								<li id="4-1" class=" "><a href="#"> 生産計画 </a></li>
-								<li id="4-2" class=" "><a href="#"> 作業 </a></li>
-								<li id="4-3" class=" "><a href="#"> 生産払出 </a></li>
-								<li id="4-4" class=" "><a href="#"> 生産入庫 </a></li>
+								<li id="4-1" class=" "><a href="#"> 作業 </a></li>
+								<li id="4-2" class=" "><a href="#"> 生産払出 </a></li>
+								<li id="4-3" class=" "><a href="#"> 生産入庫 </a></li>
 							</ul>
 						</div>
 					</li>
