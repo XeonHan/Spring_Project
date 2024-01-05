@@ -339,7 +339,7 @@
     	 var itemCode = $("input[name='item_code']").val();
 
         if (!isItemCodeValid(itemCode)) {
-            alert("無効なコード番号です (40000~49999)");
+            alert("間違ったコード番号です (40000~49999)");
             return;
         }
         
@@ -376,7 +376,7 @@
 
 
             if (!isItemCodeValid(itemCode)) {
-                alert("無効なコード番号です (40000~49999)");
+                alert("間違ったコード番号です (40000~49999)");
                 return;
             }
             

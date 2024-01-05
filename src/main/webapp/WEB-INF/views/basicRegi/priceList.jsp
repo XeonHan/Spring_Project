@@ -22,7 +22,7 @@
 
 	<div class="row">
 		<div class="col-lg-12">
-			<h2 class="page-header">특별단가 리스트</h2>
+			<h2 class="page-header">特別単価リスト</h2>
 		</div>
 	</div>
 
@@ -35,11 +35,12 @@
 				<tr>
 					<th><input type="checkbox" id="selectAll"
 						onclick="toggleAll(this)"></th>
-					<th>품목코드</th>
-					<th>품목명</th>
-					<th>특별단가그룹명</th>
-					<th>할인율</th>
-					<th>적용단가</th>
+					<th>品目コード</th>
+					<th>品目名 </th>
+					<th>出庫単価</th>
+					<th>特別単価 グループ名</th>
+					<th>割引率</th>
+					<th>適用単価</th>
 				</tr>
 			</thead>
 
@@ -54,6 +55,7 @@
 						data-price-name="${price.item_name}"> <c:out
 								value="${price.item_name}" />
 					</a></td>
+					<td><c:out value="${price.sales_price}"/></td>
 					<td><c:out value="${price.spec_name}" /></td>
 					<td><c:out value="${price.discount}" /></td>
 					<td><c:out value="${price.applied_price}" /></td>
@@ -65,7 +67,7 @@
 	<div class="row">
 		<div class="col-lg-6 text-left">
 			<button type="button" class="btn btn-primary" data-toggle="modal"
-				data-target="#priceRegisterModal">신규</button>
+				data-target="#priceRegisterModal">新規</button>
 
 		</div>
 		<div class="col-lg-6 text-right">
@@ -74,14 +76,14 @@
 					<option value=""
 						<c:out value="${pageMaker.cri.type == null ? 'selected':''}"/>>--</option>
 					<option value="N"
-						<c:out value="${pageMaker.cri.type eq 'N' ? 'selected':''}"/>>품목명</option>
+						<c:out value="${pageMaker.cri.type eq 'N' ? 'selected':''}"/>>品目名</option>
 					<option value="SN"
-						<c:out value="${pageMaker.cri.type eq 'SN' ? 'selected':''}"/>>특별단가그룹명</option>
+						<c:out value="${pageMaker.cri.type eq 'SN' ? 'selected':''}"/>>特別単価 グループ名</option>
 				</select> <input type="text" name="keyword"
 					value='<c:out value="${pageMaker.cri.keyword}"/>' /> <input
 					type="hidden" name="pageNum" value="${pageMaker.cri.pageNum}">
 				<input type="hidden" name="amount" value="${pageMaker.cri.amount}">
-				<button class="btn btn-default">검색</button>
+				<button class="btn btn-default">検索</button>
 			</form>
 		</div>
 	</div>
@@ -93,7 +95,7 @@
 	<div class="modal-dialog" role="document">
 		<div class="modal-content">
 			<div class="modal-header" style="background-color: #1f48d4;">
-				<span style="color: white;">품목별특별단가등록</span>
+				<span style="color: white;">品目別特別単価登録</span>
 				<button type="button" class="close" data-dismiss="modal"
 					aria-label="Close">
 					<span aria-hidden="true">&times;</span>
@@ -105,9 +107,9 @@
 						<table class="table" id="itemTable">
 							<thead>
 								<tr>
-									<th>품목코드(40000~49999)</th>
-									<th>품목명</th>
-									<th>출고단가</th>
+									<th>品目コード(40000~49999)</th>
+									<th>品目名</th>
+									<th>出庫単価</th>
 								</tr>
 							</thead>
 							<tbody>
@@ -123,24 +125,24 @@
 							</tbody>
 						</table>
 						<div class="form-group">
-							<label>특별단가그룹명</label><input class="form-control"
+							<label>特別単価 グループ名</label><input class="form-control"
 								name="spec_name">
 						</div>
 						<div class="form-group">
-							<label>할인율</label><input class="form-control" name="discount"
+							<label>割引率</label><input class="form-control" name="discount"
 								oninput="parsentDiscount(this), appliedTotal(this)">
 						</div>
 						<div class="form-group">
-							<label>적용단가</label><input class="form-control"
+							<label>適用単価</label><input class="form-control"
 								name="applied_price" readonly>
 						</div>
 					</div>
 					<div class="modal-footer">
 						<button type="button" class="btn btn-primary"
-							onclick="registerPrice()" data-dismiss="modal">저장</button>
-						<button type="reset" class="btn btn-default">초기화</button>
+							onclick="registerPrice()" data-dismiss="modal">保存</button>
+						<button type="reset" class="btn btn-default">初期化</button>
 						<button type="button" class="btn btn-secondary"
-							data-dismiss="modal">닫기</button>
+							data-dismiss="modal">閉じる</button>
 					</div>
 				</div>
 			</form>
@@ -191,6 +193,7 @@ function isItemCodeValid(itemCode){
             success: function (data) {
                 $("#priceModifyModal input[name='item_code']").val(itemCode);
                 $("#priceModifyModal input[name='item_name']").val(itemName);
+                $("#priceModifyModal input[name='sales_price']").val(data.sales_price);
                 $("#priceModifyModal input[name='spec_name']").val(data.spec_name);
                 $("#priceModifyModal input[name='discount']").val(data.discount);
                 $("#priceModifyModal input[name='applied_price']").val(data.applied_price);
@@ -198,7 +201,7 @@ function isItemCodeValid(itemCode){
                 $("#priceModifyModal").modal("show");
             },
             error: function () {
-                alert("데이터를 가져오는 중 오류가 발생했습니다");
+                alert("データの取得中にエラーが発生しました");
             }
         });
     });       
@@ -207,12 +210,12 @@ function isItemCodeValid(itemCode){
 
     $("#searchForm button").on("click", function (e) {
         if (!searchForm.find("option:selected").val()) {
-            alert("검색종류를 선택하세요");
+            alert("検索の種類はお選びください");
             return false;
         }
 
         if (!searchForm.find("input[name='keyword']").val()) {
-            alert("키워드를 입력하세요");
+            alert("キーワードを入力してください");
             return false;
         }
 
@@ -226,7 +229,7 @@ function isItemCodeValid(itemCode){
 	 var itemCode = $("input[name='item_code']").val();
 
 	  if (!isItemCodeValid(itemCode)) {
-          alert("잘못된 코드번호입니다 (40000~49999)");
+          alert("間違ったコード番号です (40000~49999)");
           return;
       }
 	  
@@ -236,6 +239,7 @@ function isItemCodeValid(itemCode){
         data: {
         	item_code: itemCode,
             item_name: $("input[name='item_name']").val(),
+            sales_price: $("input[name='sales_price']").val(),
            	spec_name: $("input[name='spec_name']").val(),
             discount: $("input[name='discount']").val(),
             applied_price: $("input[name='applied_price']").val(),
@@ -244,7 +248,7 @@ function isItemCodeValid(itemCode){
         	window.location.reload();
         },
         error: function () {
-            alert("저장 중 오류가 발생했습니다");
+            alert("保存中にエラーが発生しました");
         }
     });
 }
@@ -298,7 +302,7 @@ function isItemCodeValid(itemCode){
 	function appliedTotal(input) {
 	    var row = input.closest('tr');
 	    var unitPrice = row.querySelector('[name="sales_price"]').value;
-	    var discount = row.querySelector('[name="discount"]').value; // discount 변수 정의
+	    var discount = row.querySelector('[name="discount"]').value;
 	    var applied_priceInput = row.querySelector('[name="applied_price"]');
 	    var applied_price = unitPrice * (100 - discount) / 100;
 	    applied_priceInput.value = isNaN(applied_price) ? '' : applied_price;

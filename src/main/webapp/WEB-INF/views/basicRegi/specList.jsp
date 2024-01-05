@@ -22,7 +22,7 @@
 
 	<div class="row">
 		<div class="col-lg-12">
-			<h2 class="page-header">특별단가리스트</h2>
+			<h2 class="page-header">特別単価リスト</h2>
 		</div>
 	</div>
 
@@ -35,9 +35,9 @@
 				<tr>
 					<th><input type="checkbox" id="selectAll"
 						onclick="toggleAll(this)"></th>
-					<th>특별단가그룹코드</th>
-					<th>특별단가명</th>
-					<th>할인율</th>
+					<th>特別単価グループコード</th>
+					<th>特別単価名</th>
+					<th>割引率</th>
 				</tr>
 			</thead>
 
@@ -60,7 +60,7 @@
 	<div class="row">
 		<div class="col-lg-6 text-left">
 			<button type="button" class="btn btn-primary" data-toggle="modal"
-				data-target="#specRegisterModal">신규</button>
+				data-target="#specRegisterModal">新規</button>
 
 		</div>
 		<div class="col-lg-6 text-right">
@@ -69,12 +69,12 @@
 					<option value=""
 						<c:out value="${pageMaker.cri.type == null ? 'selected':''}"/>>--</option>
 					<option value="N"
-						<c:out value="${pageMaker.cri.type eq 'N' ? 'selected':''}"/>>특별단가명</option>
+						<c:out value="${pageMaker.cri.type eq 'N' ? 'selected':''}"/>>特別単価名</option>
 				</select> <input type="text" name="keyword"
 					value='<c:out value="${pageMaker.cri.keyword}"/>' /> <input
 					type="hidden" name="pageNum" value="${pageMaker.cri.pageNum}">
 				<input type="hidden" name="amount" value="${pageMaker.cri.amount}">
-				<button class="btn btn-default">검색</button>
+				<button class="btn btn-default">検索</button>
 			</form>
 		</div>
 	</div>
@@ -86,7 +86,7 @@
 	<div class="modal-dialog" role="document">
 		<div class="modal-content">
 			<div class="modal-header" style="background-color: #1f48d4;">
-				<span style="color: white;">특별단가 등록</span>
+				<span style="color: white;">特別単価登録s</span>
 				<button type="button" class="close" data-dismiss="modal"
 					aria-label="Close">
 					<span aria-hidden="true">&times;</span>
@@ -96,22 +96,22 @@
 				<div class="modal-body">
 					<div class="panel-body">
 						<div class="form-group">
-							<label>특별단가그룹코드(50000~59999)</label><input class="form-control"
+							<label> 特別単価グループコード(50000~59999)</label><input class="form-control"
 								name="spec_code" type="text">
 						</div>
 						<div class="form-group">
-							<label>특별단가명</label><input class="form-control" name="spec_name">
+							<label> 特別単価名</label><input class="form-control" name="spec_name">
 						</div>
 						<div class="form-group">
-							<label>할인율</label><input class="form-control" name="discount">
+							<label> 割引率</label><input class="form-control" name="discount">
 						</div>
 					</div>
 					<div class="modal-footer">
 						<button type="button" class="btn btn-primary"
-							onclick="registerSpec()" data-dismiss="modal">저장</button>
-						<button type="reset" class="btn btn-default">초기화</button>
+							onclick="registerSpec()" data-dismiss="modal">保存</button>
+						<button type="reset" class="btn btn-default">初期化</button>
 						<button type="button" class="btn btn-secondary"
-							data-dismiss="modal">닫기</button>
+							data-dismiss="modal">閉じる</button>
 					</div>
 				</div>
 			</form>
@@ -124,7 +124,7 @@
 	<div class="modal-dialog" role="document">
 		<div class="modal-content">
 			<div class="modal-header" style="background-color: #1f48d4;">
-				<span style="color: white;">품목 등록</span>
+				<span style="color: white;">特別単価登録</span>
 				<button type="button" class="close" data-dismiss="modal"
 					aria-label="Close">
 					<span aria-hidden="true">&times;</span>
@@ -134,22 +134,22 @@
 				<div class="modal-body">
 					<div class="panel-body">
 						<div class="form-group">
-							<label>특별단가그룹코드(50000~59999)</label><input class="form-control"
+							<label> 特別単価グループコード(50000~59999)</label><input class="form-control"
 								name="spec_code" type="text">
 						</div>
 						<div class="form-group">
-							<label>특별단가명</label><input class="form-control" name="spec_name">
+							<label> 特別単価名</label><input class="form-control" name="spec_name">
 						</div>
 						<div class="form-group">
-							<label>할인율</label><input class="form-control" name="discount">
+							<label> 割引率</label><input class="form-control" name="discount">
 						</div>
 					</div>
 					<div class="modal-footer">
 						<button type="button" class="btn btn-primary"
-							onclick="modifySpec()" data-dismiss="modal">저장</button>
-						<button type="reset" class="btn btn-default">초기화</button>
+							onclick="modifySpec()" data-dismiss="modal">保存</button>
+						<button type="reset" class="btn btn-default">初期化</button>
 						<button type="button" class="btn btn-secondary"
-							data-dismiss="modal">닫기</button>
+							data-dismiss="modal">閉じる</button>
 					</div>
 
 				</div>
@@ -207,7 +207,7 @@
                     $("#specModifyModal").modal("show");
                 },
                 error: function () {
-                    alert("데이터를 가져오는 중 오류가 발생했습니다");
+                    alert("データの取得中にエラーが発生しました");
                 }
             });
         });       
@@ -216,12 +216,12 @@
 
         $("#searchForm button").on("click", function (e) {
             if (!searchForm.find("option:selected").val()) {
-                alert("검색종류를 선택하세요");
+                alert("検索の種類はお選びください");
                 return false;
             }
 
             if (!searchForm.find("input[name='keyword']").val()) {
-                alert("키워드를 입력하세요");
+                alert("キーワードを入力してください");
                 return false;
             }
 
@@ -235,7 +235,7 @@
     	 var specCode = $("input[name='spec_code']").val();
 
         if (!isSpecCodeValid(itemCode)) {
-            alert("잘못된 코드번호입니다 (50000~59999)");
+            alert("間違ったコード番号です (50000~59999)");
             return;
         }
         
@@ -251,7 +251,7 @@
             	window.location.reload();
             },
             error: function () {
-                alert("저장 중 오류가 발생했습니다");
+                alert("保存中にエラーが発生しました");
             }
         });
     }
@@ -263,7 +263,7 @@
     	    var discount = $("#specModifyModal input[name='discount']").val();
     	 
             if (!isSpecCodeValid(specCode)) {
-                alert("잘못된 코드번호입니다 (50000~59999)");
+                alert("間違ったコード番号です (50000~59999)");
                 return;
             }
             
@@ -279,7 +279,7 @@
     	    	 window.location.reload(); 
     	    },
     	    error: function() {
-    	    	alert("수정 중 오류가 발생했습니다");
+    	    	alert("修正中にエラーが発生しました");
     	    }
     	    });
     }

@@ -23,7 +23,7 @@
 
 	<div class="row">
 		<div class="col-lg-12">
-			<h2 class="page-header">부서등록 리스트</h2>
+			<h2 class="page-header">部署登録リスト</h2>
 		</div>
 	</div>
 
@@ -36,8 +36,8 @@
 				<tr>
 					<th><input type="checkbox" id="selectAll"
 						onclick="toggleAll(this)"></th>
-					<th>부서코드</th>
-					<th>부서명</th>
+					<th>部署コード</th>
+					<th>部署名</th>
 				</tr>
 			</thead>
 			<c:forEach items="${departList}" var="depart">
@@ -59,7 +59,7 @@
 	<div class="row">
 		<div class="col-lg-6 text-left">
 			<button type="button" class="btn btn-primary" data-toggle="modal"
-				data-target="#departRegisterModal">신규</button>
+				data-target="#departRegisterModal">新規</button>
 		</div>
 		<div class="col-lg-6 text-right">
 			<form id="searchForm" action="/basicRegi/departList" method="get">
@@ -67,12 +67,12 @@
 					<option value=""
 						<c:out value="${pageMaker.cri.type == null ? 'selected':''}"/>>--</option>
 					<option value="N"
-						<c:out value="${pageMaker.cri.type eq 'N' ? 'selected':''}"/>>부서명</option>
+						<c:out value="${pageMaker.cri.type eq 'N' ? 'selected':''}"/>>部署名</option>
 				</select> <input type="text" name="keyword"
 					value='<c:out value="${pageMaker.cri.keyword}"/>' /> <input
 					type="hidden" name="pageNum" value="${pageMaker.cri.pageNum}">
 				<input type="hidden" name="amount" value="${pageMaker.cri.amount}">
-				<button class="btn btn-default">검색</button>
+				<button class="btn btn-default">検索</button>
 			</form>
 		</div>
 	</div>
@@ -84,7 +84,7 @@
 	<div class="modal-dialog" role="document">
 		<div class="modal-content">
 			<div class="modal-header" style="background-color: #1f48d4;">
-				<span style="color: white;">부서 등록</span>
+				<span style="color: white;">部署登録</span>
 				<button type="button" class="close" data-dismiss="modal"
 					aria-label="Close">
 					<span aria-hidden="true">&times;</span>
@@ -94,19 +94,19 @@
 				<div class="modal-body">
 					<div class="panel-body">
 						<div class="form-group">
-							<label>부서코드(20000~29999)</label><input class="form-control"
+							<label>部署コード(20000~29999)</label><input class="form-control"
 								name="depart_code" type="text">
 						</div>
 						<div class="form-group">
-							<label>부서명</label><input class="form-control" name="depart_name">
+							<label>部署名</label><input class="form-control" name="depart_name">
 						</div>
 					</div>
 					<div class="modal-footer">
 						<button type="button" class="btn btn-primary"
-							onclick="registerDepart()" data-dismiss="modal">저장</button>
-						<button type="reset" class="btn btn-default">초기화</button>
+							onclick="registerDepart()" data-dismiss="modal">保存</button>
+						<button type="reset" class="btn btn-default">初期化</button>
 						<button type="button" class="btn btn-secondary"
-							data-dismiss="modal">닫기</button>
+							data-dismiss="modal">閉じる</button>
 					</div>
 				</div>
 			</form>
@@ -120,7 +120,7 @@
 	<div class="modal-dialog" role="document">
 		<div class="modal-content">
 			<div class="modal-header" style="background-color: #1f48d4;">
-				<span style="color: white;">부서 등록</span>
+				<span style="color: white;">部署登録</span>
 				<button type="button" class="close" data-dismiss="modal"
 					aria-label="Close">
 					<span aria-hidden="true">&times;</span>
@@ -130,19 +130,19 @@
 				<div class="modal-body">
 					<div class="panel-body">
 						<div class="form-group">
-							<label>부서코드(20000~29999)</label><input class="form-control"
+							<label>部署コード (20000~29999)</label><input class="form-control"
 								name="depart_code" type="text">
 						</div>
 						<div class="form-group">
-							<label>부서명</label><input class="form-control" name="depart_name">
+							<label>部署名</label><input class="form-control" name="depart_name">
 						</div>
 					</div>
 					<div class="modal-footer">
 						<button type="button" class="btn btn-primary"
-							onclick="modifyDepart()" data-dismiss="modal">저장</button>
-						<button type="reset" class="btn btn-default">초기화</button>
+							onclick="modifyDepart()" data-dismiss="modal">保存</button>
+						<button type="reset" class="btn btn-default">初期化</button>
 						<button type="button" class="btn btn-secondary"
-							data-dismiss="modal">닫기</button>
+							data-dismiss="modal">閉じる</button>
 					</div>
 				</div>
 			</form>
@@ -197,7 +197,7 @@ $(document).ready(function () {
                 $("#departModifyModal").modal("show");
             },
             error: function () {
-                alert("데이터를 가져오는 중 오류가 발생했습니다");
+                alert("データの取得中にエラーが発生しました");
             }
         });
     });
@@ -206,12 +206,12 @@ $(document).ready(function () {
 
     $("#searchForm button").on("click", function (e) {
         if (!searchForm.find("option:selected").val()) {
-            alert("검색종류를 선택하세요");
+            alert("検索の種類はお選びください");
             return false;
         }
 
         if (!searchForm.find("input[name='keyword']").val()) {
-            alert("키워드를 입력하세요");
+            alert("キーワードを入力してください");
             return false;
         }
 
@@ -225,7 +225,7 @@ function registerDepart() {
 	 var departCode = $("input[name='depart_code']").val();
 
    if (!isDepartCodeValid(departCode)) {
-       alert("잘못된 코드번호입니다 (20000~29999)");
+       alert("間違ったコード番号です (20000~29999)");
        return;
    }
    
@@ -240,7 +240,7 @@ function registerDepart() {
        	window.location.reload();
        },
        error: function () {
-           alert("저장 중 오류가 발생했습니다");
+           alert("保存中にエラーが発生しました");
        }
    });
 }
@@ -251,7 +251,7 @@ function modifyDepart() {
 	    var departName = $("#departModifyModal input[name='depart_name']").val();
 	  
        if (!isDepartCodeValid(departCode)) {
-           alert("잘못된 코드번호입니다 (20000~29999)");
+           alert("間違ったコード番号です (20000~29999)");
            return;
        }
        
@@ -266,7 +266,7 @@ function modifyDepart() {
 	    	window.location.reload();
 	    },
 	    error: function() {
-	    	alert("수정 중 오류가 발생했습니다");
+	    	alert("修正中にエラーが発生しました");
 	    }
 	    });
 }

@@ -15,9 +15,11 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	<insert id="insertSelectKey"
 		parameterType="org.zerock.domain.basicRegi.ItemPriceVO"
 		useGeneratedKeys="false">
-		INSERT INTO item_price (item_code, item_name, spec_name, discount,
+		INSERT INTO item_price (item_code, item_name,
+		sales_price, spec_name, discount,
 		applied_price)
-		VALUES (#{item_code}, #{item_name}, #{spec_name}, #{discount},
+		VALUES (#{item_code},
+		#{item_name}, #{sales_price}, #{spec_name}, #{discount},
 		#{applied_price})
 	</insert>
 
@@ -42,11 +44,11 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		resultType="org.zerock.domain.basicRegi.ItemVO"
 		parameterType="org.zerock.domain.Criteria">
         <![CDATA[
-            SELECT item_code, item_name, spec_name, discount, applied_price 
+            SELECT item_code, item_name, sales_price, spec_name, discount, applied_price 
             FROM (
-                SELECT ROWNUM rn, item_code, item_name, spec_name, discount, applied_price 
+                SELECT ROWNUM rn, item_code, item_name, sales_price, spec_name, discount, applied_price 
                 FROM (
-                    SELECT item_code, item_name, spec_name, discount, applied_price 
+                    SELECT item_code, item_name, sales_price, spec_name, discount, applied_price 
                     FROM item_price
                     WHERE
         ]]>
@@ -81,12 +83,15 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	<update id="update">
 		UPDATE item_price SET
 		item_name = #{item_name},
+		sales_price = #{sales_price},
 		spec_name =
 		#{spec_name},
-		discount = #{discount},
+		discount =
+		#{discount},
 		applied_price =
 		#{applied_price}
-		WHERE item_code = #{item_code}
+		WHERE item_code =
+		#{item_code}
 	</update>
 
 </mapper>

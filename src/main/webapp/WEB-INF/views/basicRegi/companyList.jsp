@@ -22,7 +22,7 @@
 <div id="page-wrapper">
 	<div class="row">
 		<div class="col-lg-12">
-			<h2 class="page-header">거래처등록 리스트</h2>
+			<h2 class="page-header">取引先登録リスト</h2>
 		</div>
 	</div>
 
@@ -34,15 +34,15 @@
 				<tr>
 					<th><input type="checkbox" id="selectAll"
 						onclick="toggleAll(this)"></th>
-					<th>거래처코드</th>
-					<th>거래처명</th>
-					<th>대표자명</th>
-					<th>전화번호</th>
-					<th>핸드폰번호</th>
-					<th>사용구분</th>
-					<th>검색내용</th>
-					<th>이체정보</th>
-					<th>주소</th>
+					<th>取引先コード</th>
+					<th>거取引先名</th>
+					<th>代表者名</th>
+					<th>電話番号</th>
+					<th>携帯番号</th>
+					<th>使用区分</th>
+					<th>検索内容</th>
+					<th>振替情報</th>
+					<th>住所</th>
 				</tr>
 			</thead>
 
@@ -71,7 +71,7 @@
 	<div class="row">
 		<div class="col-lg-6 text-left">
 			<button type="button" class="btn btn-primary" data-toggle="modal"
-				data-target="#companyRegisterModal">신규</button>
+				data-target="#companyRegisterModal">新規</button>
 		</div>
 		<div class="col-lg-6 text-right">
 			<form id="searchForm" action="/basicRegi/companyList" method="get">
@@ -79,16 +79,16 @@
 					<option value=""
 						<c:out value="${pageMaker.cri.type == null ? 'selected':''}"/>>--</option>
 					<option value="N"
-						<c:out value="${pageMaker.cri.type eq 'N' ? 'selected':''}"/>>거래처명</option>
+						<c:out value="${pageMaker.cri.type eq 'N' ? 'selected':''}"/>>取引先名</option>
 					<option value="M"
-						<c:out value="${pageMaker.cri.type eq 'M' ? 'selected':''}"/>>대표자명</option>
+						<c:out value="${pageMaker.cri.type eq 'M' ? 'selected':''}"/>>代表者名</option>
 					<option value="S"
-						<c:out value="${pageMaker.cri.type eq 'S' ? 'selected':''}"/>>검색내용</option>
+						<c:out value="${pageMaker.cri.type eq 'S' ? 'selected':''}"/>>検索内容</option>
 				</select><input type="text" name="keyword"
 					value='<c:out value="${pageMaker.cri.keyword}"/>' /> <input
 					type="hidden" name="pageNum" value="${pageMaker.cri.pageNum}">
 				<input type="hidden" name="amount" value="${pageMaker.cri.amount}">
-				<button class="btn btn-default">검색</button>
+				<button class="btn btn-default">検索</button>
 			</form>
 		</div>
 	</div>
@@ -102,7 +102,7 @@
 	<div class="modal-dialog" role="document">
 		<div class="modal-content">
 			<div class="modal-header" style="background-color: #1f48d4;">
-				<span style="color: white;">거래처등록</span>
+				<span style="color: white;">取引先登録</span>
 				<button type="button" class="close" data-dismiss="modal"
 					aria-label="Close">
 					<span aria-hidden="true">&times;</span>
@@ -112,50 +112,50 @@
 				<div class="modal-body">
 					<div class="panel-body">
 						<div class="form-group">
-							<label>거래처코드(10000~19999)</label><input class="form-control"
+							<label>取引先コード(10000~19999)</label><input class="form-control"
 								name="company_code" type="text">
 						</div>
 						<div class="form-group">
-							<label>거래처명</label><input class="form-control"
+							<label>取引先名</label><input class="form-control"
 								name="company_name" type="text">
 						</div>
 						<div class="form-group">
-							<label>대표자명</label><input class="form-control"
+							<label>代表者名</label><input class="form-control"
 								name="company_master" type="text">
 						</div>
 						<div class="form-group">
-							<label>전화번호</label><input class="form-control" name="telephone"
+							<label>電話番号</label><input class="form-control" name="telephone"
 								type="text">
 						</div>
 						<div class="form-group">
-							<label>핸드폰번호</label><input class="form-control"
+							<label>携帯番号</label><input class="form-control"
 								name="mobile_phone" type="text">
 						</div>
 						<div class="form-group">
-							<label>사용</label> <input type="checkbox" name="company_usage"
-								id="registerUsageCheckbox" value="사용"> <label>비사용</label>
+							<label>使用</label> <input type="checkbox" name="company_usage"
+								id="registerUsageCheckbox" value="使用"> <label>非使用</label>
 							<input type="checkbox" name="company_nonusage"
-								id="registerNonUsageCheckbox" value="비사용">
+								id="registerNonUsageCheckbox" value="非使用">
 						</div>
 						<div class="form-group">
-							<label>검색내용</label><input class="form-control"
+							<label>検索内容</label><input class="form-control"
 								name="company_search" type="text">
 						</div>
 						<div class="form-group">
-							<label>이체정보(은행명/계좌번호)</label><input class="form-control"
+							<label>振替情報(銀行名/口座番号)</label><input class="form-control"
 								name="transfer_info" type="text">
 						</div>
 						<div class="form-group">
-							<label>주소</label><input class="form-control" name="address"
+							<label>住所</label><input class="form-control" name="address"
 								type="text">
 						</div>
 					</div>
 					<div class="modal-footer">
 						<button type="button" class="btn btn-primary"
-							onclick="registerCompany()" data-dismiss="modal">저장</button>
-						<button type="reset" class="btn btn-default">초기화</button>
+							onclick="registerCompany()" data-dismiss="modal">保存</button>
+						<button type="reset" class="btn btn-default">初期化</button>
 						<button type="button" class="btn btn-secondary"
-							data-dismiss="modal">닫기</button>
+							data-dismiss="modal">閉じる</button>
 					</div>
 				</div>
 			</form>
@@ -169,7 +169,7 @@
 	<div class="modal-dialog" role="document">
 		<div class="modal-content">
 			<div class="modal-header" style="background-color: #1f48d4;">
-				<span style="color: white;">거래처등록</span>
+				<span style="color: white;">取引先登録</span>
 				<button type="button" class="close" data-dismiss="modal"
 					aria-label="Close">
 					<span aria-hidden="true">&times;</span>
@@ -179,49 +179,49 @@
 				<div class="modal-body">
 					<div class="panel-body">
 						<div class="form-group">
-							<label>거래처코드(10000~19999)</label><input class="form-control"
+							<label>取引先コード(10000~19999)</label><input class="form-control"
 								name="company_code" type="text">
 						</div>
 						<div class="form-group">
-							<label>거래처명</label><input class="form-control"
+							<label>取引先名</label><input class="form-control"
 								name="company_name" type="text">
 						</div>
 						<div class="form-group">
-							<label>대표자명</label><input class="form-control"
+							<label>代表者名</label><input class="form-control"
 								name="company_master" type="text">
 						</div>
 						<div class="form-group">
-							<label>전화번호</label><input class="form-control" name="telephone"
+							<label>電話番号</label><input class="form-control" name="telephone"
 								type="text">
 						</div>
 						<div class="form-group">
-							<label>핸드폰번호</label><input class="form-control"
+							<label>携帯番号</label><input class="form-control"
 								name="mobile_phone" type="text">
 						</div>
 						<div class="form-group">
-							<label>사용</label> <input type="checkbox" name="company_usage"
-								id="modifyUsageCheckbox" value="사용"> <label>비사용</label>
+							<label>使用</label> <input type="checkbox" name="company_usage"
+								id="modifyUsageCheckbox" value="使用"> <label>非使用</label>
 							<input type="checkbox" name="company_nonusage"
-								id="modifyNonUsageCheckbox" value="비사용">
+								id="modifyNonUsageCheckbox" value="非使用">
 							<div class="form-group">
-								<label>검색내용</label><input class="form-control"
+								<label>検索内容</label><input class="form-control"
 									name="company_search" type="text">
 							</div>
 							<div class="form-group">
-								<label>이체정보(은행명/계좌번호)</label><input class="form-control"
+								<label>振替情報(銀行名/口座番号)</label><input class="form-control"
 									name="transfer_info" type="text">
 							</div>
 							<div class="form-group">
-								<label>주소</label><input class="form-control" name="address"
+								<label>住所</label><input class="form-control" name="address"
 									type="text">
 							</div>
 						</div>
 						<div class="modal-footer">
 							<button type="button" class="btn btn-primary"
-								onclick="modifyCompany()" data-dismiss="modal">저장</button>
-							<button type="reset" class="btn btn-default">초기화</button>
+								onclick="modifyCompany()" data-dismiss="modal">保存</button>
+							<button type="reset" class="btn btn-default">初期化</button>
 							<button type="button" class="btn btn-secondary"
-								data-dismiss="modal">닫기</button>
+								data-dismiss="modal">閉じる</button>
 						</div>
 					</div>
 				</div>
@@ -286,7 +286,7 @@ $(document).ready(function (){
         			 $("#companyModifyModal").modal("show");
         		 },
         		 error: function() {
-        			 alert("데이터를 가져오는 중 오류가 발생했습니다");
+        			 alert("データの取得中にエラーが発生しました");
         		 }
         	 });
          });
@@ -295,12 +295,12 @@ $(document).ready(function (){
 
      $("#searchForm button").on("click", function (e) {
          if (!searchForm.find("option:selected").val()) {
-             alert("검색종류를 선택하세요");
+             alert("検索の種類はお選びください");
              return false;
          }
 
          if (!searchForm.find("input[name='keyword']").val()) {
-             alert("키워드를 입력하세요");
+             alert("キーワードを入力してください");
              return false;
          }
 
@@ -316,7 +316,7 @@ function registerCompany() {
     var registerNonUsageCheckbox = $("#registerNonUsageCheckbox");
 
     if (!isCompanyCodeValid(companyCode)) {
-        alert("잘못된 코드번호입니다(10000~19999)");
+        alert("間違ったコード番号です(10000~19999)");
         return;
     }
 
@@ -324,7 +324,7 @@ function registerCompany() {
     var isNonUsageChecked = registerNonUsageCheckbox.is(":checked");
 
     if (!(isUsageChecked || isNonUsageChecked)) {
-        alert("사용 또는 비사용 중 하나를 선택하세요");
+        alert("使用または非使用のいずれかを選択してください");
         return;
     }
 
@@ -337,7 +337,7 @@ function registerCompany() {
             company_master: $("input[name='company_master']").val(),
             telephone: $("input[name='telephone']").val(),
             mobile_phone: $("input[name='mobile_phone']").val(),
-            company_usage: isUsageChecked ? "사용" : (isNonUsageChecked ? "비사용" : ""),
+            company_usage: isUsageChecked ? "使用" : (isNonUsageChecked ? "非使用" : ""),
             company_search: $("input[name='company_search']").val(),
             transfer_info: $("input[name='transfer_info']").val(),
             address: $("input[name='address']").val()
@@ -347,7 +347,7 @@ function registerCompany() {
             window.location.reload();
         },
         error: function () {
-            alert("저장 중 오류가 발생했습니다");
+            alert("保存中にエラーが発生しました");
         }
     });
 }
@@ -367,13 +367,13 @@ function modifyCompany() {
     var address = $("#companyModifyModal input[name='address']").val();
 
     if (!isCompanyCodeValid(companyCode)) {
-        alert("잘못된 코드번호입니다(10000~19999)");
+        alert("間違ったコード番号です(10000~19999)");
         return;
     }
 
 
     if (companyUsage && companyNonUsage) {
-        alert("사용과 비사용 중 하나만 선택하세요");
+        alert("使用または非使用のいずれかを選択してください");
         return;
     }
 
@@ -395,7 +395,7 @@ function modifyCompany() {
             window.location.reload();
         },
         error: function () {
-            alert("수정 중 오류가 발생했습니다");
+            alert("修正中にエラーが発生しました");
         }
     });
 }
