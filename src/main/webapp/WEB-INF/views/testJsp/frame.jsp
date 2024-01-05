@@ -5,6 +5,16 @@
 <%@ include file="../include/head.jsp"%>
 
 <script>
+document.querySelector('link[href="/resources/vendor/bootstrap/css/bootstrap.min.css"]').remove();
+document.querySelector('link[href="/resources/vendor/metisMenu/metisMenu.min.css"]').remove();
+document.querySelector('link[href="/resources/vendor/datatables-plugins/dataTables.bootstrap.css]').remove();
+document.querySelector('link[href="/resources/vendor/datatables-responsive/dataTables.responsive.css"]').remove();
+document.querySelector('link[href="/resources/dist/css/sb-admin-2.css"]').remove();
+document.querySelector('link[href="/resources/vendor/font-awesome/css/font-awesome.min.css"]').remove();
+
+</script>
+
+<script>
     // jQuery를 사용하여 body 요소에 클래스 추가
     $(document).ready(function() {
       $('body').addClass('welcome');
