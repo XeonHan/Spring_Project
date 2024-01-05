@@ -251,7 +251,7 @@
                         <button type="button" class="btn btn-secondary"
                             data-dismiss="modal">閉じる</button>
 					</div>
-
+s
 				</div>
 			</form>
 		</div>

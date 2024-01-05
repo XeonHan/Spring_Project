@@ -6,23 +6,23 @@
 <%@include file="../include/header.jsp"%>
 
 <ul class="sidenav">
-	<li><a href="/basicRegi/companyList">거래처등록</a></li>
-	<li><a href="/basicRegi/departList">부서등록</a></li>
-	<li><a href="/basicRegi/wareList">창고등록</a></li>
-	<li><a href="/basicRegi/itemList">품목등록</a></li>
-	<li><a href="#">단가등록</a>
+	<li><a href="/basicRegi/companyList">取引先登録</a></li>
+	<li><a href="/basicRegi/departList">部署登録</a></li>
+	<li><a href="/basicRegi/wareList">倉庫登録</a></li>
+	<li><a href="/basicRegi/itemList">品目登録</a></li>
+	<li><a href="#">単価登録</a>
 		<ul class="sidesub">
-			<li><a href="/basicRegi/specList">특별단가등록</a></li>
-			<li><a href="/basicRegi/priceList">품목별단가</a></li>
+			<li><a href="/basicRegi/specList">特別単価登録</a></li>
+			<li><a href="/basicRegi/priceList">品目別単価</a></li>
 		</ul></li>
-	<li><a href="/basicRegi/emplList">사원(담당)등록</a></li>
+	<li><a href="/basicRegi/emplList">社員(担当)登録</a></li>
 </ul>
 </nav>
 <div id="page-wrapper">
 
 	<div class="row">
 		<div class="col-lg-12">
-			<h2 class="page-header">특별단가 리스트</h2>
+			<h2 class="page-header">特別単価リスト</h2>
 		</div>
 	</div>
 
@@ -35,11 +35,11 @@
 				<tr>
 					<th><input type="checkbox" id="selectAll"
 						onclick="toggleAll(this)"></th>
-					<th>품목코드</th>
-					<th>품목명</th>
-					<th>특별단가그룹명</th>
-					<th>할인율</th>
-					<th>적용단가</th>
+					<th>品目コード</th>
+					<th>品目名</th>
+					<th>特別単価グループ名</th>
+					<th>割引率</th>
+					<th>適用単価</th>
 				</tr>
 			</thead>
 
@@ -65,7 +65,7 @@
 	<div class="row">
 		<div class="col-lg-6 text-left">
 			<button type="button" class="btn btn-primary" data-toggle="modal"
-				data-target="#priceRegisterModal">신규</button>
+				data-target="#priceRegisterModal">新規</button>
 
 		</div>
 		<div class="col-lg-6 text-right">
@@ -74,14 +74,14 @@
 					<option value=""
 						<c:out value="${pageMaker.cri.type == null ? 'selected':''}"/>>--</option>
 					<option value="N"
-						<c:out value="${pageMaker.cri.type eq 'N' ? 'selected':''}"/>>품목명</option>
+						<c:out value="${pageMaker.cri.type eq 'N' ? 'selected':''}"/>>品目名</option>
 					<option value="SN"
-						<c:out value="${pageMaker.cri.type eq 'SN' ? 'selected':''}"/>>특별단가그룹명</option>
+						<c:out value="${pageMaker.cri.type eq 'SN' ? 'selected':''}"/>>特別単価グループ名</option>
 				</select> <input type="text" name="keyword"
 					value='<c:out value="${pageMaker.cri.keyword}"/>' /> <input
 					type="hidden" name="pageNum" value="${pageMaker.cri.pageNum}">
 				<input type="hidden" name="amount" value="${pageMaker.cri.amount}">
-				<button class="btn btn-default">검색</button>
+				<button class="btn btn-default">検索</button>
 			</form>
 		</div>
 	</div>
@@ -93,7 +93,7 @@
 	<div class="modal-dialog" role="document">
 		<div class="modal-content">
 			<div class="modal-header" style="background-color: #1f48d4;">
-				<span style="color: white;">품목별특별단가등록</span>
+				<span style="color: white;">品目別特別単価登録</span>
 				<button type="button" class="close" data-dismiss="modal"
 					aria-label="Close">
 					<span aria-hidden="true">&times;</span>
@@ -105,9 +105,9 @@
 						<table class="table" id="itemTable">
 							<thead>
 								<tr>
-									<th>품목코드(40000~49999)</th>
-									<th>품목명</th>
-									<th>출고단가</th>
+									<th>品目コード(40000~49999)</th>
+									<th>品目名</th>
+									<th>出荷単価</th>
 								</tr>
 							</thead>
 							<tbody>
@@ -123,30 +123,31 @@
 							</tbody>
 						</table>
 						<div class="form-group">
-							<label>특별단가그룹명</label><input class="form-control"
+							<label>特別単価グループ名</label><input class="form-control"
 								name="spec_name">
 						</div>
 						<div class="form-group">
-							<label>할인율</label><input class="form-control" name="discount"
+							<label>割引率</label><input class="form-control" name="discount"
 								oninput="parsentDiscount(this), appliedTotal(this)">
 						</div>
 						<div class="form-group">
-							<label>적용단가</label><input class="form-control"
+							<label>適用単価</label><input class="form-control"
 								name="applied_price" readonly>
 						</div>
 					</div>
 					<div class="modal-footer">
 						<button type="button" class="btn btn-primary"
-							onclick="registerPrice()" data-dismiss="modal">저장</button>
-						<button type="reset" class="btn btn-default">초기화</button>
+							onclick="registerPrice()" data-dismiss="modal">保存</button>
+						<button type="reset" class="btn btn-default">初期化</button>
 						<button type="button" class="btn btn-secondary"
-							data-dismiss="modal">닫기</button>
+							data-dismiss="modal">閉じる</button>
 					</div>
 				</div>
 			</form>
 		</div>
 	</div>
 </div>
+
 
 <script type="text/javascript">
 function toggleAll(source) {
@@ -155,19 +156,19 @@ function toggleAll(source) {
         checkbox.checked = source.checked;
     });
 }
+
 function isItemCodeValid(itemCode){
-	return itemCode >= 40000 && itemCode <= 49999;
+    return itemCode >= 40000 && itemCode <= 49999;
 }
 
- $(document).ready(function () {
+$(document).ready(function () {
     var actionForm = $("#actionForm");
     var priceRegisterModal = $("#priceRegisterModal");
 
     $("#priceRegisterModal").on("click", function () {
         priceRegisterModal.modal("show");
-   
     });
-     
+
     $(".pagination a").on("click", function (e) {
         e.preventDefault();
         console.log('click');
@@ -198,21 +199,21 @@ function isItemCodeValid(itemCode){
                 $("#priceModifyModal").modal("show");
             },
             error: function () {
-                alert("데이터를 가져오는 중 오류가 발생했습니다");
+                alert("データの取得中にエラーが発生しました");
             }
         });
-    });       
+    });
 
     var searchForm = $("#searchForm");
 
     $("#searchForm button").on("click", function (e) {
         if (!searchForm.find("option:selected").val()) {
-            alert("검색종류를 선택하세요");
+            alert("検索種類を選択してください");
             return false;
         }
 
         if (!searchForm.find("input[name='keyword']").val()) {
-            alert("키워드를 입력하세요");
+            alert("キーワードを入力してください");
             return false;
         }
 
@@ -221,87 +222,87 @@ function isItemCodeValid(itemCode){
         searchForm.submit();
     });
 });
- 
- function registerPrice() {
-	 var itemCode = $("input[name='item_code']").val();
 
-	  if (!isItemCodeValid(itemCode)) {
-          alert("잘못된 코드번호입니다 (40000~49999)");
-          return;
-      }
-	  
+function registerPrice() {
+    var itemCode = $("input[name='item_code']").val();
+
+    if (!isItemCodeValid(itemCode)) {
+        alert("不正なコード番号です (40000~49999)");
+        return;
+    }
+
     $.ajax({
         type: "POST",
         url: "/basicRegi/priceRegister",
         data: {
-        	item_code: itemCode,
+            item_code: itemCode,
             item_name: $("input[name='item_name']").val(),
-           	spec_name: $("input[name='spec_name']").val(),
+            spec_name: $("input[name='spec_name']").val(),
             discount: $("input[name='discount']").val(),
             applied_price: $("input[name='applied_price']").val(),
         },
         success: function (data) {
-        	window.location.reload();
+            window.location.reload();
         },
         error: function () {
-            alert("저장 중 오류가 발생했습니다");
+            alert("保存中にエラーが発生しました");
         }
     });
 }
- 
- function parsentDiscount(inputElement) {
-	    let inputValue = inputElement.value.trim();
 
-	    if (!isNaN(inputValue)) {
-	        let numericValue = parseFloat(inputValue);
+function percentDiscount(inputElement) {
+    let inputValue = inputElement.value.trim();
 
-	        return numericValue + '%';
-	    }
+    if (!isNaN(inputValue)) {
+        let numericValue = parseFloat(inputValue);
 
-	    return '0%';
-	}
-	function logInputValue(inputElement) {
-		var inputValue = inputElement.value;
+        return numericValue + '%';
+    }
 
-		if (inputValue.trim() !== '') {
-			$.ajax({
-				url : '/basicRegi/searchitem',
-				type : 'GET',
-				data : {
-					keyword : inputValue
-				},
-				success : function(data) {
-					var tableRow = inputElement.closest('tr');
-					if (typeof data === 'undined' || data === null) {
-						console.log("no data");
-					}
-					var targetField = tableRow
-							.querySelector('td input[name="item_name"]');
-					if (targetField) {
-						targetField.value = data.item_name;
-					}
-					var targetField = tableRow
-							.querySelector('td input[name="sales_price"]');
-					if (targetField) {
-						targetField.value = data.sales_price;
-					}
-				},
-				error : function(xhr, status, err) {
-					console.error('no data');
-				}
-			});
-		} else {
-			return;
-		}
-	}
+    return '0%';
+}
 
-	function appliedTotal(input) {
-	    var row = input.closest('tr');
-	    var unitPrice = row.querySelector('[name="sales_price"]').value;
-	    var discount = row.querySelector('[name="discount"]').value; // discount 변수 정의
-	    var applied_priceInput = row.querySelector('[name="applied_price"]');
-	    var applied_price = unitPrice * (100 - discount) / 100;
-	    applied_priceInput.value = isNaN(applied_price) ? '' : applied_price;
-	}
+function logInputValue(inputElement) {
+    var inputValue = inputElement.value;
+
+    if (inputValue.trim() !== '') {
+        $.ajax({
+            url: '/basicRegi/searchitem',
+            type: 'GET',
+            data: {
+                keyword: inputValue
+            },
+            success: function (data) {
+                var tableRow = inputElement.closest('tr');
+                if (typeof data === 'undefined' || data === null) {
+                    console.log("データがありません");
+                }
+                var targetField = tableRow.querySelector('td input[name="item_name"]');
+                if (targetField) {
+                    targetField.value = data.item_name;
+                }
+                var targetField = tableRow.querySelector('td input[name="sales_price"]');
+                if (targetField) {
+                    targetField.value = data.sales_price;
+                }
+            },
+            error: function (xhr, status, err) {
+                console.error('データがありません');
+            }
+        });
+    } else {
+        return;
+    }
+}
+
+function appliedTotal(input) {
+    var row = input.closest('tr');
+    var unitPrice = row.querySelector('[name="sales_price"]').value;
+    var discount = row.querySelector('[name="discount"]').value; // discount 변수の定義
+    var applied_priceInput = row.querySelector('[name="applied_price"]');
+    var applied_price = unitPrice * (100 - discount) / 100;
+    applied_priceInput.value = isNaN(applied_price) ? '' : applied_price;
+}
+
 </script>
 <%@ include file="../include/footer.jsp"%>
