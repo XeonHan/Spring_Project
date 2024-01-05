@@ -10,16 +10,16 @@ body {
   width: 100%;
 }
 #page-wrapper {
-  padding: 0 15px;
-  min-height: 568px;
-  background-color: white;
+    grid-area: e;
+    z-index: 5;
+    overflow: hidden;
+    background-color: var(--body-background-color)
 }
 @media (min-width: 768px) {
   #page-wrapper {
-    position: inherit;
-    margin: 0 0 0 230px;
-    padding: 0 30px;
-    border-left: 1px solid #e7e7e7;
+	position: inherit;
+    margin-top: 0;
+    padding-top: 0
   }
 }
 .navbar-top-links {

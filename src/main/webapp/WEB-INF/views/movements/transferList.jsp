@@ -5,6 +5,18 @@
 
 <%@ include file="../include/head.jsp"%>
 
+<script>
+document.querySelector('link[href="/resources/vendor/bootstrap/css/bootstrap.min.css"]').remove();
+document.querySelector('link[href="/resources/vendor/metisMenu/metisMenu.min.css"]').remove();
+document.querySelector('link[href="/resources/vendor/datatables-plugins/dataTables.bootstrap.css]').remove();
+document.querySelector('link[href="/resources/vendor/datatables-responsive/dataTables.responsive.css"]').remove();
+document.querySelector('link[href="/resources/dist/css/sb-admin-2.css"]').remove();
+document.querySelector('link[href="/resources/vendor/font-awesome/css/font-awesome.min.css"]').remove();
+document.querySelector('link[href="/resources/css/sidedropdown.css"]').remove();
+
+</script>
+
+
 <!-- side  -->
  <div class="wrapper-frame-local-nav open" id="menuAreaAddon" > 
  <div class="wrapper-local-nav">

@@ -92,7 +92,7 @@ $(document).ready(function() {
     handleMenu('1', 'group_1', 6);
     handleMenu('2', 'group_2', 4);
     handleMenu('3', 'group_3', 4);
-    handleMenu('4', 'group_4', 4);
+    handleMenu('4', 'group_4', 3);
     handleMenu('5', 'group_5', 4);
     handleMenu('6', 'group_6', 3);
   });

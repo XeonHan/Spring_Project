@@ -17,6 +17,33 @@
 	type="image/x-icon">
 <link rel="stylesheet" href="/resources/css/common-responsive.css" />
 
+<!-- 교재 -->
+<!-- Bootstrap Core CSS -->
+<link href="/resources/vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
+
+<!-- MetisMenu CSS -->
+<link href="/resources/vendor/metisMenu/metisMenu.min.css"
+	rel="stylesheet">
+
+<!-- DataTables CSS -->
+<link
+	href="/resources/vendor/datatables-plugins/dataTables.bootstrap.css"
+	rel="stylesheet">
+
+<!-- DataTables Responsive CSS -->
+<link
+	href="/resources/vendor/datatables-responsive/dataTables.responsive.css"
+	rel="stylesheet">
+
+<!-- Custom CSS -->
+<link href="/resources/dist/css/sb-admin-2.css" rel="stylesheet">
+
+<!-- Custom Fonts -->
+<link href="/resources/vendor/font-awesome/css/font-awesome.min.css"
+	rel="stylesheet" type="text/css">
+
+<!-- <link href="/resources/css/sidedropdown.css" rel="stylesheet" type="text/css">
+ -->
 <style>
 html, body {
 	height: 100%;
@@ -31,11 +58,25 @@ html, body {
 		'Gulim';
 }
 </style>
-</head>
 
-<body
-	class="page-fluid-vertical navigation-type1 erp using-bookmark font-user-setting cursor-default zoom-100 responsive-web theme-blue"
+<script>
+document.querySelector('link[href="/resources/vendor/bootstrap/css/bootstrap.min.css"]').remove();
+document.querySelector('link[href="/resources/vendor/metisMenu/metisMenu.min.css"]').remove();
+document.querySelector('link[href="/resources/vendor/datatables-plugins/dataTables.bootstrap.css]').remove();
+document.querySelector('link[href="/resources/vendor/datatables-responsive/dataTables.responsive.css"]').remove();
+document.querySelector('link[href="/resources/dist/css/sb-admin-2.css"]').remove();
+document.querySelector('link[href="/resources/vendor/font-awesome/css/font-awesome.min.css"]').remove();
+document.querySelector('link[href="/resources/css/sidedropdown.css"]').remove();
+
+</script>
+
+
+
+</head>
+<body class="page-fluid-vertical navigation-type1 erp using-bookmark font-user-setting cursor-default zoom-100 responsive-web theme-blue"
 	id="body_html" style>
+	
+
 
 	<div id="responsive-applied"></div>
 
@@ -275,7 +316,7 @@ html, body {
 							<ul id="group_5" class=" ">
 								<li id="5-1" class=" "><a href="/movements/transferList"> 倉庫移動 </a></li>
 								<li id="5-2" class=" "><a href="#"> 自己使用 </a></li>
-								<li id="5-3" class=" "><a href="#"> 自己使用 </a></li>
+								<li id="5-3" class=" "><a href="#"> 不良処理 </a></li>
 								<li id="5-4" class=" "><a href="#"> 移動状況 </a></li>
 							</ul>
 						</div>
