@@ -1,18 +1,26 @@
 package org.zerock.controller;
 
+import java.util.Collections;
+import java.util.List;
+import java.util.Map;
+
 import org.springframework.http.HttpStatus;
+import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 import org.zerock.domain.shoppingMall.MallInfoModVO;
 import org.zerock.domain.shoppingMall.MallInfoVO;
+import org.zerock.domain.shoppingMall.OrderManagementVO;
 import org.zerock.domain.shoppingMall.ShoppingMallVO;
+import org.zerock.service.shoppingMall.OrderManagementService;
 import org.zerock.service.shoppingMall.ShoppingMallService;
 
 import lombok.AllArgsConstructor;
@@ -25,12 +33,8 @@ import lombok.extern.log4j.Log4j;
 public class ShoppingMallController {
 	private ShoppingMallService service;
 	
-//	@GetMapping("/shoppingMallManagement")
-//	public void shoppingMallManagement(Model model) {
-//		List<ShoppingMallVO> data= service.readList();
-//		log.info(data);
-//		model.addAttribute("list", data);
-//	}
+	private OrderManagementService OrderManageService;
+	
 	
 	@GetMapping("/shoppingMallManagement")
 	public void shoppingMallManagement(Model model) {
@@ -68,6 +72,8 @@ public class ShoppingMallController {
         return new ResponseEntity<>(service.getinfo(shopCode), HttpStatus.OK);
         
     }
+    
+
     
 //	@GetMapping(value = "/{getShopData}", produces = { MediaType.APPLICATION_XML_VALUE, MediaType.APPLICATION_JSON_UTF8_VALUE })
 //    public ResponseEntity<MallInfoVO> getShopData(@RequestParam String shopCode) {
@@ -130,9 +136,57 @@ public class ShoppingMallController {
 		
 	}
 	@GetMapping("/orderManagement")
-	public void orderManagement() {
-		
+	public void orderManagement(Model model) {
+		log.info("list---------------------------");
+		model.addAttribute("list", OrderManageService.getList());
+		log.info("list" + OrderManageService.getList());	
 	}
+	
+	
+//  @GetMapping("/orderStatusList")
+//  @ResponseBody
+//  public ResponseEntity<OrderManagementVO> orderStatusList(@RequestParam String orderStatus) {
+//      // Fetch data based on the shop code (replace this with your logic)
+//     
+//  	 log.info("orderinfo: " + orderStatus);
+//      //return ResponseEntity.ok(shopData);
+//  	 log.info("orderinfo: " + OrderManageService.getOrderList(orderStatus));
+//     return new ResponseEntity<>(OrderManageService.getOrderList(orderStatus), HttpStatus.OK);
+//      
+//  }
+  
+//	@GetMapping("/orderStatusList")
+//	public List<OrderManagementVO> orderStatusList(@RequestParam("orderStatus") String orderStatus, Model model) {
+//		log.info("Orderlist---------------------------");
+//		model.addAttribute("Orderlist", OrderManageService.getOrderList(orderStatus));
+//		log.info("Orderlist" + OrderManageService.getOrderList(orderStatus));
+//		return OrderManageService.getOrderList(orderStatus);
+//	}
+	@GetMapping("/orderStatusList")
+	@ResponseBody
+	public List<OrderManagementVO> orderStatusList(@RequestParam("orderStatus") String orderStatus) {
+	    log.info("Orderlist---------------------------");
+	    log.info("Orderlist: " + orderStatus);
+	    List<OrderManagementVO> orderList = OrderManageService.getOrderList(orderStatus);
+	    log.info("Orderlist: " + orderList);
+	    return orderList;
+	}
+	
+    @PostMapping("/deleteItems")
+    @ResponseBody
+    public ResponseEntity<String> deleteItems(@RequestParam("deliCodes") List<String> deliCodes) {
+        // Perform deletion logic using the injected service
+    	log.info("Orderlist: " + deliCodes);
+        try {
+        	OrderManageService.deleteItems(deliCodes);
+            return ResponseEntity.ok("Items deleted successfully");
+        } catch (Exception e) {
+            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR)
+                    .body("Error deleting items: " + e.getMessage());
+        }
+    }
+    
+
 //	@GetMapping("/confirmationProcess")
 //	public void confirmationProcess() {
 //		
