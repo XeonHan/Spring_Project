@@ -1,7 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 <!DOCTYPE html>
-<html style class="--default-font-size: 10; --table-title-font-size: 12; --size-rate: 1; --space-rate: 1; --radius-rate: 1; --line-height-rate: 1;">
+<html class style="--default-font-size: 10.5; --table-title-font-size: 12; --size-rate: 1; --space-rate: 1; --radius-rate: 1; --line-height-rate: 1;">
 <head>
 <meta charset="UTF-8">
 <meta http-equiv="X-UA-Compatible" content="IE=Edge" />
@@ -57,6 +57,8 @@ html, body {
 	font-family: 'Dotum', 'Arial', '', 'Arial', 'Apple SD Gothic Neo',
 		'Gulim';
 }
+
+
 </style>
 
 </head>

@@ -31,6 +31,15 @@ public class MovementsController {
 	public void transferList() {
 	}
 	
+	@GetMapping("/selfList")
+	public void selfList() {
+	}
+	
+	@GetMapping("/defectList")
+	public void defectList() {
+	}
+	
+	
 	/*
 	 * @GetMapping("/transferList") public void transferList(Criteria cri, Model
 	 * model) { log.info("list" + cri);
@@ -76,9 +85,35 @@ public class MovementsController {
 	}
 	
 	@GetMapping("/transferRegi")
-	public void register() {
+	public void transferRegister() {
 
 	}
+	
+	@GetMapping("/transferSearch")
+	public void transferSearch() {
+
+	}
+	
+	@GetMapping("/selfRegi")
+	public void selfRegi() {
+
+	}
+	
+	@GetMapping("/selfSearch")
+	public void selfSearch() {
+
+	}
+	
+	@GetMapping("/defectRegi")
+	public void defectRegi() {
+
+	}
+	
+	@GetMapping("/defectSearch")
+	public void defectSearch() {
+
+	}
+	
 	
 	@PostMapping("/remove")
 	public String remove(@RequestParam("transferNo") int transferNo, RedirectAttributes rttr) {
