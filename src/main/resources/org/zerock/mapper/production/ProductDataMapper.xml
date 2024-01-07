@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="org.zerock.mapper.production.ProductDataMapper">
+
+<insert id="register">
+    insert into WORK_DATA (wno, work_no, item_code, order_amount, ware_name_house)
+    values ( wno_seq.nextval, #{work_no}, #{item_code}, #{order_amount, jdbcType=INTEGER}, #{ware_name_house, jdbcType=VARCHAR})
+</insert>
+
+
+<select id="getProItemList" resultType="org.zerock.domain.production.productDataVO">
+		select * from WORK_DATA where work_no =
+		#{date}
+	</select>
+</mapper>

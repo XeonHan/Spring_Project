@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="org.zerock.mapper.production.ProdIssueMapper">
+
+	<!-- 리스트 가져오기 -->
+	<select id="getList"
+		resultType="org.zerock.domain.production.ProdIssueVO">
+<![CDATA[
+select * from PROD_ISSUE
+]]>
+	</select>
+	<!-- 등록 -->
+	<insert id="register">
+		insert into PROD_ISSUE(issue_no, empl_code,
+		ware_code_factory, ware_code_house)
+		values (#{issue_no,
+		jdbcType=VARCHAR},
+		#{empl_code,
+		jdbcType=VARCHAR}, #{ware_code_factory,
+		jdbcType=VARCHAR},
+		#{ware_code_house, jdbcType=VARCHAR})
+	</insert>
+
+
+	<select id="getCountDate" parameterType="java.lang.String"
+		resultType="java.lang.Integer">
+    <![CDATA[
+        SELECT COUNT(*)
+        FROM PROD_ISSUE
+        WHERE TO_DATE(SUBSTR(work_no, 1, 10), 'yyyy-MM-DD') = TO_DATE(#{issue_no, jdbcType=VARCHAR}, 'yyyy-MM-DD')
+    ]]>
+	</select>
+
+
+</mapper>

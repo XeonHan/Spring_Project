@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="org.zerock.mapper.production.ProdDataMapper">
+
+<insert id="register">
+    insert into PROD_DATA (ino, issue_no, item_code, issue_amount)
+    values ( ino_seq.nextval, #{issue_no}, #{item_code}, #{issue_amount, jdbcType=INTEGER})
+</insert>
+
+
+<select id="getProItemList" resultType="org.zerock.domain.production.ProdDataVO">
+		select * from PROD_DATA where issue_no =
+		#{date}
+	</select>
+</mapper>
