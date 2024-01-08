@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="org.zerock.mapper.purchase.ProdMapper">
+
+	<select id="read"
+		resultType="org.zerock.domain.purchase.PurProdVO">
+		select * from pur_prod where no = #{no}
+	</select>
+
+	<insert id="regist">
+		insert into PUR_PROD (no,item_code,request_no,plan_no
+		,pur_no,amount) values (seq_no.nextval,#{item_code},#{request_no,
+		jdbcType=VARCHAR},#{plan_no, jdbcType=VARCHAR},#{pur_no,
+		jdbcType=VARCHAR},#{amount})
+	</insert>
+
+	<select id="getPurProdList"
+		resultType="org.zerock.domain.purchase.PurProdVO">
+		select * from PUR_PROD where request_no =
+		#{date}
+	</select>
+
+</mapper>

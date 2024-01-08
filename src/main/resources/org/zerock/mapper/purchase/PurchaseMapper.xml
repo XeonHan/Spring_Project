@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="org.zerock.mapper.purchase.PurchaseMapper">
+
+
+	<select id="getList"
+		resultType="org.zerock.domain.purchase.PurRequestVO">
+<![CDATA[
+select * from pur_request
+]]>
+	</select>
+
+	<!-- <select id="read" resultType="org.zerock.domain.purchase.PurRequestVO"> 
+		select * from pur_request </select> -->
+
+	<!-- 등록 -->
+	<insert id="regist">
+		insert into PUR_REQUEST (request_no, company_code, employee_code, ware_code,
+		delivery_date, completion, progress)
+		values (
+		#{request_no},
+		#{company_code},
+		#{employee_code},
+		#{ware_code},
+		#{delivery_date},
+		#{completion, jdbcType=VARCHAR},
+		#{progress, jdbcType=VARCHAR}
+		)
+	</insert>
+
+	<!-- 날짜 카운트 계산 -->
+	<select id="getCountDate" parameterType="java.lang.String"
+		resultType="java.lang.Integer">
+		<![CDATA[
+		SELECT COUNT(*)
+	  	FROM PUR_REQUEST
+	  	WHERE TO_DATE(SUBSTR(request_no, 1, 10), 'YYYY-MM-DD') = TO_DATE(#{request_no}, 'YYYY-MM-DD')
+		]]>
+	</select>
+
+
+
+</mapper>

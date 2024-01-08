@@ -2,22 +2,28 @@
 	pageEncoding="UTF-8"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt"%>
+<head>
+<title>発注要請照会</title>
+
+
+</head>
 
 <%@include file="../include/header.jsp"%>
 
 <!-- 사이드 바 메뉴 -->
 <ul class="sidenav">
-	<li><a href="#">견적서</a>
+	<li><a href="#">発注要請</a>
 		<ul class="sidesub">
-			<li><a href="#">submenu01</a></li>
-			<li><a href="#">submenu02</a></li>
-			<li><a href="#">submenu03</a></li>
-			<li><a href="#">submenu04</a></li>
-			<li><a href="#">submenu05</a></li>
+			<li><a href="/purchase/purRequestInquiry">発注要請照会</a></li>
+			<li><a href="/purchase/purRequestInput">発注要請入力</a></li>
+			<li><a href="#">発注要請現況</a></li>
 		</ul></li>
 
-	<li><a href="#">주문서</a></li>
-
+	<li><a href="#">発注計画</a>
+		<ul class="sidesub">
+			<li><a href="/purchase/purRequestInquiry">発注計画照会</a></li>
+			<li><a href="/purchase/purRequestInput">発注計画入力</a></li>
+		</ul></li>
 	<li><a href="#">판매</a></li>
 	<li><a href="#">출하</a></li>
 </ul>
@@ -28,7 +34,7 @@
 
 	<div class="row">
 		<div class="col-lg-12">
-			<h1 class="page-header">발주요청조회</h1>
+			<h1 class="page-header">発注要請照会</h1>
 		</div>
 		<!-- /.col-lg-12 -->
 	</div>
@@ -83,28 +89,31 @@
 							</tr>
 						</thead>
 
-						<c:forEach items="${list}" var="request">
+						<c:forEach items="${list}" var="request" varStatus="loop">
 							<tr>
 								<td><input type="checkbox" name="selectedItems"
 									value="${item.item_code}"></td>
-
-								<%-- <td><c:out value="${mall.mallCode}" /></td>
-								<td><a class='move'
-									href='/board/get?bno=<c:out value="${mall.mallCode}"/>'> <c:out
-											value="${mall.mallName}" /></a></td> --%>
-
-
-								<td><c:out value="${request.request_No}" /></td>
-								<td><c:out value="${request.company_Name}" /></td>
-								<td><c:out value="${request.item_Name}" /></td>
+								<td><a href="#" class="openModalLink"
+									data-row-id="${loop.index }" data-target="#exampleModal"> <c:out
+											value="${request.request_no}" /></a></td>
+								<td><c:out value="${request.company_code}" /></td>
+								<td><c:out value="${request.prodInfo}" /></td>
 								<td><fmt:formatDate pattern="yyyy-MM-dd"
-										value="${request.delivery_Date}" /></td>
-								<td><c:out value="${request.amount}" /></td>
-								<td>${request.amount * request.unit_Price}</td>
-								<td>진행중</td>
+										value="${request.delivery_date}" /></td>
+								<%-- 								<td><c:out value="${request.amount}" /></td>
+ --%>
+								<%-- <td>${request.amount * request.unit_Price}</td> --%>
+								<td><c:out value="${request.totalNum}" /></td>
+								<td><c:out value="${request.totalCount}" /></td>
+								<td><select class="statusDropdown"
+									onchange="changeStatus(this)">
+										<option value="진행중">진행중</option>
+										<option value="완료">완료</option>
+								</select></td>
 								<td><a class='move'
 									href='/board/get?bno=<c:out value="${mall.mallCode}"/>'> <c:out
-											value="조회" /></a></td>
+											value="조회" />
+								</a></td>
 							</tr>
 						</c:forEach>
 					</table>
@@ -196,6 +205,13 @@ function toggleAll(source) {
         checkbox.checked = source.checked;
     });
 }
+
+function changeStatus(selectedDropdown) {
+    var selectedStatus = $(selectedDropdown).val();
+    var cell = $(selectedDropdown).closest('td');
+    cell.text(selectedStatus);
+}
+
 
 <!-- 쇼핑몰, 통합관리소루션 선택 버튼 용 JS -->
 function showOptions(selectedOption) {
