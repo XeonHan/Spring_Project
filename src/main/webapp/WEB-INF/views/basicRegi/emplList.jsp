@@ -20,15 +20,13 @@
 </nav>
 
 <div id="page-wrapper">
-
 	<div class="row">
 		<div class="col-lg-12">
-			<h2 class="page-header">사원(담당)등록 리스트</h2>
+			<h2 class="page-header">従業員（担当者）登録リスト</h2>
 		</div>
 	</div>
 
 	<div class="panel-body">
-
 		<table width="100%"
 			class="table table-striped table-boarded table-hover"
 			id="dataTables-empl">
@@ -36,12 +34,12 @@
 				<tr>
 					<th><input type="checkbox" id="selectAll"
 						onclick="toggleAll(this)"></th>
-					<th>사원(담당)코드(70000~79999)</th>
-					<th>사원(담당)명</th>
-					<th>검색내용</th>
-					<th>담당자연락처</th>
-					<th>담당자Email</th>
-					<th>이체정보(은행명/계좌번호)</th>
+					<th>従業員（担当者）コード（70000〜79999）</th>
+					<th>従業員（担当者）名</th>
+					<th>検索内容</th>
+					<th>担当者連絡先</th>
+					<th>担当者Email</th>
+					<th>振込情報（銀行名/口座番号）</th>
 				</tr>
 			</thead>
 			<c:forEach items="${emplList}" var="empl">
@@ -52,8 +50,7 @@
 					<td><a class='move' href='#' data-toggle="modal"
 						data-target="#emplModifyModal" data-empl-code="${empl.empl_code}"
 						data-empl-name="${empl.empl_name}"> <c:out
-								value="${empl.empl_name}" />
-					</a></td>
+								value="${empl.empl_name}" /></a></td>
 					<td><c:out value="${empl.empl_search}" /></td>
 					<td><c:out value="${empl.phone}" /></td>
 					<td><c:out value="${empl.email}" /></td>
@@ -65,7 +62,7 @@
 	<div class="row">
 		<div class="col-lg-6 text-left">
 			<button type="button" class="btn btn-primary" data-toggle="modal"
-				data-target="#emplRegisterModal">신규</button>
+				data-target="#emplRegisterModal">新規</button>
 		</div>
 		<div class="col-lg-6 text-right">
 			<form id="searchForm" action="/basicRegi/emplList" method="get">
@@ -73,14 +70,14 @@
 					<option value=""
 						<c:out value="${pageMaker.cri.type == null ? 'selected':''}"/>>--</option>
 					<option value="N"
-						<c:out value="${pageMaker.cri.type eq 'N' ? 'selected':''}"/>>사원(담당)명</option>
+						<c:out value="${pageMaker.cri.type eq 'N' ? 'selected':''}"/>>従業員（担当者）名</option>
 					<option value="S"
-						<c:out value="${pageMaker.cri.type eq 'S' ? 'selected':''}"/>>검색내용</option>
+						<c:out value="${pageMaker.cri.type eq 'S' ? 'selected':''}"/>>検索内容</option>
 				</select> <input type="text" name="keyword"
 					value='<c:out value="${pageMaker.cri.keyword}"/>' /> <input
 					type="hidden" name="pageNum" value="${pageMaker.cri.pageNum}">
 				<input type="hidden" name="amount" value="${pageMaker.cri.amount}">
-				<button class="btn btn-default">검색</button>
+				<button class="btn btn-default">検索</button>
 			</form>
 		</div>
 	</div>
@@ -92,7 +89,7 @@
 	<div class="modal-dialog" role="document">
 		<div class="modal-content">
 			<div class="modal-header" style="background-color: #1f48d4;">
-				<span style="color: white;">사원(담당) 등록</span>
+				<span style="color: white;">従業員（担当者）登録</span>
 				<button type="button" class="close" data-dismiss="modal"
 					aria-label="Close">
 					<span aria-hidden="true">&times;</span>
@@ -102,33 +99,33 @@
 				<div class="modal-body">
 					<div class="panel-body">
 						<div class="form-group">
-							<label>사원(담당)코드(70000~79999)</label><input class="form-control"
-								name="empl_code" type="text">
+							<label>従業員（担当者）コード（70000〜79999）</label><input
+								class="form-control" name="empl_code" type="text">
 						</div>
 						<div class="form-group">
-							<label>사원(담당)명</label><input class="form-control"
+							<label>従業員（担当者）名</label><input class="form-control"
 								name="empl_name">
 						</div>
 						<div class="form-group">
-							<label>검색내용</label><input class="form-control" name="empl_search">
+							<label>検索内容</label><input class="form-control" name="empl_search">
 						</div>
 						<div class="form-group">
-							<label>담당자연락처</label><input class="form-control" name="phone">
+							<label>担当者連絡先</label><input class="form-control" name="phone">
 						</div>
 						<div class="form-group">
-							<label>담당자email</label><input class="form-control" name="email">
+							<label>担当者email</label><input class="form-control" name="email">
 						</div>
 						<div class="form-group">
-							<label>이체정보(은행명/계좌번호)</label><input class="form-control"
+							<label>振込情報（銀行名/口座番号）</label><input class="form-control"
 								name="address_info">
 						</div>
 					</div>
 					<div class="modal-footer">
 						<button type="button" class="btn btn-primary"
-							onclick="registerEmpl()" data-dismiss="modal">저장</button>
-						<button type="reset" class="btn btn-default">초기화</button>
+							onclick="registerEmpl()" data-dismiss="modal">保存</button>
+						<button type="reset" class="btn btn-default">リセット</button>
 						<button type="button" class="btn btn-secondary"
-							data-dismiss="modal">닫기</button>
+							data-dismiss="modal">閉じる</button>
 					</div>
 				</div>
 			</form>
@@ -141,7 +138,7 @@
 	<div class="modal-dialog" role="document">
 		<div class="modal-content">
 			<div class="modal-header" style="background-color: #1f48d4;">
-				<span style="color: white;">사원(담당) 등록</span>
+				<span style="color: white;">従業員（担当者）登録</span>
 				<button type="button" class="close" data-dismiss="modal"
 					aria-label="Close">
 					<span aria-hidden="true">&times;</span>
@@ -151,39 +148,40 @@
 				<div class="modal-body">
 					<div class="panel-body">
 						<div class="form-group">
-							<label>사원(담당)코드(70000~79999)</label><input class="form-control"
-								name="empl_code" type="text">
+							<label>従業員（担当者）コード（70000〜79999）</label><input
+								class="form-control" name="empl_code" type="text">
 						</div>
 						<div class="form-group">
-							<label>사원(담당)명</label><input class="form-control"
+							<label>従業員（担当者）名</label><input class="form-control"
 								name="empl_name">
 						</div>
 						<div class="form-group">
-							<label>검색내용</label><input class="form-control" name="empl_search">
+							<label>検索内容</label><input class="form-control" name="empl_search">
 						</div>
 						<div class="form-group">
-							<label>담당자연락처</label><input class="form-control" name="phone">
+							<label>担当者連絡先</label><input class="form-control" name="phone">
 						</div>
 						<div class="form-group">
-							<label>담당자email</label><input class="form-control" name="email">
+							<label>担当者email</label><input class="form-control" name="email">
 						</div>
 						<div class="form-group">
-							<label>이체정보(은행명/계좌번호)</label><input class="form-control"
+							<label>振込情報（銀行名/口座番号）</label><input class="form-control"
 								name="address_info">
 						</div>
 					</div>
 					<div class="modal-footer">
 						<button type="button" class="btn btn-primary"
-							onclick="modifyEmpl()" data-dismiss="modal">저장</button>
-						<button type="reset" class="btn btn-default">초기화</button>
+							onclick="modifyEmpl()" data-dismiss="modal">保存</button>
+						<button type="reset" class="btn btn-default">リセット</button>
 						<button type="button" class="btn btn-secondary"
-							data-dismiss="modal">닫기</button>
+							data-dismiss="modal">閉じる</button>
 					</div>
 				</div>
 			</form>
 		</div>
 	</div>
 </div>
+
 
 <script type="text/javascript">
 function toggleAll(source) {
@@ -193,8 +191,8 @@ function toggleAll(source) {
     });
 }
 
-function isEmployeeCodeValid(emplCode){
-	return emplCode >= 70000 && emplCode <= 79999;
+function isEmployeeCodeValid(emplCode) {
+    return emplCode >= 70000 && emplCode <= 79999;
 }
 
 $(document).ready(function () {
@@ -203,7 +201,6 @@ $(document).ready(function () {
 
     $("#emplRegisterModal").on("click", function () {
         emplRegisterModal.modal("show");
-   
     });
 
     $(".pagination a").on("click", function (e) {
@@ -233,25 +230,25 @@ $(document).ready(function () {
                 $("#emplModifyModal input[name='phone']").val(data.phone);
                 $("#emplModifyModal input[name='email']").val(data.email);
                 $("#emplModifyModal input[name='address_info']").val(data.address_info);
-               
+
                 $("#emplModifyModal").modal("show");
             },
             error: function () {
-                alert("데이터를 가져오는 중 오류가 발생했습니다");
+                alert("データの取得中にエラーが発生しました");
             }
         });
-    });   
+    });
 
     var searchForm = $("#searchForm");
 
     $("#searchForm button").on("click", function (e) {
         if (!searchForm.find("option:selected").val()) {
-            alert("검색종류를 선택하세요");
+            alert("検索種類を選択してください");
             return false;
         }
 
         if (!searchForm.find("input[name='keyword']").val()) {
-            alert("키워드를 입력하세요");
+            alert("キーワードを入力してください");
             return false;
         }
 
@@ -269,7 +266,7 @@ function registerEmpl() {
     var emplCode = $("input[name='empl_code']").val();
 
     if (!isEmplCodeValid(emplCode)) {
-        alert("잘못된 코드번호입니다 (70000~79999)");
+        alert("無効なコード番号です（70000〜79999）");
         return;
     }
 
@@ -288,43 +285,44 @@ function registerEmpl() {
             window.location.reload();
         },
         error: function () {
-            alert("저장 중 오류가 발생했습니다");
+            alert("保存中にエラーが発生しました");
         }
     });
 }
 
 function modifyEmpl() {
-	
-	 var emplCode = $("#emplModifyModal input[name='empl_code']").val();
-	    var emplName = $("#emplModifyModal input[name='empl_name']").val();
-	    var emplSearch = $("#emplModifyModal input[name='empl_search']").val();
-	    var phone = $("#emplModifyModal input[name='phone']").val();
-	    var email = $("#emplModifyModal input[name='email']").val();
-	    var addressInfo = $("#emplModifyModal input[name='address_info']").val();
 
-       if (!isEmplCodeValid(emplCode)) {
-           alert("잘못된 코드번호입니다 (70000~79999)");
-           return;
-       }
-       
-	    $.ajax({
-	    	type: "POST",
-	    url: "/basicRegi/emplModify",
-	    data: {
-	    	  empl_code: emplCode,
-	            empl_name: emplName,
-	            empl_search: emplSearch,
-	            phone: phone,
-	            email: email,
-	            address_info: addressInfo
-	    },
-	    success: function(data){
-	    	window.location.reload();
-	    },
-	    error: function() {
-	    	alert("수정 중 오류가 발생했습니다");
-	    }
-	    });
+    var emplCode = $("#emplModifyModal input[name='empl_code']").val();
+    var emplName = $("#emplModifyModal input[name='empl_name']").val();
+    var emplSearch = $("#emplModifyModal input[name='empl_search']").val();
+    var phone = $("#emplModifyModal input[name='phone']").val();
+    var email = $("#emplModifyModal input[name='email']").val();
+    var addressInfo = $("#emplModifyModal input[name='address_info']").val();
+
+    if (!isEmplCodeValid(emplCode)) {
+        alert("無効なコード番号です（70000〜79999）");
+        return;
+    }
+
+    $.ajax({
+        type: "POST",
+        url: "/basicRegi/emplModify",
+        data: {
+            empl_code: emplCode,
+            empl_name: emplName,
+            empl_search: emplSearch,
+            phone: phone,
+            email: email,
+            address_info: addressInfo
+        },
+        success: function (data) {
+            window.location.reload();
+        },
+        error: function () {
+            alert("修正中にエラーが発生しました");
+        }
+    });
 }
+
 </script>
 <%@ include file="../include/footer.jsp"%>
