@@ -331,8 +331,8 @@ html, body {
 							<ul id="group_5" class=" ">
 								<li id="5-1" class=" "><a href="/movements/transferList">
 										倉庫移動 </a></li>
-								<li id="5-2" class=" "><a href="#"> 自己使用 </a></li>
-								<li id="5-3" class=" "><a href="#"> 不良処理 </a></li>
+								<li id="5-2" class=" "><a href="/movements/selfList"> 自己使用 </a></li>
+								<li id="5-3" class=" "><a href="/movements/defectList"> 不良処理 </a></li>
 								<li id="5-4" class=" "><a href="#"> 移動状況 </a></li>
 							</ul>
 						</div>

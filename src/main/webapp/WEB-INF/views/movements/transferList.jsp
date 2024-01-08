@@ -266,10 +266,7 @@
 								class="tab-text" id="all"><font
 									style="vertical-align: inherit;"><font
 										style="vertical-align: inherit;">基本</font></font></span></a></li>
-						<li id="__ecAddNewTab" class="preset tab-add"
-							data-presetid="__ecAddNewTab"
-							data-ecpath="ESM002M_6∫header∫∫tab∬u96fd2lr∫∫∫"
-							data-function="preset" data-function-id="presetitem"><a
+						<li id="__ecAddNewTab" class="preset tab-add" data-function="preset"><a
 							href="javascript:;" id="__ecAddNewTab"
 							data-presetid="__ecAddNewTab"
 							data-ecpath="ESM002M_6∫header∫∫tab∬u96fd2lr∫∫∫"

@@ -188,15 +188,14 @@ div[data-ecpageid="ESM001M_21"] .wrapper-form-state-2.wrapper-form {
 
 <!-- body  -->
 
+
 <div class="wrapper-frame-body">
 	<div style="display: block;">
 
 		<style></style>
 
 		<div id="responsive-applied"></div>
-		<div class="wrapper-page-progress slogan hidden">
-			<div class="page-progress-icon"></div>
-		</div>
+
 		<div class="wrapper-overlay"></div>
 		<div id="mainPage" data-ecpageid="ESM001M_21"
 			class="page page-fluid page-loadComplete" style="">
