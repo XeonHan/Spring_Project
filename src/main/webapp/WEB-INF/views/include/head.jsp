@@ -1,7 +1,8 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 <!DOCTYPE html>
-<html class style="--default-font-size: 10.5; --table-title-font-size: 12; --size-rate: 1; --space-rate: 1; --radius-rate: 1; --line-height-rate: 1;">
+<html class
+	style="-default-font-size: 12; - -table-title-font-size: 12; - -size-rate: 1; - -space-rate: 1; - -radius-rate: 1; - -line-height-rate: 1;">
 <head>
 <meta charset="UTF-8">
 <meta http-equiv="X-UA-Compatible" content="IE=Edge" />
@@ -19,7 +20,8 @@
 
 <!-- 교재 -->
 <!-- Bootstrap Core CSS -->
-<link href="/resources/vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet" class="theme">
+<link href="/resources/vendor/bootstrap/css/bootstrap.min.css"
+	rel="stylesheet" class="theme">
 
 <!-- MetisMenu CSS -->
 <link href="/resources/vendor/metisMenu/metisMenu.min.css"
@@ -36,7 +38,8 @@
 	rel="stylesheet" class="theme">
 
 <!-- Custom CSS -->
-<link href="/resources/dist/css/sb-admin-2.css" rel="stylesheet" class="theme">
+<link href="/resources/dist/css/sb-admin-2.css" rel="stylesheet"
+	class="theme">
 
 <!-- Custom Fonts -->
 <link href="/resources/vendor/font-awesome/css/font-awesome.min.css"
@@ -57,14 +60,12 @@ html, body {
 	font-family: 'Dotum', 'Arial', '', 'Arial', 'Apple SD Gothic Neo',
 		'Gulim';
 }
-
-
 </style>
 
 </head>
 <body class="page-fluid-vertical navigation-type1 erp using-bookmark font-user-setting cursor-default zoom-100 responsive-web theme-blue"
 	id="body_html" style>
-	
+
 
 
 	<div id="responsive-applied"></div>
@@ -74,7 +75,10 @@ html, body {
 
 	<div class="wrapper-frame collapsed-apps disabled-apps">
 		<div class="wrapper-frame-bookmark" id="bookmarkBarFrame">
-
+			<ul class="dropdown-menu context-menu">
+				<li><a href="javascript:;" id="cmChangeName"> 이름변경 </a></li>
+				<li><a href="javascript:;" id="cmDelFav"> 즐겨찾기삭제 </a></li>
+			</ul>
 			<div class="wrapper-bookmark-bar" id="bookmarkBar">
 				<ul class="nav nav-pills ui-sortable">
 					<li class="unsortable">
@@ -104,10 +108,10 @@ html, body {
 						data-nav-role="favorite"></div>
 				</div>
 				<div class="qm-company-logo">
-					<a href="/testJsp/frame" data-toggle="tooltip" data-placement="right"
-						target="_top"> <img class="company-logo"
-						src="/resources/img/ECount.png" onerror="#"> <img
-						class="company-logo-responsive"
+					<a href="/testJsp/frame" data-toggle="tooltip"
+						data-placement="right" target="_top"> <img
+						class="company-logo" src="/resources/img/ECount.png" onerror="#">
+						<img class="company-logo-responsive"
 						src="/resources/img/ecount-ci-simbol-40-35.png" width="40"
 						height="35">
 					</a>
@@ -226,34 +230,46 @@ html, body {
 
 		<div class="wrapper-frame-global-nav" id="menuArea">
 			<div class="wrapper-global-nav">
-				<ul id="menuSection1" > <!-- class="active" -->
-					<li id="1" class="mypage align-center"> <!-- active  -->
+				<ul id="menuSection1">
+					<!-- class="active" -->
+					<li id="1" class="mypage align-center">
+						<!-- active  -->
 						<div class="wrapper-depth1">
 							<a href="/basicRegi/itemList"> 基礎登録 </a>
 							<div class="nav-option">
 								<span data-role="button.delete" class="navigation-remove"></span>
 							</div>
 						</div>
-						<div class="wrapper-depth2"> <!-- active -->
+						<div class="wrapper-depth2">
+							<!-- active -->
 							<ul id="group_1" class=" ">
-								<li id="1-1" class=" "><a href="/basicRegi/companyList"> 取引先登録 </a></li>
-								<li id="1-2" class=" "><a href="/basicRegi/departList"> 部署登録 </a></li>
-								<li id="1-3" class=" "><a href="/basicRegi/wareList"> 倉庫登録 </a></li>
-								<li id="1-4" class=" "><a href="/basicRegi/itemList"> 品目登録 </a></li>
-								<li id="1-5" class=" "><a href="/basicRegi/priceList"> 単価登録 </a></li>
-								<li id="1-6" class=" "><a href="/basicRegi/emplList"> 社員登録 </a></li>
+								<li id="1-1" class=" "><a href="/basicRegi/companyList">
+										取引先登録 </a></li>
+								<li id="1-2" class=" "><a href="/basicRegi/departList">
+										部署登録 </a></li>
+								<li id="1-3" class=" "><a href="/basicRegi/wareList">
+										倉庫登録 </a></li>
+								<li id="1-4" class=" "><a href="/basicRegi/itemList">
+										品目登録 </a></li>
+								<li id="1-5" class=" "><a href="/basicRegi/priceList">
+										単価登録 </a></li>
+								<li id="1-6" class=" "><a href="/basicRegi/emplList">
+										社員登録 </a></li>
 							</ul>
 						</div>
 					</li>
-					
-					<li id="2" class="mypage align-center"> <!-- active  -->
+
+					<li id="2" class="mypage align-center">
+						<!-- active  -->
 						<div class="wrapper-depth1">
-							<a href="/business/"> 営業管理 </a> <!-- 영업관리의 처음화면 판매화면 -->
+							<a href="#"> 営業管理 </a>
+							<!-- 영업관리의 처음화면 판매화면 -->
 							<div class="nav-option">
 								<span data-role="button.delete" class="navigation-remove"></span>
 							</div>
 						</div>
-						<div class="wrapper-depth2"> <!-- active -->
+						<div class="wrapper-depth2">
+							<!-- active -->
 							<ul id="group_2" class=" ">
 								<li id="2-1" class=" "><a href="#"> 見積書 </a></li>
 								<li id="2-2" class=" "><a href="#"> 注文書 </a></li>
@@ -262,15 +278,18 @@ html, body {
 							</ul>
 						</div>
 					</li>
-					
-					<li id="3" class="mypage align-center"> <!-- active  -->
+
+					<li id="3" class="mypage align-center">
+						<!-- active  -->
 						<div class="wrapper-depth1">
-							<a href="#"> 購買管理 </a> <!--구매 관리의 첫번째로 보이는 화면 -->
+							<a href="#"> 購買管理 </a>
+							<!--구매 관리의 첫번째로 보이는 화면 -->
 							<div class="nav-option">
 								<span data-role="button.delete" class="navigation-remove"></span>
 							</div>
 						</div>
-						<div class="wrapper-depth2"> <!-- active -->
+						<div class="wrapper-depth2">
+							<!-- active -->
 							<ul id="group_3" class=" ">
 								<li id="3-1" class=" "><a href="#"> 発注要請 </a></li>
 								<li id="3-2" class=" "><a href="#"> 発注計画 </a></li>
@@ -279,45 +298,55 @@ html, body {
 							</ul>
 						</div>
 					</li>
-					<li id="4" class="mypage align-center"> <!-- active  -->
+					<li id="4" class="mypage align-center">
+						<!-- active  -->
 						<div class="wrapper-depth1">
-							<a href="#"> 生産/外注  </a>
+							<a href="#"> 生産/外注 </a>
 							<div class="nav-option">
 								<span data-role="button.delete" class="navigation-remove"></span>
 							</div>
 						</div>
-						<div class="wrapper-depth2"> <!-- active -->
+						<div class="wrapper-depth2">
+							<!-- active -->
 							<ul id="group_4" class=" ">
-								<li id="4-1" class=" "><a href="#"> 作業 </a></li>
-								<li id="4-2" class=" "><a href="#"> 生産払出 </a></li>
-								<li id="4-3" class=" "><a href="#"> 生産入庫 </a></li>
+								<li id="4-1" class=" "><a href="/production/Order_regist">
+										作業 </a></li>
+								<li id="4-2" class=" "><a
+									href="/production/Prod_Issue_list"> 生産払出 </a></li>
+								<li id="4-3" class=" "><a
+									href="/production/Prod_Receipt_list"> 生産入庫 </a></li>
 							</ul>
 						</div>
 					</li>
-					<li id="5" class="mypage align-center"> <!-- active  -->
+					<li id="5" class="mypage align-center">
+						<!-- active  -->
 						<div class="wrapper-depth1">
-							<a href="/movements/transferList"> 其他移動  </a>
+							<a href="/movements/transferList"> 其他移動 </a>
 							<div class="nav-option">
 								<span data-role="button.delete" class="navigation-remove"></span>
 							</div>
 						</div>
-						<div class="wrapper-depth2"> <!-- active -->
+						<div class="wrapper-depth2">
+							<!-- active -->
 							<ul id="group_5" class=" ">
-								<li id="5-1" class=" "><a href="/movements/transferList"> 倉庫移動 </a></li>
+								<li id="5-1" class=" "><a href="/movements/transferList">
+										倉庫移動 </a></li>
 								<li id="5-2" class=" "><a href="#"> 自己使用 </a></li>
 								<li id="5-3" class=" "><a href="#"> 不良処理 </a></li>
 								<li id="5-4" class=" "><a href="#"> 移動状況 </a></li>
 							</ul>
 						</div>
 					</li>
-					<li id="6" class="mypage align-center"> <!-- active  -->
+					<li id="6" class="mypage align-center">
+						<!-- active  -->
 						<div class="wrapper-depth1">
-							<a href="#"> ショッピングモール管理  </a>
+							<a href="#"> ショッピングモール管理 </a>
 							<div class="nav-option">
 								<span data-role="button.delete" class="navigation-remove"></span>
 							</div>
 						</div>
-						<div class="wrapper-depth2"> <!-- active -->
+						<div class="wrapper-depth2">
+							<!-- active -->
 							<ul id="group_6" class=" ">
 								<li id="6-1" class=" "><a href="#"> 基礎登録 </a></li>
 								<li id="6-2" class=" "><a href="#"> 商品管理 </a></li>
@@ -325,10 +354,11 @@ html, body {
 							</ul>
 						</div>
 					</li>
-				</ul>		
+				</ul>
 				<div class="wrapper-depth2  hidden"></div>
-			
+
 			</div>
 		</div>
 
-		<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+		<script
+			src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>

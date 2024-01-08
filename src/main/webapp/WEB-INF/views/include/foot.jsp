@@ -37,7 +37,7 @@ $(document).ready(function() {
 	});
 
   document.addEventListener('DOMContentLoaded', function() {
-    const ADJUSTMENT_PX = 250; // 조절할 픽셀 수
+    const ADJUSTMENT_PX = 200; // 조절할 픽셀 수
 
     function handleMenu(menuId, groupId, subMenuCount) {
       var menuItem = document.getElementById(menuId);

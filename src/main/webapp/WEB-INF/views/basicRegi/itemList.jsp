@@ -1,12 +1,12 @@
-<%@ page language="java" contentType="text/html; charset=UTF-8"
+<%-- <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt"%>
 
 <%@ include file="../include/head.jsp"%>
-
+ --%>
 <!-- side  -->
-<div class="wrapper-frame-local-nav open" id="menuAreaAddon">
+<!-- <div class="wrapper-frame-local-nav open" id="menuAreaAddon">
 	<div class="wrapper-local-nav">
 		<ul class="on">
 			<li id="1" class="collapsed"><a href="/basicRegi/companyList" class=""> 거래처등록 </a>
@@ -55,11 +55,10 @@
 	</div>
 </div>
 
+ -->
 
 
-
-
-<%-- <%@ page language="java" contentType="text/html; charset=UTF-8"
+<%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt"%>
@@ -78,10 +77,10 @@
 		</ul></li>
 	<li><a href="/basicRegi/emplList">사원(담당)등록</a></li>
 </ul>
-</nav> --%>
+</nav>
 
 
-<div id="page-wrapper" style="overflow:scroll;">
+<div id="page-wrapper">
 
 	<div class="row">
 		<div class="col-lg-12">
@@ -403,4 +402,5 @@
     }
     
 </script>
-<%@ include file="../include/foot.jsp"%>
+<%-- <%@ include file="../include/foot.jsp"%> --%>
+<%@ include file="../include/footer.jsp"%>
